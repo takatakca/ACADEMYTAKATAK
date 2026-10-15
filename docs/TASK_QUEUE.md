@@ -44,3 +44,9 @@ Legend: [x] committed to main; [ ] incomplete or unverified. Tasks are ordered t
 
 ## Next executable development after this session
 Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implement the next independent source-level task (private exam bank/instructor-reviewed syllabus or resilient credential workflow) while V1 and Coolify activation remain externally gated. Do not invent secrets or deployment evidence.
+
+## Next quality milestone
+- [x] Add `workflow_dispatch` to Academy CI so latest `main` can be reverified after documentation-only pushes without bypassing tests.
+- [ ] Verify CI for workflow change `f176531a` and newest source, capture exact successful run.
+- [ ] Produce end-to-end database-backed test coverage (approved dedicated test Postgres) for exam-bank four-eyes publication, signed exam tickets, 24h attempt cap, student workbook isolation, educational record issuance/revocation and replay.
+- [ ] Prepare deeper instructional content and accessible bilingual training, with instructor approvals and QA.
