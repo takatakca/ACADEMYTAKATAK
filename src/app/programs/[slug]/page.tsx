@@ -5,6 +5,8 @@ import { getProgram,getProgramCourses } from "@/lib/programs";
 import { currentIdentity } from "@/lib/session";
 import { readProgress,progressConfigured } from "@/lib/progress";
 import { readExamSummaries } from "@/lib/exam-records";
+import { readMyAwards } from "@/lib/awards";
+import AwardButton from "@/components/award-button";
 
 type Props={params:Promise<{slug:string}>};
 export const dynamic="force-dynamic";
@@ -27,6 +29,9 @@ export default async function ProgramPage({params}:Props){
  const points=details.reduce((sum,{exam})=>sum+(exam?.bestPoints||0),0);
  const mastered=details.filter(d=>d.passed).length;
  const completion=details.length>0&&mastered===details.length;
+ let award:Awaited<ReturnType<typeof readMyAwards>>[number]|null=null;
+ if(identity&&progressConfigured())try{award=(await readMyAwards(identity)).find(row=>row.programSlug===program.slug)??null;}catch{}
+
  return <div className="container inner-page">
    <div className="breadcrumbs"><Link href="/programs">Programs</Link><span>/</span><span>{program.department}</span><span>/</span><span>{program.title}</span></div>
    <div className="program-heading"><div><span className="eyebrow">{program.department.toUpperCase()} · STRUCTURED LEARNING PATH</span><h1>{program.title}</h1><p>{program.description}</p>
@@ -43,6 +48,7 @@ export default async function ProgramPage({params}:Props){
        <div className="roadmap-meta"><span>{completed.length}/{course.lessons.length} lessons</span><span>{exam?.bestPoints??0}/100 points</span><span>{course.access==="one_time"?"Specialist purchase":course.access==="free"?"Free course":"Free + Premium"}</span></div>
        <div className="roadmap-links"><Link href={`/courses/${course.slug}`} className="text-link">Open course →</Link><Link href={`/courses/${course.slug}/exam`} className="text-link">Final exam ↗</Link></div>
      </div></div>)}</div>
+   {identity&&completion&&(award?.status==="revoked"?<div className="important-note"><strong>Learning record revoked.</strong><p>This record has been revoked; a new award cannot be generated automatically. Contact authorized Academy support.</p></div>:<AwardButton program={program.slug} initialId={award?.status==="active"?award.awardId:null}/>)}
    <section className="panel"><span className="kicker">YOUR LEARNING OUTCOME</span><h2>{program.outcome}</h2><p>Course achievements are educational. Completion does not automatically unlock TAKATAK-V1 customer service privileges, employment, government credentials or independent professional licensing.</p>
      {!identity&&<Link href="/auth/start" className="btn btn-primary">Sign in to track points →</Link>}</section>
  </div>;
