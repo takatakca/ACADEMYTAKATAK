@@ -10,6 +10,7 @@ Legend: [x] committed to main; [ ] incomplete or unverified. Tasks are ordered t
 - [x] Authenticated completion API, graded exams, best-score point accumulation.
 - [x] Fix completed-program count, batch student transcript query and surface storage failures.
 - [x] Resume the requested lesson or exam after trusted V1 login (relative allowlist).
+- [x] Save student-written exercises in private Academy PostgreSQL workbooks, scoped to course/lesson and central TAKATAK identity; show question-by-question feedback after exams.
 - [x] Original course illustration assets and mobile-responsive assessment UI.
 - [x] Add Coolify workflow gated on green `main` CI and explicit opt-in; require matching deployed commit and operational readiness.
 - [x] Implement separate `/api/ready` endpoint for database migration/SSO config checks.
@@ -18,7 +19,7 @@ Legend: [x] committed to main; [ ] incomplete or unverified. Tasks are ordered t
 - [ ] V1 owner/coordinator reviews, CI-validates and merges PR #183, **not** through an unrelated Academy agent.
 - [ ] Create Academy application in the approved Coolify instance on Contabo or confirmed host, with public HTTPS origin.
 - [ ] Configure V1 and Academy callback URLs, dedicated service token, session secret, and Academy PostgreSQL `DATABASE_URL` (never commit values).
-- [ ] Take Academy DB backup, obtain migration approval and apply `db/001_academy.sql`, `db/002_exam_attempt.sql`.
+- [ ] Take Academy DB backup, obtain migration approval and apply `db/001_academy.sql`, `db/002_exam_attempt.sql`, `db/003_lesson_workbook.sql`.
 - [ ] Exercise genuine V1 one-use-code SSO (valid, expired, replay, wrong state) and verify identity-specific private data.
 - [ ] Implement V1 paid plans and purchases with payment-confirmed entitlements; test subscription expiry, cancellation, refund and specialist-course isolation.
 - [ ] Configure `COOLIFY_WEBHOOK`, `COOLIFY_TOKEN`, `ACADEMY_HEALTHCHECK_URL`, and enable `ACADEMY_AUTODEPLOY_ENABLED` only when migration and service smoke tests succeed.
