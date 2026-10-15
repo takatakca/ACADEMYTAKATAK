@@ -219,3 +219,51 @@ p{color:#b3c0d6;line-height:1.8}
 .transcript-passed{background:#174539;color:#8ff0c8}.transcript-review{background:#59411d;color:#ffd598}
 @media(max-width:770px){.student-overview{grid-template-columns:repeat(2,minmax(0,1fr))}.exam-question .answer-list{grid-template-columns:1fr}.exam-submit{align-items:stretch;flex-direction:column}}
 @media(max-width:535px){.student-overview{gap:8px}.student-overview>div{padding:15px 11px}.student-overview strong{font-size:31px}.exam-question{padding:21px 15px}.exam-question legend{font-size:17px}.answer-choice{padding:12px 9px}.transcript-panel{padding:20px 12px}.transcript-item{gap:8px}.transcript-item strong{font-size:12px}.transcript-points{font-size:12px}.assessment-promo{padding:20px 16px}}
+
+
+/* Structured program (multi-course pathway) catalog and student roadmaps. */
+.program-feature{background:linear-gradient(175deg,#091830,#0c1c38)}
+.featured-programs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.featured-program{border:1px solid #31547f;border-radius:17px;background:#122644;padding:25px;display:flex;flex-direction:column;align-items:flex-start;transition:transform .2s,border-color .2s}
+.featured-program:hover,.program-card:hover{transform:translateY(-4px);border-color:#5cb3ff}
+.featured-program-symbol{width:54px;height:54px;border-radius:13px;display:grid;place-items:center;font:800 31px 'Outfit';margin-bottom:20px}
+.featured-program small{color:#76c5ff;text-transform:uppercase;letter-spacing:.13em;font-size:10px;font-weight:800}
+.featured-program h3{font-size:24px;margin:12px 0}.featured-program p{font-size:12px;flex:1}
+.featured-program strong{font-size:11px;color:#8dd4ff;margin-top:15px}
+.program-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px;margin:32px 0}
+.program-card{display:grid;grid-template-columns:160px minmax(0,1fr);border:1px solid #325073;border-radius:17px;background:#101e38;overflow:hidden;transition:transform .2s,border-color .2s}
+.program-art{min-height:225px;display:flex;justify-content:center;align-items:center;flex-direction:column;gap:20px;background-size:cover;background-position:center}
+.program-art span{font:800 70px 'Outfit';color:#e8f5ff;text-shadow:0 9px 30px #061426b0}
+.program-art small{font-size:10px;color:#dbefff;font-weight:700;text-align:center;padding:0 10px}
+.program-body{padding:25px;display:flex;flex-direction:column;align-items:flex-start}
+.program-body h2{font-size:23px;margin:12px 0 8px}
+.program-body p{font-size:12px;flex:1;line-height:1.75}
+.program-body .text-link{margin-top:11px;font-size:12px}
+.program-art.art-blue,.program-hero-art.art-blue,.featured-program-symbol.art-blue{background-image:url('/course-art/blue.svg')}
+.program-art.art-violet,.program-hero-art.art-violet,.featured-program-symbol.art-violet{background-image:url('/course-art/violet.svg')}
+.program-art.art-cyan,.program-hero-art.art-cyan,.featured-program-symbol.art-cyan{background-image:url('/course-art/cyan.svg')}
+.program-art.art-orange,.program-hero-art.art-orange,.featured-program-symbol.art-orange{background-image:url('/course-art/orange.svg')}
+.program-heading{display:grid;grid-template-columns:1fr 290px;gap:25px;align-items:center;margin:32px 0 35px}
+.program-heading h1{font-size:clamp(2.5rem,4.6vw,4.4rem);margin:18px 0}
+.program-heading>div:first-child>p{max-width:700px}
+.program-hero-art{height:265px;border:1px solid #35629a;border-radius:22px;background-size:cover;background-position:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px}
+.program-hero-art span{font:800 110px 'Outfit';color:#effaff;text-shadow:0 9px 25px #091d33d6}
+.program-hero-art small{font-size:9px;letter-spacing:.1em;font-weight:800;color:#dff4ff}
+.program-meter{padding:22px 28px;background:#123054;border-radius:15px;border:1px solid #3977b5;margin-bottom:36px}
+.program-meter>div:first-child{display:flex;justify-content:space-between;gap:10px;color:#b8d3ef;margin-bottom:16px}
+.program-meter strong{color:#e8faff}.program-meter p{font-size:12px;margin:12px 0 0}
+.program-congrats{color:#88e8c2!important;font-weight:700}
+.roadmap{position:relative;margin:35px 0 45px}
+.roadmap:before{content:'';position:absolute;left:27px;top:36px;bottom:44px;width:2px;background:#28547d}
+.roadmap-item{position:relative;display:flex;gap:23px;align-items:flex-start;margin-bottom:16px}
+.roadmap-number{position:relative;z-index:1;min-width:55px;width:55px;height:55px;display:grid;place-items:center;border-radius:16px;border:1px solid #548bd0;background:#183c6b;color:#d8efff;font:800 16px 'Outfit'}
+.roadmap-detail{flex:1;padding:24px 27px;background:#101f3b;border:1px solid #2d4a6c;border-radius:14px}
+.roadmap-top{display:flex;justify-content:space-between;gap:15px;font-size:11px;color:#75bdf7}
+.roadmap-detail h3{margin:10px 0 6px;font-size:23px}
+.roadmap-detail p{font-size:12px;line-height:1.7;margin:0 0 18px}
+.roadmap-meta,.roadmap-links{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.roadmap-meta span{font-size:11px;border-radius:20px;background:#1d3557;color:#bacde5;padding:5px 10px}
+.roadmap-links{margin-top:20px}
+@media(max-width:950px){.featured-programs{grid-template-columns:1fr 1fr}.program-grid{grid-template-columns:1fr}}
+@media(max-width:770px){.featured-programs{grid-template-columns:1fr}.program-heading{grid-template-columns:1fr}.program-hero-art{max-height:210px;order:-1}.roadmap-detail{padding:19px}}
+@media(max-width:535px){.program-card{grid-template-columns:1fr}.program-art{min-height:125px}.program-art span{font-size:50px}.roadmap-item{gap:12px}.roadmap-number{min-width:39px;width:39px;height:39px;border-radius:9px;font-size:12px}.roadmap:before{left:19px}.roadmap-meta{gap:5px}.roadmap-top{flex-direction:column;gap:3px}.roadmap-detail h3{font-size:20px}}
