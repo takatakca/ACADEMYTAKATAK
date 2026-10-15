@@ -307,3 +307,18 @@ p{color:#b3c0d6;line-height:1.8}
 .exam-review-item p{margin:0;font-size:12px;color:#b8cde5}
 .review-correct,.review-incorrect{font-size:11px;font-weight:800}
 .review-correct{color:#90e9c3}.review-incorrect{color:#ffc58b}
+
+/* Restricted Academy instructor exam workspace */
+.instructor-shell{display:grid;gap:22px;max-width:1060px;margin:25px 0 58px}
+.instructor-label{display:block;font-size:12px;color:#b3d8ff;font-weight:700;margin:9px 0}
+.instructor-select,.instructor-textarea{width:100%;max-width:100%;padding:13px;border:1px solid #52789d;border-radius:10px;background:#102541;color:#e6f4ff;outline-offset:2px}
+.instructor-select{font-size:14px}.instructor-textarea{font:12px/1.7 ui-monospace,SFMono-Regular,monospace;resize:vertical;min-height:200px}
+.instructor-version{border:1px solid #355574;border-radius:11px;margin:11px 0;padding:13px;background:#122a49}
+.instructor-version summary{display:flex;gap:15px;justify-content:space-between;align-items:center;cursor:pointer;font-size:13px}
+.instructor-version summary span{color:#9fbeda;font-size:12px}
+.instructor-version-body{padding-top:18px;border-top:1px solid #355574;margin-top:13px}
+.instructor-version-body ol{padding:0 0 0 22px}
+.instructor-version-body li{padding:15px 0;border-bottom:1px solid #304a67;font-size:13px}
+.instructor-version-body li p{margin:6px 0;font-size:12px}
+.instructor-version-body button{margin-top:20px}
+@media(max-width:600px){.instructor-version summary{align-items:flex-start;flex-direction:column}.instructor-shell{gap:12px}}
