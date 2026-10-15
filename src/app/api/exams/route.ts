@@ -34,7 +34,11 @@ export async function POST(request:NextRequest){
       return json({ok:false,error:"finish_lessons_first"},403);
     const grade=gradeExam(questions,answers as number[]);
     const bestPoints=await saveExamAttempt(identity,slug,grade);
-    return json({ok:true,grade,bestPoints,attemptLimit:3,passingPercent:80},200);
+    const review=questions.map((q,i)=>({
+      id:q.id,prompt:q.prompt,correct:q.correctIndex===(answers as number[])[i],
+      correctAnswer:q.choices[q.correctIndex],explanation:q.explanation
+    }));
+    return json({ok:true,grade:{...grade,review},bestPoints,attemptLimit:3,passingPercent:80},200);
   }catch(e){
     if(e instanceof ExamLimitError)return json({ok:false,error:"exam_attempt_limit"},429);
     return json({ok:false,error:"exam_unavailable"},503);
