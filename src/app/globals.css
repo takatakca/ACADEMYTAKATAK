@@ -267,3 +267,20 @@ p{color:#b3c0d6;line-height:1.8}
 @media(max-width:950px){.featured-programs{grid-template-columns:1fr 1fr}.program-grid{grid-template-columns:1fr}}
 @media(max-width:770px){.featured-programs{grid-template-columns:1fr}.program-heading{grid-template-columns:1fr}.program-hero-art{max-height:210px;order:-1}.roadmap-detail{padding:19px}}
 @media(max-width:535px){.program-card{grid-template-columns:1fr}.program-art{min-height:125px}.program-art span{font-size:50px}.roadmap-item{gap:12px}.roadmap-number{min-width:39px;width:39px;height:39px;border-radius:9px;font-size:12px}.roadmap:before{left:19px}.roadmap-meta{gap:5px}.roadmap-top{flex-direction:column;gap:3px}.roadmap-detail h3{font-size:20px}}
+
+
+.guide-categories{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 45px}
+.guide-categories a{display:inline-block;font-size:11px;font-weight:700;background:#142e51;border:1px solid #315078;border-radius:22px;padding:8px 12px;color:#bbdbfc}
+.guide-categories a:hover{background:#184577;color:white}
+.learning-guide-section{scroll-margin-top:130px;margin-bottom:50px}
+.learning-guide-section .section-heading{margin-bottom:20px}
+.guide-count{color:#9dbddd;font-size:12px}
+.guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.guide-item{display:flex;align-items:flex-start;gap:13px;border:1px solid #30486b;background:#10203d;border-radius:13px;padding:17px}
+.guide-item-symbol{background:#1f4977;color:#7ac5ff;border-radius:8px;padding:7px;min-width:34px;height:34px;text-align:center}
+.guide-item h3{font-size:16px;margin:0 0 7px}.guide-item p{font-size:12px;margin-bottom:12px;line-height:1.5}
+.guide-links{display:flex;flex-direction:column;gap:6px}
+.guide-links a{font-size:11px;color:#7fcaff;font-weight:700}
+.guide-links a:hover{text-decoration:underline}
+@media(max-width:920px){.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.guide-grid{grid-template-columns:1fr}.guide-categories{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.guide-categories a{white-space:nowrap}}
