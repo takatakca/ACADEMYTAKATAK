@@ -9,6 +9,7 @@ Education platform for the **GROUPE TAKATAK** ecosystem. Its master dashboard an
 - Free lesson previews plus server-side subscription/purchase gates.
 - Central TAKATAK sign-in bridge with state-bound launch, short-lived one-time code exchange and signed HttpOnly session cookies. A missing bridge fails closed.
 - Student dashboard and authenticated lesson completion API backed by PostgreSQL.
+- Access-controlled written exercise workbook per lesson (PostgreSQL migration 003) and per-question learning feedback after exam submissions.
 - Pricing, resources and partner information pages that do not advertise unapproved rates.
 - SQL learning-progress and graded-exam history tables (do not copy billing, customer records or other tenant data).
 - **8 sequenced programs** (/programs) with course roadmaps, lesson prerequisites for exams, individual assessment grading and cumulative student points.
@@ -30,7 +31,7 @@ npm run lint
 npm run build
 ```
 
-Visit http://localhost:3000. Free lessons work without auth or database. To track progress and graded exams, use a PostgreSQL instance and explicitly apply `db/001_academy.sql` followed by `db/002_exam_attempt.sql` through an approved migration process; never run migrations automatically on startup. If 002 is missing, exam submission fails closed with a 503; no points are silently awarded.
+Visit http://localhost:3000. Free lessons work without auth or database. To track progress and graded exams, use a PostgreSQL instance and explicitly apply `db/001_academy.sql` followed by `db/002_exam_attempt.sql` and `db/003_lesson_workbook.sql` through an approved migration process; never run migrations automatically on startup. If 002 is missing, exam submission fails closed with a 503; no points are silently awarded.
 
 ## Identity and payment boundary
 
