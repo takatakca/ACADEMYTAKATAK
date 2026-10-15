@@ -3,7 +3,7 @@
 Updated: 2026-10-15. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
 
 ## Source-of-truth checkpoint
-- **Repository HEAD before this handoff commit:** `043f059b1ccbfd1cec30e86a8046d551cbc938df` (verify new HEAD from GitHub; this handoff itself adds a later commit).
+- **Last verified SOURCE commit:** `043f059b1ccbfd1cec30e86a8046d551cbc938df`. Documentation-only commits followed; run `git rev-parse HEAD` or read the GitHub `main` ref for the absolute latest pushed HEAD.
 - **Last task completed:** implemented practical student workbook, corrected multi-course program achievement totals, batched student transcript queries, secure post-login return path, post-exam explanations, readiness route, gated Coolify workflow and durable project documentation.
 - **Current task:** source CI is green; continue independent features and external deployment readiness. Production launch is not verified.
 - **Push status:** Academy changes committed to `main` with expected-SHA writes. No force push.
