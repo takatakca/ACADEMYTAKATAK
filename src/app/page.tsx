@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { categories, courses } from "@/lib/catalog";
 import { currentIdentity } from "@/lib/session";
+import { programs,getProgramCourses } from "@/lib/programs";
 
 export default async function Home({searchParams}:{searchParams:Promise<{category?:string}>}) {
   const {category} = await searchParams;
@@ -14,12 +15,12 @@ export default async function Home({searchParams}:{searchParams:Promise<{categor
         <p>One academy. A world of practical skills. Start with free lessons, unlock advanced learning as you grow, and connect what you learn to your TAKATAK dashboard.</p>
         <div className="hero-buttons"><a className="btn btn-primary" href="#courses">Explore courses <span aria-hidden="true">↗</span></a>
           <Link className="btn btn-soft" href={identity ? "/account" : "/auth/start"}>{identity ? "Continue learning" : "Create your free account"} →</Link></div>
-        <div className="hero-points"><span>✓ Free lessons for everyone</span><span>✓ Learn at your pace</span><span>✓ One TAKATAK identity</span></div>
+        <div className="hero-points"><span>✓ Free lessons for everyone</span><span>✓ Graded exams and earned points</span><span>✓ One TAKATAK identity</span></div>
       </div>
       <div className="hero-visual" aria-label="Overview of the TAKATAK Academy learning experience">
         <div className="orb orb-one"></div><div className="orb orb-two"></div>
         <div className="learning-preview">
-          <div className="preview-top"><span className="preview-dots"><b></b><b></b><b></b></span><span>YOUR LEARNING SPACE</span><span>✧</span></div>
+          <div className="preview-top"><span className="preview-dots"><b></b><b></b><b></b></span><span>SAMPLE LEARNING PREVIEW</span><span>✧</span></div>
           <div className="preview-main"><div className="preview-heading">Keep moving forward<span className="preview-spark">✦</span></div>
             <p>Explore pathways designed for the way you work.</p>
             <div className="preview-course"><span className="preview-icon">⌁</span><div><strong>SEO + AEO Academy</strong><small>Search, discovery and AI visibility</small><div className="progress-track"><i style={{width:"42%"}}></i></div></div><span>42%</span></div>
@@ -30,6 +31,16 @@ export default async function Home({searchParams}:{searchParams:Promise<{categor
       </div>
     </div></section>
     <section className="trust-row"><div className="container trust-inner"><span>BUILT FOR REAL-WORLD GROWTH</span><span>BUSINESS</span><span>MARKETING</span><span>COMMERCE</span><span>TECHNOLOGY</span><span>CAREERS</span></div></section>
+    <section className="section program-feature"><div className="container">
+      <div className="section-heading"><div><span className="kicker">MULTI-COURSE UNIVERSITY PATHS</span>
+        <h2>Build a skillset. <span className="gradient-text">Master a program.</span></h2>
+        <p>Follow recommended training paths with lessons, exercises, five-question assessments and earned points.</p></div>
+        <Link href="/programs" className="text-link">Explore all programs ↗</Link></div>
+      <div className="featured-programs">{programs.slice(0,3).map(p=><Link key={p.slug} href={"/programs/"+p.slug} className="featured-program">
+        <span className={"featured-program-symbol art-"+p.accent}>{p.icon}</span><small>{p.department}</small><h3>{p.title}</h3>
+        <p>{p.description}</p><strong>{getProgramCourses(p).length} courses · {getProgramCourses(p).length*100} possible exam points →</strong>
+      </Link>)}</div>
+    </div></section>
     <section id="courses" className="section catalogue"><div className="container">
       <div className="section-heading"><div><span className="kicker">YOUR NEXT SKILL STARTS HERE</span><h2>Explore our <span className="gradient-text">academies</span></h2>
         <p>Practical, step-by-step courses—from first steps to advanced workflows.</p></div>
