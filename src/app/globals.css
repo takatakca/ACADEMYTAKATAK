@@ -322,3 +322,18 @@ p{color:#b3c0d6;line-height:1.8}
 .instructor-version-body li p{margin:6px 0;font-size:12px}
 .instructor-version-body button{margin-top:20px}
 @media(max-width:600px){.instructor-version summary{align-items:flex-start;flex-direction:column}.instructor-shell{gap:12px}}
+
+/* Educational completion awards and public verification. */
+.award-claim{margin:35px 0;padding:28px;border-radius:18px;border:1px solid #397dc2;background:linear-gradient(120deg,#0e315a,#14213e)}
+.award-claim>strong{display:block;font:700 24px 'Outfit',sans-serif;color:#e3f5ff}
+.award-claim>p{max-width:720px;color:#a9cbe7;line-height:1.7}
+.award-claim .btn{margin:10px 0}
+.award-verify-card{padding:35px;max-width:740px;width:100%;text-align:left;background:#0f223e;border:1px solid #406b94;border-radius:20px}
+.award-verify-card h1{font-size:clamp(2rem,4vw,3rem)}
+.award-symbol{font:800 45px 'Outfit',sans-serif;color:#82ebc4}
+.award-details{display:flex;flex-direction:column;margin:22px 0;border-top:1px solid #34506f}
+.award-details>div{padding:12px 0;border-bottom:1px solid #34506f;display:flex;align-items:flex-start;justify-content:space-between;gap:18px}
+.award-details dt{font-size:12px;color:#92b5d8}
+.award-details dd{font-size:13px;color:#e1f4ff;font-weight:700;margin:0;max-width:65%;overflow-wrap:anywhere;text-align:right}
+.award-code{font-family:ui-monospace,monospace;font-size:11px!important}
+@media(max-width:540px){.award-verify-card{padding:22px 14px}.award-details>div{flex-direction:column;gap:5px}.award-details dd{text-align:left;max-width:100%}}
