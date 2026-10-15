@@ -10,7 +10,7 @@
 ## Prerequisites (do NOT invent values)
 1. Authorized Coolify team/project, actual server, Academy application UUID, published domain and TLS.
 2. TAKATAK-V1 Academy bridge merged and deployed under V1 coordinator's release controls (PR #183).
-3. Academy PostgreSQL database and backup. Apply `db/001_academy.sql` then `db/002_exam_attempt.sql` then `db/003_lesson_workbook.sql` then `db/004_private_exam_bank.sql` with explicit approval; never migrate silently on startup.
+3. Academy PostgreSQL database and backup. Apply `db/001_academy.sql` then `db/002_exam_attempt.sql` then `db/003_lesson_workbook.sql` then `db/004_private_exam_bank.sql` then `db/005_program_awards.sql` with explicit approval; never migrate silently on startup.
 4. Provision Academy environment variables in Coolify:
    - `NEXT_PUBLIC_TAKATAK_DASHBOARD_URL`
    - `TAKATAK_ACADEMY_LAUNCH_URL` (V1 launch route)
@@ -39,7 +39,7 @@ IMPORTANT: Coolify automatic native GitHub deployment on push can bypass our CI 
 
 ## Live verification
 - GET `/api/health`: app liveness and *configuration flags* only.
-- GET `/api/ready`: HTTP 200 only when signed central auth bridge env and Academy progress/exam/workbook/private-bank tables are available and queryable; HTTP 503 otherwise.
+- GET `/api/ready`: HTTP 200 only when signed central auth bridge env and Academy progress/exam/workbook/private-bank/award tables are available and queryable; HTTP 503 otherwise.
 - Run 90-second one-use code, replay and state mismatch smoke tests through V1.
 - Validate guest paid-lesson denial and unauthorized exam POST denial.
 - Validate actual persisted progress, grade best-score, three attempts in rolling 24 hours and program completion.
@@ -48,3 +48,6 @@ IMPORTANT: Coolify automatic native GitHub deployment on push can bypass our CI 
 
 ## Instructor exam bank activation
 V1 must issue short-lived, signed `academy_editor` entitlements to editorial staff and `academy_reviewer` entitlements to independent reviewers. The same master identity cannot publish its own draft. Do not grant roles locally or derive them from browser input. Apply migration 004, verify staff can create drafts at `/instructor/exams`, then have a **different** reviewer inspect and publish a version. A version becomes available to new sittings only after this transition; old public-source banks remain unaccredited low-stakes practice until replaced. Protect the PostgreSQL table and do not expose it through an anonymous database API.
+
+## Academy educational completion awards
+The optional program-completion award is issued only after every component course has all lessons completed **and** a passing exam, plus a current V1 entitlement when requesting the record. Its unguessable UUID is verifiable at `/verify/<award-uuid>` without disclosing the holder's master identity or name. A separate V1-signed `academy_awards_admin` entitlement authorizes `/instructor/awards` and the revocation API, which records the reason and administering master identity. The award is a non-accredited **internal educational record**; public verification does not prove who possesses the URL. Test issuance, duplicate prevention, authorized revocation and privacy before enabling in production.
