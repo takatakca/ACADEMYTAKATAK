@@ -51,3 +51,6 @@ V1 must issue short-lived, signed `academy_editor` entitlements to editorial sta
 
 ## Academy educational completion awards
 The optional program-completion award is issued only after every component course has all lessons completed **and** a passing exam, plus a current V1 entitlement when requesting the record. Its unguessable UUID is verifiable at `/verify/<award-uuid>` without disclosing the holder's master identity or name. A separate V1-signed `academy_awards_admin` entitlement authorizes `/instructor/awards` and the revocation API, which records the reason and administering master identity. The award is a non-accredited **internal educational record**; public verification does not prove who possesses the URL. Test issuance, duplicate prevention, authorized revocation and privacy before enabling in production.
+
+## Revalidate `main` on demand
+The Academy CI workflow supports `workflow_dispatch`. When documentation-only commits have advanced the HEAD past the last compiled source SHA, use **GitHub Actions → Academy CI → Run workflow → main** after obtaining authorized repository access. A passing manual CI on exact current HEAD can trigger the gated Coolify workflow if production deployment is explicitly enabled; do not bypass the two independent checks. No external restart/orchestrator is configured by this workflow.
