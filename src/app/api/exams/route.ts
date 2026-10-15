@@ -2,7 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { currentIdentity } from "@/lib/session";
 import { getCourse } from "@/lib/catalog";
 import { canReadLesson } from "@/lib/access";
-import { getExamKey, gradeExam } from "@/lib/exams";
+import { gradeExam } from "@/lib/exams";
+import { verifyAssessmentTicket } from "@/lib/assessment-ticket";
+import { verifyTicketQuestions } from "@/lib/private-exams";
 import { readProgress,progressConfigured } from "@/lib/progress";
 import { ExamLimitError,saveExamAttempt } from "@/lib/exam-records";
 
@@ -21,19 +23,23 @@ export async function POST(request:NextRequest){
   try { const raw=await request.text(); if(raw.length>4096)return json({ok:false,error:"request_too_large"},413);input=JSON.parse(raw); }
   catch{return json({ok:false,error:"invalid_json"},400);}
   if(!input||typeof input!=="object"||Array.isArray(input))return json({ok:false,error:"invalid_payload"},400);
-  const {course:slug,answers}=input as Record<string,unknown>;
-  if(typeof slug!=="string"||slug.length>100||!Array.isArray(answers)||answers.length!==5||
+  const {course:slug,answers,ticket:ticketToken}=input as Record<string,unknown>;
+  if(typeof slug!=="string"||slug.length>100||typeof ticketToken!=="string"||!Array.isArray(answers)||answers.length!==5||
      !answers.every(x=>Number.isInteger(x)&&x>=0&&x<=3))return json({ok:false,error:"invalid_answers"},400);
-  const course=getCourse(slug);const questions=getExamKey(slug);
-  if(!course||!questions)return json({ok:false,error:"not_found"},404);
+  const course=getCourse(slug);
+  if(!course)return json({ok:false,error:"not_found"},404);
+  const ticket=verifyAssessmentTicket(ticketToken,process.env.ACADEMY_SESSION_SECRET||"",identity.sub,slug);
+  if(!ticket)return json({ok:false,error:"exam_ticket_expired"},403);
   if(!course.lessons.every(lesson=>canReadLesson(course,lesson,identity)))
     return json({ok:false,error:"payment_or_entitlement_required"},403);
   try {
     const completed=await readProgress(identity,slug);
     if(!course.lessons.every(lesson=>completed.includes(lesson.slug)))
       return json({ok:false,error:"finish_lessons_first"},403);
+    const questions=await verifyTicketQuestions(ticket);
+    if(!questions)return json({ok:false,error:"exam_version_unavailable"},409);
     const grade=gradeExam(questions,answers as number[]);
-    const bestPoints=await saveExamAttempt(identity,slug,grade);
+    const bestPoints=await saveExamAttempt(identity,slug,grade,ticket.source,ticket.version);
     const review=questions.map((q,i)=>({
       id:q.id,prompt:q.prompt,correct:q.correctIndex===(answers as number[])[i],
       correctAnswer:q.choices[q.correctIndex],explanation:q.explanation
