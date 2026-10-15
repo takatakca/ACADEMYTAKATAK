@@ -10,7 +10,7 @@
 ## Prerequisites (do NOT invent values)
 1. Authorized Coolify team/project, actual server, Academy application UUID, published domain and TLS.
 2. TAKATAK-V1 Academy bridge merged and deployed under V1 coordinator's release controls (PR #183).
-3. Academy PostgreSQL database and backup. Apply `db/001_academy.sql` then `db/002_exam_attempt.sql` with explicit approval; never migrate silently on startup.
+3. Academy PostgreSQL database and backup. Apply `db/001_academy.sql` then `db/002_exam_attempt.sql` then `db/003_lesson_workbook.sql` with explicit approval; never migrate silently on startup.
 4. Provision Academy environment variables in Coolify:
    - `NEXT_PUBLIC_TAKATAK_DASHBOARD_URL`
    - `TAKATAK_ACADEMY_LAUNCH_URL` (V1 launch route)
@@ -39,7 +39,7 @@ IMPORTANT: Coolify automatic native GitHub deployment on push can bypass our CI 
 
 ## Live verification
 - GET `/api/health`: app liveness and *configuration flags* only.
-- GET `/api/ready`: HTTP 200 only when signed central auth bridge env and Academy progress/exam tables are available and queryable; HTTP 503 otherwise.
+- GET `/api/ready`: HTTP 200 only when signed central auth bridge env and Academy progress/exam/workbook tables are available and queryable; HTTP 503 otherwise.
 - Run 90-second one-use code, replay and state mismatch smoke tests through V1.
 - Validate guest paid-lesson denial and unauthorized exam POST denial.
 - Validate actual persisted progress, grade best-score, three attempts in rolling 24 hours and program completion.
