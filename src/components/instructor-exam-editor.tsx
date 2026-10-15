@@ -12,7 +12,7 @@ const errorText=(key:string)=>({
  storage_unavailable:"The private exam database is not available.",
  invalid_question_bank:"Provide 10–60 original, valid questions with distinct IDs, four answers and a complete explanation.",
  different_reviewer_or_valid_draft_required:"A separate authorized reviewer must approve a valid draft that is not yet published."
-}[key]||"The operation was not completed.");
+} as Record<string,string>)[key]||"The operation was not completed.";
 export default function InstructorExamEditor({courses,canAuthor,canReview}:{
  courses:CourseOption[];canAuthor:boolean;canReview:boolean;
 }){
