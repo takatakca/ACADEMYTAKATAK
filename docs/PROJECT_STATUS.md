@@ -9,7 +9,7 @@ Last reviewed: 2026-10-15 (GitHub main). Source of truth: https://github.com/tak
 - Free and paid course access checked server-side against short-lived SSO entitlements.
 - V1 single sign-on consumer, session handling, course progress, five-question exams, best-score points and learning transcript implemented in source.
 - Student academic achievement counts are corrected to count **whole programs**, not individual passing courses.
-- PostgreSQL migration files exist for lesson and exam history. They are **not known to be applied in production**.
+- PostgreSQL migrations 001/002/003 exist for lessons, exams and student workbooks. They are **not known to be applied in production**.
 - Original course-cover SVG assets exist; no official TAKATAK logo invented.
 - CI: Academy tests, typecheck, lint and Next.js build validated on GitHub. Latest commit-specific run must be checked again after every further push.
 
