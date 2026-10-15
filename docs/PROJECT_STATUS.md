@@ -37,5 +37,5 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 ## Release checkpoint 2026-10-15
 - Last fully successful application CI on `491e088e96322219147529faffac3a130ccfe6ea`: GitHub run `38791816925` (test, typecheck, lint and build).
 - `.github/workflows/ci.yml` now also supports manual `workflow_dispatch` on current `main` for a fresh production-candidate validation after documentation-only commits.
-- Later workflow-source update commit `f176531a73196bb4ef668152c59afb6452833fcc` requires a new CI result; confirm it through Actions before declaring verified.
+- Workflow-source update `f176531a73196bb4ef668152c59afb6452833fcc` PASSED Academy CI run `38792169955`: tests, typecheck, lint and Next.js build. Documentation-only commits followed, so the latest main HEAD is not an independently retested deployable source revision until CI is manually redispatched.
 - Live Coolify release is still intentionally disabled and V1 PR #183 remains open. No migration, payment processing or real Academy student SSO was tested in production.
