@@ -337,3 +337,9 @@ p{color:#b3c0d6;line-height:1.8}
 .award-details dd{font-size:13px;color:#e1f4ff;font-weight:700;margin:0;max-width:65%;overflow-wrap:anywhere;text-align:right}
 .award-code{font-family:ui-monospace,monospace;font-size:11px!important}
 @media(max-width:540px){.award-verify-card{padding:22px 14px}.award-details>div{flex-direction:column;gap:5px}.award-details dd{text-align:left;max-width:100%}}
+
+.award-revoke{max-width:780px;display:flex;flex-direction:column;gap:11px}
+.award-revoke>button{align-self:flex-start}
+.instructor-check{display:flex;align-items:flex-start;gap:13px;color:#d5e6fa;font-size:13px;line-height:1.5;margin:10px 0}
+.instructor-check input{accent-color:#4bafff;min-width:18px;min-height:18px;margin-top:2px}
+@media(max-width:535px){.award-revoke>button{width:100%}}
