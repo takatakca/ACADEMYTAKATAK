@@ -17,7 +17,7 @@ export async function readExamSummaries(identity:AcademyIdentity):Promise<Course
     passed:r.passed,lastAttempt:r.last_attempt
   }));
 }
-export async function saveExamAttempt(identity:AcademyIdentity,slug:string,grade:ReturnTypeGrade):Promise<number>{
+export async function saveExamAttempt(identity:AcademyIdentity,slug:string,grade:ReturnTypeGrade,source:"public_practice"|"private_reviewed",version:number):Promise<number>{
   const pool=learningDb();
   if(!pool)throw new Error("exam_storage_not_configured");
   const client=await pool.connect();
@@ -32,9 +32,9 @@ export async function saveExamAttempt(identity:AcademyIdentity,slug:string,grade
     if(Number(recent.rows[0].attempts)>=3)throw new ExamLimitError();
     await client.query(
       `INSERT INTO academy_exam_attempt
-       (master_identity_id,course_slug,correct_answers,question_count,points,passed)
-       VALUES($1,$2,$3,$4,$5,$6)`,
-      [identity.sub,slug,grade.correct,grade.total,grade.points,grade.passed]);
+       (master_identity_id,course_slug,correct_answers,question_count,points,passed,assessment_source,assessment_version)
+       VALUES($1,$2,$3,$4,$5,$6,$7,$8)`,
+      [identity.sub,slug,grade.correct,grade.total,grade.points,grade.passed,source,version===0?null:version]);
     const best=await client.query<{best_points:number}>(
       "SELECT MAX(points)::integer AS best_points FROM academy_exam_attempt WHERE master_identity_id=$1 AND course_slug=$2",
       [identity.sub,slug]);
