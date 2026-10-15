@@ -35,8 +35,8 @@ jobs:
             echo "::error::Expected an HTTPS Coolify resource deploy webhook."
             exit 1
           fi
-          if [[ "${ACADEMY_HEALTHCHECK_URL}" != https://*/api/health ]]; then
-            echo "::error::ACADEMY_HEALTHCHECK_URL must be a trusted HTTPS Academy /api/health URL."
+          if [[ "${ACADEMY_HEALTHCHECK_URL}" != https://*/api/ready ]]; then
+            echo "::error::ACADEMY_HEALTHCHECK_URL must be a trusted HTTPS Academy /api/ready URL."
             exit 1
           fi
           latest="$(curl -fsS --max-time 15 -H "Authorization: Bearer ${GH_TOKEN}" \
@@ -82,7 +82,7 @@ jobs:
               fi
               echo "Coolify reports finished with the expected commit ${VERIFIED_SHA}"
               body="$(curl -fsS --retry 3 --retry-delay 3 --max-time 20 "${ACADEMY_HEALTHCHECK_URL}")"
-              if ! printf '%s' "${body}" | jq -e '.service == "takatak-academy" and .status == "running"' >/dev/null; then
+              if ! printf '%s' "${body}" | jq -e '.service == "takatak-academy" and .ready == true' >/dev/null; then
                 echo "::error::Academy health response is unexpected."
                 exit 1
               fi
