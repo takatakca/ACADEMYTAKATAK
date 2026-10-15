@@ -37,16 +37,18 @@ A mapping snapshot lives at `src/lib/dashboard-learning-map.ts`. It links 55 sid
 
 `db/002_exam_attempt.sql`: scored exam attempt history, index, validation.
 
-`db/003_lesson_workbook.sql`: student practice response upsert, 4,000 character limit and identity/course/lesson compound key. No migrations occur automatically at startup.
+`db/003_lesson_workbook.sql`: student practice response upsert, 4,000 character limit and identity/course/lesson compound key.
+
+`db/004_private_exam_bank.sql`: private immutable draft/review/published assessment versions, unique active version per course, source and version fields on attempts. No migrations occur automatically at startup.
 
 Production DBA approval is required before applying migrations. Back up first, apply in order, and verify SELECT and INSERT access with a dedicated least-privilege Academy application account. Academy stores neither payment details nor another tenant's customer records.
 
 ## Current exam assurance level
 
-**Learning check / low stakes only.** This is a public GitHub repository with question and answer definitions checked into source. Students can inspect source to discover answers. Neither obscuring server HTML nor limiting attempts addresses public source disclosure.
+**Learning check / low stakes only.** Existing legacy practice quizzes remain exposed as source-code examples in this public GitHub repository. New reviewed item banks are stored only in private Academy PostgreSQL and require two separate authorized reviewer/editor identities. Students can inspect source to discover answers. Neither obscuring server HTML nor limiting attempts addresses public source disclosure.
 
 Before issuing any high-stakes or externally verifiable certificate:
-1. Move exam bank and correct answers to private, server-authorized storage.
+1. Populate the implemented private, versioned bank with original expert-reviewed items and independently publish approved versions.
 2. Add versioning, larger randomized question banks, response audits and review from subject matter experts.
 3. Add plagiarism/risk review and reasonable accessibility accommodations.
 4. Require identification/proctoring proportional to the credential.
@@ -79,3 +81,6 @@ Launch checklist:
 ## QA
 
 `npm run test`, `npm run typecheck`, `npm run lint`, `npm run build` on Node 22. CI logs are the actual verification evidence; a code push alone does not establish deployment health.
+
+## Reviewed private bank implementation (source phase)
+`src/lib/private-exams.ts` stores 10–60 questions per authored version, requires V1 `academy_editor` to draft and separate V1 `academy_reviewer` to publish. All published questions remain server-side. Student exam pages receive only five sampled questions plus a 15-minute HMAC-signed selection token scoped to learner, course, bank version and item IDs; submissions are graded using the exact approved version. Attempt history records both source and version; retries remain capped at three per 24 hours. The learner sees answer explanations only **after** server grading and persisted score. `/instructor/exams` remains inaccessible without signed TAKATAK permissions; V1 must later issue these staff entitlements after its own governance review. This is not yet a proctored or regulated high-stakes exam system.
