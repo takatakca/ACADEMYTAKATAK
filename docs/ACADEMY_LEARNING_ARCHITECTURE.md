@@ -17,7 +17,7 @@ A mapping snapshot lives at `src/lib/dashboard-learning-map.ts`. It links 55 sid
 - 8 sequenced programs (`src/lib/programs.ts`) spanning digital business, marketing, commerce, sales, professional travel, IT and operations.
 - Every lesson supplies a focused teaching sequence and a practical activity. Free lessons are public; premium lessons require **server-verified** V1 product entitlements.
 - Each course has a five-question learning exam, graded on the server.
-- Student progress and exam history are keyed by verified master identity ID.
+- Student progress, exam history and free-text practice workbooks are keyed by verified master identity ID; practical exercises require an authorized session and server-side content/access validation.
 - Images: four original editable SVG course illustration assets under `public/course-art` with GROUPE TAKATAK blue/navy visual treatment. These are not substitutes for the owner's logo.
 
 ## Grading and achievements
@@ -35,7 +35,9 @@ A mapping snapshot lives at `src/lib/dashboard-learning-map.ts`. It links 55 sid
 
 `db/001_academy.sql`: student lesson completion.
 
-`db/002_exam_attempt.sql`: scored exam attempt history, index, validation. No migrations occur automatically at startup.
+`db/002_exam_attempt.sql`: scored exam attempt history, index, validation.
+
+`db/003_lesson_workbook.sql`: student practice response upsert, 4,000 character limit and identity/course/lesson compound key. No migrations occur automatically at startup.
 
 Production DBA approval is required before applying migrations. Back up first, apply in order, and verify SELECT and INSERT access with a dedicated least-privilege Academy application account. Academy stores neither payment details nor another tenant's customer records.
 
