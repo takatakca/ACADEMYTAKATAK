@@ -14,12 +14,13 @@ Legend: [x] committed to main; [ ] incomplete or unverified. Tasks are ordered t
 - [x] Original course illustration assets and mobile-responsive assessment UI.
 - [x] Add Coolify workflow gated on green `main` CI and explicit opt-in; require matching deployed commit and operational readiness.
 - [x] Implement separate `/api/ready` endpoint for database migration/SSO config checks.
+- [x] Add versioned private 10–60-item exam banks, random five-question candidate tickets, V1-authorized editor/reviewer UI, review separation and versioned attempt metadata (migration 004).
 
 ## Required production blockers
 - [ ] V1 owner/coordinator reviews, CI-validates and merges PR #183, **not** through an unrelated Academy agent.
 - [ ] Create Academy application in the approved Coolify instance on Contabo or confirmed host, with public HTTPS origin.
 - [ ] Configure V1 and Academy callback URLs, dedicated service token, session secret, and Academy PostgreSQL `DATABASE_URL` (never commit values).
-- [ ] Take Academy DB backup, obtain migration approval and apply `db/001_academy.sql`, `db/002_exam_attempt.sql`, `db/003_lesson_workbook.sql`.
+- [ ] Take Academy DB backup, obtain migration approval and apply `db/001_academy.sql`, `db/002_exam_attempt.sql`, `db/003_lesson_workbook.sql`, `db/004_private_exam_bank.sql`.
 - [ ] Exercise genuine V1 one-use-code SSO (valid, expired, replay, wrong state) and verify identity-specific private data.
 - [ ] Implement V1 paid plans and purchases with payment-confirmed entitlements; test subscription expiry, cancellation, refund and specialist-course isolation.
 - [ ] Configure `COOLIFY_WEBHOOK`, `COOLIFY_TOKEN`, `ACADEMY_HEALTHCHECK_URL`, and enable `ACADEMY_AUTODEPLOY_ENABLED` only when migration and service smoke tests succeed.
@@ -28,7 +29,8 @@ Legend: [x] committed to main; [ ] incomplete or unverified. Tasks are ordered t
 
 ## Curriculum and product completion
 - [ ] Instructor editorial review and deeper module content/video, multimedia transcripts, hands-on demonstrations, worked examples and graded practical assignments.
-- [ ] Harden exam integrity: private versioned item bank, sufficient randomized questions, instructor review and proportional anti-cheating.
+- [x] Private versioned item-bank source, randomized selection, instructor review/publish workflow, signed tickets and schema migration authored.
+- [ ] Provision distinct V1 editor/reviewer entitlements, apply migration 004, create original reviewed exam items, and test actual private bank E2E; add risk-based anti-cheating/regulated controls.
 - [ ] Student/staff role-authorized instructor CMS: draft/review/publish content, moderation, audit history.
 - [ ] Optional AI tutor through server-side provider adapter, privacy minimization, consent, rate/cost limits and grounded answers; no fabricated integration status.
 - [ ] Accessible Québec French localization with content, legal notices and assessment parity.
