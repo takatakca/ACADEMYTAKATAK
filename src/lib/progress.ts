@@ -26,6 +26,22 @@ export async function writeProgress(identity: AcademyIdentity, courseSlug: strin
     [identity.sub, courseSlug, lessonSlug]
   );
 }
+/** Load every saved lesson with one scoped query instead of one query per course. */
+export async function readAllProgress(identity: AcademyIdentity): Promise<Map<string,string[]>> {
+  const client=db();if(!client)return new Map();
+  const result=await client.query<{course_slug:string;lesson_slug:string}>(
+    "SELECT course_slug,lesson_slug FROM academy_lesson_progress WHERE master_identity_id=$1",
+    [identity.sub]
+  );
+  const byCourse=new Map<string,string[]>();
+  for(const row of result.rows){
+    const entries=byCourse.get(row.course_slug)??[];
+    entries.push(row.lesson_slug);
+    byCourse.set(row.course_slug,entries);
+  }
+  return byCourse;
+}
+
 export function progressConfigured(): boolean { return Boolean(process.env.DATABASE_URL); }
 
 /** Reuse the Academy-owned Postgres pool for graded learning records. */
