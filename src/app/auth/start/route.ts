@@ -1,9 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { newLaunchState, STATE_COOKIE } from "@/lib/session";
 
+import { safeLearningReturnPath } from "@/lib/return-path";
+
+const RETURN_COOKIE="takatak_academy_return";
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
-export async function GET(){
+export async function GET(request:NextRequest){
   const target=process.env.TAKATAK_ACADEMY_LAUNCH_URL;
   if(!target)return NextResponse.json({ok:false,message:"TAKATAK-V1 Academy sign-in bridge is not configured."},{status:503,headers:{"Cache-Control":"no-store"}});
   let url:URL;
@@ -13,6 +16,7 @@ export async function GET(){
   const state=newLaunchState();
   url.searchParams.set("state",state);
   const response=NextResponse.redirect(url,303);
+  response.cookies.set(RETURN_COOKIE,safeLearningReturnPath(request.nextUrl.searchParams.get("next")),{httpOnly:true,secure:process.env.NODE_ENV==="production",sameSite:"lax",path:"/",maxAge:300});
   response.cookies.set(STATE_COOKIE,state,{httpOnly:true,secure:process.env.NODE_ENV==="production",sameSite:"lax",path:"/",maxAge:300});
   response.headers.set("Cache-Control","no-store");
   return response;
