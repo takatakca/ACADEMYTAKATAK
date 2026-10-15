@@ -6,6 +6,7 @@ import { programs } from "@/lib/programs";
 import { isCourseMastered, masteredProgramCount, totalEarnedPoints } from "@/lib/achievements";
 import { readExamSummaries } from "@/lib/exam-records";
 import { courseProgress } from "@/lib/access";
+import { canAuthorExams,canReviewExams } from "@/lib/assessment-policy";
 
 export const dynamic="force-dynamic";
 export default async function Account(){
@@ -26,7 +27,7 @@ export default async function Account(){
   const completedCourses=records.filter(({course})=>isCourseMastered(course,progress,examByCourse)).length;
   const completedPrograms=masteredProgramCount(programs,courses,progress,examByCourse);
   return <div className="container inner-page">
-    <div className="account-head"><div><span className="kicker">MY LEARNING · TAKATAK-V1 MASTER ACCOUNT</span><h1>Welcome, {identity.name||"learner"}.</h1><p>Your courses, exam results and accumulated points—always linked to one TAKATAK identity.</p></div><Link href="/auth/logout" className="btn btn-outline">Sign out</Link></div>
+    <div className="account-head"><div><span className="kicker">MY LEARNING · TAKATAK-V1 MASTER ACCOUNT</span><h1>Welcome, {identity.name||"learner"}.</h1><p>Your courses, exam results and accumulated points—always linked to one TAKATAK identity.</p></div><div className="assessment-actions">{(canAuthorExams(identity)||canReviewExams(identity))&&<Link href="/instructor/exams" className="btn btn-outline">Instructor exam desk →</Link>}<Link href="/auth/logout" className="btn btn-outline">Sign out</Link></div></div>
     {storageError&&<div className="important-note" role="alert"><strong>Learning data temporarily unavailable.</strong><p>We could not load your transcript. Your saved records have not been reset; please retry later.</p></div>}
     {!progressConfigured()&&<div className="important-note"><strong>Learning database not configured.</strong><p>Progress and exams cannot be saved until Academy PostgreSQL migrations are activated.</p></div>}
     <section className="student-overview" aria-label="Personal learning statistics">
