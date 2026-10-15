@@ -4,7 +4,8 @@ import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import type { PublicQuestion } from "@/lib/exams";
 
-type Grade={correct:number;total:number;percent:number;points:number;passed:boolean};
+type Grade={correct:number;total:number;percent:number;points:number;passed:boolean;
+  review:{id:string;prompt:string;correct:boolean;correctAnswer:string;explanation:string}[]};
 type ApiResult={ok:boolean;grade?:Grade;bestPoints?:number;error?:string};
 export default function ExamForm({course,questions}:{course:string;questions:PublicQuestion[]}){
   const [answers,setAnswers]=useState<(number|null)[]>(Array(questions.length).fill(null));
@@ -41,6 +42,13 @@ export default function ExamForm({course,questions}:{course:string;questions:Pub
     <p>You answered {result.grade.correct} out of {result.grade.total} questions correctly.
       You earned {result.grade.points} points on this attempt. Your best exam score for this course is <strong>{result.bestPoints} points</strong>.</p>
     <p>{result.grade.passed?"Your passed exam is recorded in your learning transcript.":"Review the lessons before your next attempt. You may attempt this exam up to three times in any 24-hour window."}</p>
+    <section className="exam-review"><h3>Review what you learned</h3>
+      <p>Use these explanations to strengthen your understanding before the next course.</p>
+      {result.grade.review.map((item,i)=><div key={item.id} className="exam-review-item">
+        <span className={item.correct?"review-correct":"review-incorrect"}>{item.correct?"✓ Correct":"Review needed"} · Question {i+1}</span>
+        <strong>{item.prompt}</strong><p>Correct answer: {item.correctAnswer}</p><p>{item.explanation}</p>
+      </div>)}
+    </section>
     <div className="assessment-actions"><Link href="/account" className="btn btn-primary">My learning transcript →</Link>
     <Link href={`/courses/${course}`} className="btn btn-outline">Course overview</Link></div>
   </div>;
