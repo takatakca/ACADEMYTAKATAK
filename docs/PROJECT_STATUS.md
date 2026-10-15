@@ -8,18 +8,19 @@ Last reviewed: 2026-10-15 (GitHub main). Source of truth: https://github.com/tak
 - Existing content: 29 courses, 145 authored introductory lessons, 8 multi-course programs; learning route directory mapping 55 TAKATAK-V1 navigation entries.
 - Free and paid course access checked server-side against short-lived SSO entitlements.
 - V1 single sign-on consumer, session handling, course progress, five-question exams, best-score points and learning transcript implemented in source.
+- Optional course-program completion awards: verified eligibility across every lesson and exam; immutable unique UUID record, privacy-safe public verification and restricted V1-admin revocation, all implemented in source.
 - Student academic achievement counts are corrected to count **whole programs**, not individual passing courses.
-- PostgreSQL migrations 001/002/003/004 exist for lessons, exams, workbooks and a private versioned assessment bank. They are **not known to be applied in production**.
+- PostgreSQL migrations 001/002/003/004/005 exist for lessons, exams, workbooks, private reviewed assessment banks and revocable educational program awards. They are **not known to be applied in production**.
 - Original course-cover SVG assets exist; no official TAKATAK logo invented.
 - CI: Academy tests, typecheck, lint and Next.js build validated on GitHub. Latest commit-specific run must be checked again after every further push.
 
 ## Incomplete / not claimable as launched
 - Live Academy Coolify application, public Academy HTTPS URL and runtime secrets **not verified**.
 - TAKATAK-V1 Academy bridge PR #183 is still open/unmerged at last verification, V1 owns master identity and payment.
-- Subscription/one-time paid commerce and revocations are not provisioned in V1.
+- Subscription/one-time paid commerce and revocations are not provisioned in V1; Academy instructor and award-admin role entitlements are not issued by V1 yet.
 - Complete instructor-reviewed lesson videos, downloadable materials, bilingual delivery, CMS and external AI tutor are not finished.
 - Existing legacy exam answer keys remain in public GitHub and are **low-stakes practice**. A separately stored PostgreSQL private bank with author/reviewer separation, signed exam tickets and randomized 5-of-10+ questions is now implemented in source, but not activated/seeded in production. Not a regulated professional credential.
-- No independently verified live payment, SSO, PostgreSQL or exam E2E has occurred.
+- No independently verified live payment, SSO, PostgreSQL, reviewed exam bank, student award issuance or exam E2E has occurred.
 - `/api/health` only confirms a running app; `/api/ready` now checks bridge env, database tables and read permissions, returning HTTP 503 until ready.
 - Production deploy workflow is explicitly disabled unless `ACADEMY_AUTODEPLOY_ENABLED=true` and Coolify credentials and health URL are provided.
 
