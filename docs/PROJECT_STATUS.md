@@ -33,3 +33,9 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - `docs/DEPLOYMENT.md` — deployment and verification process.
 - `docs/DECISIONS.md` — architectural decisions and release constraints.
 - `docs/ACADEMY_LEARNING_ARCHITECTURE.md` — course and assessment contract.
+
+## Release checkpoint 2026-10-15
+- Last fully successful application CI on `491e088e96322219147529faffac3a130ccfe6ea`: GitHub run `38791816925` (test, typecheck, lint and build).
+- `.github/workflows/ci.yml` now also supports manual `workflow_dispatch` on current `main` for a fresh production-candidate validation after documentation-only commits.
+- Later workflow-source update commit `f176531a73196bb4ef668152c59afb6452833fcc` requires a new CI result; confirm it through Actions before declaring verified.
+- Live Coolify release is still intentionally disabled and V1 PR #183 remains open. No migration, payment processing or real Academy student SSO was tested in production.
