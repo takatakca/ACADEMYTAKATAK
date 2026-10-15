@@ -44,7 +44,7 @@ export default async function ExamPage({params}:Props){
       <ExamForm course={slug} questions={questions}/></>
       :<section className="panel assessment-locked"><h2>{!identity?"Sign in to take this exam":!progressConfigured()?"Exam storage not configured":!unlocked?"Full course access required":"Complete all lessons first"}</h2>
       <p>{!identity?"Your exam points belong to your centralized TAKATAK learner account.":!progressConfigured()?"Your learning database must be activated before graded exams can be saved.":!unlocked?"Advanced lessons must be unlocked by a verified TAKATAK-V1 entitlement before the final assessment.":`You completed ${completed.length} of ${course.lessons.length} lessons. Mark all lessons complete before starting the assessment.`}</p>
-      <Link href={!identity?"/auth/start":`/courses/${slug}`} className="btn btn-primary">{!identity?"Sign in with TAKATAK":"Return to curriculum"} →</Link></section>}
+      <Link href={!identity?`/auth/start?next=${encodeURIComponent(`/courses/${slug}/exam`)}`:`/courses/${slug}`} className="btn btn-primary">{!identity?"Sign in with TAKATAK":"Return to curriculum"} →</Link></section>}
     {course.disclaimer&&<div className="important-note"><strong>Professional training notice</strong><p>{course.disclaimer}</p></div>}
     <p className="fine-print">These are learning assessments and points, not external professional licences or regulated credentials.</p>
   </div>;
