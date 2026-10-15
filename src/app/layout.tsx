@@ -18,7 +18,7 @@ export default async function RootLayout({children}:{children:React.ReactNode}) 
         <span className="logo-mark">T<span>↗</span></span><span className="logo-type"><strong>TAKATAK</strong><small>ACADEMY</small></span>
       </Link>
       <nav aria-label="Main menu" className="menu">
-        <Link href="/#courses">Courses</Link><Link href="/pricing">Plans</Link><Link href="/resources">Resources</Link><Link href="/partners">Partners</Link>
+        <Link href="/#courses">Courses</Link><Link href="/programs">Programs</Link><Link href="/pricing">Plans</Link><Link href="/resources">Resources</Link><Link href="/partners">Partners</Link>
       </nav>
       <div className="nav-actions"><a className="dashboard-link" href={dashboard}>Main dashboard ↗</a>
         <Link className="btn btn-outline nav-button" href={identity ? "/account" : "/auth/start"}>{identity ? "My learning" : "Sign in"}</Link>
@@ -27,7 +27,7 @@ export default async function RootLayout({children}:{children:React.ReactNode}) 
     <main>{children}</main>
     <footer className="footer"><div className="container footer-grid">
       <div><div className="footer-brand">TAKATAK <span>ACADEMY</span></div><p>Skills for the real world. One account across GROUPE TAKATAK.</p><small>© 2026 GROUPE TAKATAK. All rights reserved.</small></div>
-      <div><strong>Explore</strong><Link href="/#courses">All academies</Link><Link href="/pricing">Pricing & access</Link><Link href="/resources">Resources</Link></div>
+      <div><strong>Explore</strong><Link href="/#courses">All academies</Link><Link href="/programs">Learning programs</Link><Link href="/pricing">Pricing & access</Link><Link href="/resources">Resources</Link></div>
       <div><strong>Community</strong><Link href="/partners">Partners</Link><Link href="/account">My learning</Link><a href={dashboard}>TAKATAK-V1 dashboard ↗</a></div>
     </div></footer>
   </body></html>;
