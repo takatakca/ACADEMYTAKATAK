@@ -45,7 +45,7 @@ export default async function Account(){
       {exams.length?<div className="transcript-list">{exams.map(item=><div key={item.courseSlug} className="transcript-item">
         <div><strong>{courses.find(c=>c.slug===item.courseSlug)?.title??item.courseSlug}</strong><small>{item.attempts} graded attempt(s) · Best score recorded</small></div>
         <span className="transcript-points">{item.bestPoints} / 100</span><span className={item.passed?"transcript-passed":"transcript-review"}>{item.passed?"Passed":"Review"}</span>
-      </div>)}</div>:<p>No graded exams yet. Finish a program's lessons to unlock its knowledge assessment.</p>}
+      </div>)}</div>:<p>No graded exams yet. Finish a program&apos;s lessons to unlock its knowledge assessment.</p>}
       <p className="fine-print">Learning points reflect graded course quizzes, not a government licence or regulated credential. Professional certifications require separate verification.</p>
     </section>
     <div className="notice account-note">Payments, specialist-course purchases and access rights are managed by TAKATAK-V1. <a href={process.env.NEXT_PUBLIC_TAKATAK_DASHBOARD_URL||"https://takatak.ca/dashboard"}>Open your main dashboard ↗</a></div>
