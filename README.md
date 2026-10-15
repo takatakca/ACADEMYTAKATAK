@@ -105,3 +105,6 @@ See [the TAKATAK-V1 integration contract](docs/TAKATAK_V1_INTEGRATION.md), plus 
 
 ## Private reviewed examinations
 Academy includes an opt-in private PostgreSQL assessment bank, with a restricted staff desk at `/instructor/exams`. A V1-signed `academy_editor` entitlement can author 10–60 original items. A different V1-signed `academy_reviewer` identity must approve publication. Students see five selected items bound to a signed expiring token; saved scores record the bank version. Legacy public-source quizzes remain educational practice until they are replaced by independently reviewed private questions. Requires migration `db/004_private_exam_bank.sql` after 001–003.
+
+## Internal program completion records
+After all required course lessons and exams pass, the student may issue an optional Academy education completion record. An opaque UUID lets others check the program, course count, frozen exam points, issue date and active/revoked status at `/verify/<uuid>` without revealing the learner's identity. Only a verified TAKATAK-V1 `academy_awards_admin` may revoke via the restricted `/instructor/awards` interface. The feature is source-complete but needs database migration 005 and end-to-end production testing; it does not confer government or external professional credentials.
