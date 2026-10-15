@@ -5,15 +5,18 @@ Education platform for the **GROUPE TAKATAK** ecosystem. Its master dashboard an
 ## Implemented foundation
 
 - Next.js 16 / React 19, responsive electric-blue on navy Academy frontend.
-- Eight curated course paths covering SEO/AEO, Shopify, local SEO, websites, social marketing, AI automation, travel advisor fundamentals and telecom.
+- **29 course paths and 145 lessons** across the existing SEO, Shopify, local SEO, websites, social, AI, travel and telecom foundation and 21 additional module-aligned TAKATAK-V1 service courses. Each service course maps to the main dashboard's actual module route.
 - Free lesson previews plus server-side subscription/purchase gates.
 - Central TAKATAK sign-in bridge with state-bound launch, short-lived one-time code exchange and signed HttpOnly session cookies. A missing bridge fails closed.
 - Student dashboard and authenticated lesson completion API backed by PostgreSQL.
 - Pricing, resources and partner information pages that do not advertise unapproved rates.
-- SQL learning-progress table (does not copy client identity, billing or other tenant data).
+- SQL learning-progress and graded-exam history tables (do not copy billing, customer records or other tenant data).
+- **8 sequenced programs** (/programs) with course roadmaps, lesson prerequisites for exams, individual assessment grading and cumulative student points.
+- **Final knowledge exams:** five questions per course; 80% passing mark; 20 points per correct answer; three attempts per rolling 24-hour window, best course score only; server-verified results shown in /account.
+- Original blue/cyan/violet/orange course illustrations stored in public/course-art/.
 - GitHub Actions verification and container build for Coolify when production is approved.
 
-This is a **working application foundation**, not a claim of live paid checkout, licensing authorization or deployed production. Future course editorial content, video hosting, educator CMS, exams, certificates and analytics require further work.
+This is a **working application foundation**, not a claim of live paid checkout, licensing authorization or deployed production. Deeper instructor-reviewed content, video hosting, an educator CMS, verified certificates, secure private exam item banks and advanced analytics require further work. Exams currently use **publicly viewable source-code item banks** and must be treated as low-stakes learning checks, not high-stakes external accreditation.
 
 ## Running the project
 
@@ -27,7 +30,7 @@ npm run lint
 npm run build
 ```
 
-Visit http://localhost:3000. Free lessons work without auth or database. To track progress, use a PostgreSQL instance and explicitly apply `db/001_academy.sql`; never run a migration automatically on startup.
+Visit http://localhost:3000. Free lessons work without auth or database. To track progress and graded exams, use a PostgreSQL instance and explicitly apply `db/001_academy.sql` followed by `db/002_exam_attempt.sql` through an approved migration process; never run migrations automatically on startup. If 002 is missing, exam submission fails closed with a 503; no points are silently awarded.
 
 ## Identity and payment boundary
 
@@ -82,6 +85,18 @@ Provision the Academy as its own Coolify app connected to this repository, confi
 ## Professional courses
 
 The Travel Advisor track contains learning exercises but is **not** itself an official travel agent licence or a government accreditation. Québec travel agency permits and travel counsellor certificates have distinct legal requirements administered by the OPC: https://www.opc.gouv.qc.ca/commercant/permis-certificat/agentsdevoyages/ and https://www.opc.gouv.qc.ca/commercant/permis-certificat/conseiller/
+
+## Student progression and scoring
+
+1. Explore a free lesson from the course catalog or browse a curated multi-course program.
+2. Sign in using the TAKATAK-V1 master account to save course progress.
+3. Complete each available lesson and its practical exercise; advanced lessons require a verified V1 entitlement.
+4. When all lessons of a course are complete and accessible, open its final assessment.
+5. The server checks session, prerequisites, entitlements and answer choices before recording the score.
+6. Five questions at 20 points each; 80% to pass. Three submissions are allowed in a rolling 24-hour period. Points are calculated from the best score **per course**, not from the sum of every retry.
+7. Personal exam history, passing marks, cumulative points and program achievement status appear in the private /account and /programs pages.
+
+**Important:** The current exam item banks are in the public source repository. They are for low-stakes practice and not suitable as tamper-resistant regulated professional examinations. Before real professional certifications, move the question bank to an access-controlled datastore, add instructor review, randomized items, identity verification and independent accreditation where applicable.
 
 ## Next steps
 
