@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { newLaunchState, STATE_COOKIE } from "@/lib/session";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
-export async function GET(request:NextRequest){
+export async function GET(){
   const target=process.env.TAKATAK_ACADEMY_LAUNCH_URL;
   if(!target)return NextResponse.json({ok:false,message:"TAKATAK-V1 Academy sign-in bridge is not configured."},{status:503,headers:{"Cache-Control":"no-store"}});
   let url:URL;
