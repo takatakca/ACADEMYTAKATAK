@@ -1,3 +1,4 @@
+import { serviceCourses } from "./service-courses";
 export type LessonAccess = "free" | "plus" | "purchase";
 export type Course = {
   slug: string;
@@ -12,6 +13,7 @@ export type Course = {
   estimatedHours: number;
   certification: "completion" | "none";
   disclaimer?: string;
+  dashboardPath?: string;
   lessons: { slug: string; title: string; duration: number; access: LessonAccess; content: string[]; activity: string }[];
 };
 
@@ -147,6 +149,8 @@ export const courses: Course[] = [
     ]
   }
 ];
+courses.push(...serviceCourses);
+
 export const getCourse = (slug: string) => courses.find((course) => course.slug === slug);
 export const getLesson = (course: Course, slug: string) => course.lessons.find((item) => item.slug === slug);
 export const categories = [...new Set(courses.map((course) => course.category))];
