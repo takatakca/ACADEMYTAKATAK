@@ -297,3 +297,13 @@ p{color:#b3c0d6;line-height:1.8}
 .workbook-success{margin:15px 0 0!important;color:#95ecc8!important;font-weight:700}
 .workbook-notice{margin:20px 0}
 @media(max-width:535px){.workbook-form{padding:17px}.workbook-actions{flex-direction:column;align-items:stretch}.workbook-actions button{width:100%}}
+
+
+.exam-review{margin-top:29px;padding-top:18px;border-top:1px solid #355476}
+.exam-review h3{font:700 24px 'Outfit',sans-serif;margin-bottom:6px}
+.exam-review>p{font-size:12px;margin-bottom:20px}
+.exam-review-item{display:flex;flex-direction:column;gap:8px;background:#0b203d;border:1px solid #365476;border-radius:13px;padding:18px;margin-bottom:10px}
+.exam-review-item strong{font-size:14px}
+.exam-review-item p{margin:0;font-size:12px;color:#b8cde5}
+.review-correct,.review-incorrect{font-size:11px;font-weight:800}
+.review-correct{color:#90e9c3}.review-incorrect{color:#ffc58b}
