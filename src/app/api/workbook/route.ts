@@ -3,7 +3,8 @@ import { currentIdentity } from "@/lib/session";
 import { getCourse,getLesson } from "@/lib/catalog";
 import { canReadLesson } from "@/lib/access";
 import { progressConfigured } from "@/lib/progress";
-import { saveWorkbook,validWorkbookText } from "@/lib/workbook";
+import { saveWorkbook } from "@/lib/workbook";
+import { validWorkbookText } from "@/lib/workbook-policy";
 
 export const runtime="nodejs";export const dynamic="force-dynamic";
 const json=(x:object,status:number)=>NextResponse.json(x,{status,headers:{"Cache-Control":"no-store"}});
