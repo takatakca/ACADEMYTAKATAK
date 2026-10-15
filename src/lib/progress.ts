@@ -27,3 +27,6 @@ export async function writeProgress(identity: AcademyIdentity, courseSlug: strin
   );
 }
 export function progressConfigured(): boolean { return Boolean(process.env.DATABASE_URL); }
+
+/** Reuse the Academy-owned Postgres pool for graded learning records. */
+export function learningDb(): Pool | null { return db(); }
