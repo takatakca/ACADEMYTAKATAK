@@ -229,7 +229,7 @@ const pathways: Path[] = [
 ];
 
 const categoryIcon = (p:Path) => p.icon;
-export const serviceCourses: Course[] = pathways.map((path) => ({
+export const serviceCourses: Course[] = pathways.map((path):Course => ({
   slug:path.slug, title:path.title, category:path.category,description:path.description,outcome:path.outcome,
   dashboardPath:path.dashboardPath, icon:categoryIcon(path),accent:path.accent,
   level:path.category==="Industry Applications"?"Intermediate":"Beginner", access:"freemium",
