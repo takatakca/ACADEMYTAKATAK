@@ -18,3 +18,5 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 13. **Staff exam publishing** requires V1-granted `academy_editor` for draft creation, `academy_reviewer` for publication, and two distinct TAKATAK master identities. Private questions reside only in Academy PostgreSQL; new student tickets bind five selected IDs, learner ID, course, version and expiration with an HMAC.
 
 14. **Educational completion records** require actual completed lessons and passed course exams throughout a program; issuance stores a UUID, frozen course snapshot and earned points in Academy. Anonymous verification exposes no master identity; V1 authorizes `academy_awards_admin` revocation, with reason and audit. These are NOT external professional licences, identity verification or government accreditation.
+
+15. **Release and revalidation**: Academy CI may be manually rerun on `main` through `workflow_dispatch`; the Coolify workflow still requires a successful run on the exact latest `main` SHA plus explicit opt-in. Documentation-only commits must not be misconstrued as a deployed code version.
