@@ -2,10 +2,7 @@ import "server-only";
 import type { AcademyIdentity } from "./access";
 import { learningDb } from "./progress";
 
-export const MAX_WORKBOOK_CHARS=4000;
-export function validWorkbookText(input:unknown):input is string {
-  return typeof input==="string" && input.trim().length>=1 && input.length<=MAX_WORKBOOK_CHARS;
-}
+import { validWorkbookText } from "./workbook-policy";
 export async function readWorkbook(identity:AcademyIdentity,courseSlug:string,lessonSlug:string):Promise<string|null>{
   const db=learningDb();if(!db)return null;
   const result=await db.query<{response_text:string}>(
