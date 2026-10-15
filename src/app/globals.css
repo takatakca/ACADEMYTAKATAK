@@ -284,3 +284,16 @@ p{color:#b3c0d6;line-height:1.8}
 .guide-links a:hover{text-decoration:underline}
 @media(max-width:920px){.guide-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.guide-grid{grid-template-columns:1fr}.guide-categories{flex-wrap:nowrap;overflow-x:auto;padding-bottom:5px}.guide-categories a{white-space:nowrap}}
+
+
+/* Private course practice notebooks */
+.workbook-form{margin-top:22px;padding:25px;border:1px solid #365b84;background:#102947;border-radius:16px}
+.workbook-form>label{display:block;font:700 22px 'Outfit',sans-serif;color:#e5f3ff;margin-bottom:6px}
+.workbook-form>p{font-size:12px;color:#abc1df;line-height:1.6}
+.workbook-form textarea{resize:vertical;display:block;width:100%;min-height:170px;max-width:100%;padding:16px;border-radius:12px;border:1px solid #49719c;background:#0a1b34;color:#eef8ff;font:400 14px 'DM Sans',sans-serif;line-height:1.7}
+.workbook-form textarea:focus-visible{outline:3px solid #69bdff;outline-offset:2px}
+.workbook-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px}
+.workbook-actions span{color:#9ac6ed;font-size:11px}
+.workbook-success{margin:15px 0 0!important;color:#95ecc8!important;font-weight:700}
+.workbook-notice{margin:20px 0}
+@media(max-width:535px){.workbook-form{padding:17px}.workbook-actions{flex-direction:column;align-items:stretch}.workbook-actions button{width:100%}}
