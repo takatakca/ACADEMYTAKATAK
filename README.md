@@ -102,3 +102,6 @@ The Travel Advisor track contains learning exercises but is **not** itself an of
 ## Next steps
 
 See [the TAKATAK-V1 integration contract](docs/TAKATAK_V1_INTEGRATION.md), plus [work log](WORKLOG.md).
+
+## Private reviewed examinations
+Academy includes an opt-in private PostgreSQL assessment bank, with a restricted staff desk at `/instructor/exams`. A V1-signed `academy_editor` entitlement can author 10–60 original items. A different V1-signed `academy_reviewer` identity must approve publication. Students see five selected items bound to a signed expiring token; saved scores record the bank version. Legacy public-source quizzes remain educational practice until they are replaced by independently reviewed private questions. Requires migration `db/004_private_exam_bank.sql` after 001–003.
