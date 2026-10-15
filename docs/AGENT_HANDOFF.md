@@ -3,9 +3,9 @@
 Updated: 2026-10-15. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
 
 ## Source-of-truth checkpoint
-- **Repository HEAD before this handoff commit:** `2d6c6e43b092d25a17d9309805c2187ef6c96547` (verify new HEAD from GitHub; this handoff itself adds a later commit).
+- **Repository HEAD before this handoff commit:** `043f059b1ccbfd1cec30e86a8046d551cbc938df` (verify new HEAD from GitHub; this handoff itself adds a later commit).
 - **Last task completed:** implemented practical student workbook, corrected multi-course program achievement totals, batched student transcript queries, secure post-login return path, post-exam explanations, readiness route, gated Coolify workflow and durable project documentation.
-- **Current task:** final CI verification of all latest commits, then next independent source-level enhancement. Do not claim production launch.
+- **Current task:** source CI is green; continue independent features and external deployment readiness. Production launch is not verified.
 - **Push status:** Academy changes committed to `main` with expected-SHA writes. No force push.
 - **V1 bridge:** `takatakca/takatak-v1` PR #183 was open, unmerged at last check. V1 coordinator must own its approval and merge.
 
@@ -24,7 +24,7 @@ Updated: 2026-10-15. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Br
 ## Verification
 - Earlier completed CI on HEAD `7143b2d7c08f3c018f5b0c17ef1c363d5f06e99d`: run `38735966292` succeeded.
 - Subsequent incremental Auth/achievements changes CI also succeeded, e.g. run `38773802562` for `b2c1b99d`.
-- **Latest workbook/docs changes had CI queued when handoff was drafted**. Check https://github.com/takatakca/ACADEMYTAKATAK/actions and do not mark verified until the newest `main` commit's run finishes green.
+- **Verified latest source CI:** `043f059b1ccbfd1cec30e86a8046d551cbc938df` passed Academy CI run `38775342885`: unit tests, typecheck, lint and build successful. Corrected prior workbook TypeScript import failure. Documentation-only changes after this commit do not establish a new deployed build.
 - Existing CI executes `npm install --no-audit --no-fund`, `npm run test`, `npm run typecheck`, `npm run lint`, `npm run build` on Node.js 22.
 - Deploy workflow jobs are **skipped by design** while repository variable `ACADEMY_AUTODEPLOY_ENABLED` is unset/not true. Do not interpret skipped as a successful live deploy.
 - No local or production database migration executed here; all new DB work is source-only.
