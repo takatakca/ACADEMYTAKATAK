@@ -18,12 +18,13 @@ export async function GET(){
   const db=learningDb();
   if(db){
     try {
-      const result=await db.query<{progress:string|null;exams:string|null}>(
-        "SELECT to_regclass('academy_lesson_progress')::text AS progress, to_regclass('academy_exam_attempt')::text AS exams"
+      const result=await db.query<{progress:string|null;exams:string|null;workbook:string|null}>(
+        "SELECT to_regclass('academy_lesson_progress')::text AS progress, to_regclass('academy_exam_attempt')::text AS exams, to_regclass('academy_activity_submission')::text AS workbook"
       );
-      if(result.rows[0]?.progress && result.rows[0]?.exams){
+      if(result.rows[0]?.progress && result.rows[0]?.exams && result.rows[0]?.workbook){
         await db.query("SELECT 1 FROM academy_lesson_progress LIMIT 1");
         await db.query("SELECT 1 FROM academy_exam_attempt LIMIT 1");
+        await db.query("SELECT 1 FROM academy_activity_submission LIMIT 1");
         dataReady=true;
       }
     } catch { dataReady=false; }
