@@ -5,6 +5,8 @@ import { readAllProgress, progressConfigured } from "@/lib/progress";
 import { programs } from "@/lib/programs";
 import { isCourseMastered, masteredProgramCount, totalEarnedPoints } from "@/lib/achievements";
 import { readExamSummaries } from "@/lib/exam-records";
+import { readMyAwards } from "@/lib/awards";
+import { getProgram } from "@/lib/programs";
 import { courseProgress } from "@/lib/access";
 import { canAuthorExams,canReviewExams } from "@/lib/assessment-policy";
 
@@ -19,6 +21,8 @@ export default async function Account(){
     try { [progress,exams]=await Promise.all([readAllProgress(identity),readExamSummaries(identity)]); }
     catch { storageError=true; }
   }
+  let awards:Awaited<ReturnType<typeof readMyAwards>>=[];
+  if(progressConfigured())try{awards=await readMyAwards(identity);}catch{storageError=true;}
   const records=courses.map(course=>({course,completed:progress.get(course.slug)??[]}));
   const examByCourse=new Map(exams.map(row=>[row.courseSlug,row]));
   const myCourses=records.filter(({course,completed})=>completed.length>0 || examByCourse.has(course.slug));
@@ -54,6 +58,15 @@ export default async function Account(){
         <span className="transcript-points">{item.bestPoints} / 100</span><span className={item.passed?"transcript-passed":"transcript-review"}>{item.passed?"Passed":"Review"}</span>
       </div>)}</div>:<p>No graded exams yet. Finish a program&apos;s lessons to unlock its knowledge assessment.</p>}
       <p className="fine-print">Learning points reflect graded course quizzes, not a government licence or regulated credential. Professional certifications require separate verification.</p>
+    </section>
+    <section className="transcript-panel"><span className="kicker">ACADEMY EDUCATIONAL RECORDS</span><h2>Completion records</h2>
+      {awards.length?<div className="transcript-list">{awards.map(award=><div key={award.awardId} className="transcript-item">
+        <div><strong>{getProgram(award.programSlug)?.title||award.programSlug}</strong>
+          <small>{award.courseSlugs.length} courses · {award.pointsEarned} earned exam points</small></div>
+        <span className={award.status==="active"?"transcript-passed":"transcript-review"}>{award.status}</span>
+        <Link className="text-link" href={"/verify/"+award.awardId}>Verify →</Link>
+      </div>)}</div>:<p>No issued completion records yet. Finish a program and use its official Academy completion-record action.</p>}
+      <p className="fine-print">These are Academy education records, not government permits or external certifications. Public verification does not show your identity.</p>
     </section>
     <div className="notice account-note">Payments, specialist-course purchases and access rights are managed by TAKATAK-V1. <a href={process.env.NEXT_PUBLIC_TAKATAK_DASHBOARD_URL||"https://takatak.ca/dashboard"}>Open your main dashboard ↗</a></div>
   </div>;
