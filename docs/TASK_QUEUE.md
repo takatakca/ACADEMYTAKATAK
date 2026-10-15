@@ -47,6 +47,6 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 
 ## Next quality milestone
 - [x] Add `workflow_dispatch` to Academy CI so latest `main` can be reverified after documentation-only pushes without bypassing tests.
-- [ ] Verify CI for workflow change `f176531a` and newest source, capture exact successful run.
+- [x] Verify workflow-source commit `f176531a` via green Academy CI run `38792169955` (tests, typecheck, lint, build).
 - [ ] Produce end-to-end database-backed test coverage (approved dedicated test Postgres) for exam-bank four-eyes publication, signed exam tickets, 24h attempt cap, student workbook isolation, educational record issuance/revocation and replay.
 - [ ] Prepare deeper instructional content and accessible bilingual training, with instructor approvals and QA.
