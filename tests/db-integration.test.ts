@@ -21,6 +21,7 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      const sql=await readFile(new URL("../db/"+files[i-1],import.meta.url),"utf8");
      await client.query(sql);
    }
+   await client.query("BEGIN");
    await t.test("all expected Academy tables and the one-use ticket index exist",async()=>{
      const tables=await client.query<{name:string}>(
        "SELECT tablename AS name FROM pg_tables WHERE schemaname=$1",[schema]);
@@ -102,6 +103,7 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      await client.query("RELEASE SAVEPOINT award_duplicate");
    });
  } finally {
+   await client.query("ROLLBACK").catch(()=>{});
    await client.query("RESET search_path").catch(()=>{});
    await client.query(`DROP SCHEMA IF EXISTS "${schema}" CASCADE`).catch(()=>{});
    await client.end();
