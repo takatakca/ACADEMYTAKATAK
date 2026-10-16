@@ -2,6 +2,20 @@
 
 Updated: 2026-10-15. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
 
+## Current checkpoint — 2026-10-15 evening (latest session)
+- **Repository / branch:** `takatakca/ACADEMYTAKATAK` / `main`. Latest source commit before documentation writes: `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65`. Re-fetch `main` HEAD after documentation commits for exact final commit.
+- **Last completed task:** six-migration PostgreSQL CI, atomic one-use exam tickets (nonce UUID signed, persisted with grading), clear HTTP 409 on replay, separate DB connection race test, reviewer/author separation DB check, exact write Origin enforcement for seven authenticated mutation routes, and bounded progress POST body.
+- **Currently in progress:** final GitHub CI for latest source `01e7cbc0`; last known green concurrency CI is `38848221344` (35 tests, typecheck, lint, build; SHA `60aca968b71194161dce2258dbc21011b4c29fc2`).
+- **Modified files:** `db/006_exam_ticket_once.sql`, `src/lib/assessment-ticket.ts`, `src/lib/private-exams.ts`, `src/lib/exam-records.ts`, `src/app/api/exams/route.ts`, `src/components/exam-form.tsx`, `src/app/api/ready/route.ts`, `src/lib/request-origin.ts`, seven `src/app/api/**/route.ts` mutation handlers, `tests/assessment-ticket-replay.test.ts`, `tests/db-integration.test.ts`, `tests/request-origin.test.ts`, `tests/assessment-policy.test.ts`, `.github/workflows/ci.yml`, and the documentation files.
+- **Executed verification:** GitHub Actions test/typecheck/lint/build; GitHub Actions PostgreSQL 16 service, migrations 001–006 applied in a disposable isolated schema, duplicate nonce blocked even across two concurrent clients, two-person reviewer constraint enforced. Source CI run `38848221344` passed; new origin-code run must be checked before claiming green.
+- **Known blockers:** Production migrations 001–006 not applied or verified, Academy Coolify application and HTTPS runtime not confirmed, V1 PR #183 open and role/payment entitlements not provisioned. Origin checks require correct proxy scheme forwarding. No actual production student login/paid-content denial/grade/award E2E.
+- **Production status:** **NOT DEPLOYED / NOT VERIFIED**. Coolify deploy workflow remains gated and skipped absent explicit release variable and confirmed secrets; no resource UUID or verified live SHA. No secrets obtained or committed.
+- **Access needed:** V1 coordinator for PR #183/role issuance, Coolify authorized app/domain/HTTPS, approved Academy-only PostgreSQL DBA migration and secrets, repo production Actions configuration. Avoid exposing tokens.
+- **Exact next actions:** inspect latest GitHub `main` and Academy CI; if failed, read job logs and fix with SHA-safe commit, then rerun. Apply migration 006 only following DB approval/backup after 001–005. Test actual V1 SSO/cancel/expiring plan, HTTPS Origin, repeated and concurrent exam submission and student data isolation in a real staging deployment; only then enable opt-in Coolify release. Continue independent course quality and live integration tests if environment remains unavailable.
+- **Orchestration:** GitHub handoff documents are not a running agent. External restart automation requires a separately authorized orchestrator.
+
+---
+
 ## Current handoff — 2026-10-15, 14:59 Montréal
 - **Repository / branch:** `takatakca/ACADEMYTAKATAK`, `main`. This session began at `ffc63d7c337de3f169e28f08fd519556e9f5d35e`.
 - **Last application + workflow commit VERIFIED:** `f176531a73196bb4ef668152c59afb6452833fcc`; Academy CI run `38792169955` completed success (npm install, test, typecheck, lint, Next.js build). Earlier application commit `491e088e96322219147529faffac3a130ccfe6ea` passed run `38791816925`.
