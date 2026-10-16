@@ -116,3 +116,6 @@ TAKATAK-authorized course editors and independent reviewers may maintain version
 
 ## Student data portability and workbook privacy
 From `/account`, signed-in Academy students can download a JSON export of their own Academy learning progress, exam attempts, exercise responses and educational awards. The application enforces `master_identity_id` filtering in SQL, a bounded consistent database snapshot and private no-store download headers. They can also permanently erase **only their own saved workbook text** with the exact confirmation `DELETE MY WORKBOOKS`. Grade history, progress, awards, payments and the central TAKATAK-V1 customer identity remain unchanged. This control is not a full data-subject or TAKATAK master-account deletion. See `docs/DEPLOYMENT.md` for production identity, privacy and verification requirements.
+
+
+To erase one exercise without deleting every workbook, open its Academy lesson and select “Delete this response”, then explicitly confirm. This deletes only the saved `master_identity_id` + course + lesson entry. To erase all responses, use the separate account-level control. Neither action deletes exams, learning history, Academy awards or TAKATAK-V1 accounts.
