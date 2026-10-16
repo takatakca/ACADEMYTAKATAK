@@ -66,3 +66,7 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - `/instructor/lessons` offers staff editorial drafting, review and publishing UI. Student lessons only use approved published text **after** passing existing lesson-access policy; original curriculum remains fallback, no leaked drafts.
 - Disposable PostgreSQL 16 CI applies migrations **001–007** and verifies new approval/one-published-per-lesson constraints.
 - **No migrations or services were changed in production.** Coolify deployment is not verified; source-level functionality is not a live deployment.
+
+## Final source verification for lesson CMS
+- **Success:** SHA `eef9e1478e31ed363be28976f292dbefcc28d595` passed GitHub Actions Academy CI run `38883044268`, **40 tests succeeded / 0 failed**, including PostgreSQL migrations 001–007, lesson self-review and unique published revision constraints, TypeScript, ESLint and Next.js build.
+- Coolify auto-deploy is still intentionally skipped, not verified; no production database migration 007 or live V1 SSO smoke test was run.
