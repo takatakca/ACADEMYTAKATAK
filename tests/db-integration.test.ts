@@ -15,9 +15,9 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
  try {
    await client.query(`CREATE SCHEMA "${schema}"`);
    await client.query(`SET search_path TO "${schema}"`);
-   for(let i=1;i<=6;i++){
+   for(let i=1;i<=7;i++){
      const files=["001_academy.sql","002_exam_attempt.sql","003_lesson_workbook.sql",
-       "004_private_exam_bank.sql","005_program_awards.sql","006_exam_ticket_once.sql"];
+       "004_private_exam_bank.sql","005_program_awards.sql","006_exam_ticket_once.sql","007_lesson_revisions.sql"];
      const sql=await readFile(new URL("../db/"+files[i-1],import.meta.url),"utf8");
      await client.query(sql);
    }
@@ -26,7 +26,7 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      const tables=await client.query<{name:string}>(
        "SELECT tablename AS name FROM pg_tables WHERE schemaname=$1",[schema]);
      for(const table of ["academy_lesson_progress","academy_exam_attempt","academy_activity_submission",
-       "academy_exam_version","academy_program_award"])
+       "academy_exam_version","academy_program_award","academy_lesson_revision"])
        assert.ok(tables.rows.some(r=>r.name===table),table);
      const indexes=await client.query<{indexname:string}>(
        "SELECT indexname FROM pg_indexes WHERE schemaname=$1",[schema]);
@@ -82,6 +82,58 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      assert.equal(error,"23514");
      await client.query("ROLLBACK TO SAVEPOINT author_review");
      await client.query("RELEASE SAVEPOINT author_review");
+   });
+   await t.test("lesson revision drafts require independent review and one active edition",async()=>{
+     const paragraphs=JSON.stringify([
+       "Check the correct tenant scope and explain why access is verified on the server.",
+       "Build a realistic example with the client's permitted records and document the outcome."
+     ]);
+     const args=["seo-aeo","search-fundamentals",
+       "Review tenant safety in real scenarios",paragraphs,
+       "Document an authorized workflow and its permission checks.", "master-editor"];
+     await client.query(`INSERT INTO academy_lesson_revision
+       (course_slug,lesson_slug,revision,status,title,paragraphs,activity,created_by)
+       VALUES($1,$2,1,'draft',$3,$4::jsonb,$5,$6)`,args);
+     await client.query("SAVEPOINT same_reviewer");
+     let noSelfReview="";
+     try{
+       await client.query(`UPDATE academy_lesson_revision SET status='published',
+         reviewed_by='master-editor',published_at=NOW()
+         WHERE course_slug=$1 AND lesson_slug=$2 AND revision=1`,
+         ["seo-aeo","search-fundamentals"]);
+     }catch(e){noSelfReview=(e as {code?:string}).code??"";}
+     assert.equal(noSelfReview,"23514");
+     await client.query("ROLLBACK TO SAVEPOINT same_reviewer");
+     await client.query("RELEASE SAVEPOINT same_reviewer");
+     await client.query(`UPDATE academy_lesson_revision SET status='published',
+       reviewed_by='master-reviewer',published_at=NOW()
+       WHERE course_slug=$1 AND lesson_slug=$2 AND revision=1`,
+       ["seo-aeo","search-fundamentals"]);
+     await client.query(`INSERT INTO academy_lesson_revision
+       (course_slug,lesson_slug,revision,status,title,paragraphs,activity,created_by)
+       VALUES($1,$2,2,'draft',$3,$4::jsonb,$5,$6)`,args);
+     await client.query("SAVEPOINT simultaneous_publication");
+     let duplicate="";
+     try{
+       await client.query(`UPDATE academy_lesson_revision SET status='published',
+         reviewed_by='another-reviewer',published_at=NOW()
+         WHERE course_slug=$1 AND lesson_slug=$2 AND revision=2`,
+         ["seo-aeo","search-fundamentals"]);
+     }catch(e){duplicate=(e as {code?:string}).code??"";}
+     assert.equal(duplicate,"23505");
+     await client.query("ROLLBACK TO SAVEPOINT simultaneous_publication");
+     await client.query("RELEASE SAVEPOINT simultaneous_publication");
+     await client.query(`UPDATE academy_lesson_revision SET status='retired'
+       WHERE course_slug=$1 AND lesson_slug=$2 AND status='published'`,
+       ["seo-aeo","search-fundamentals"]);
+     await client.query(`UPDATE academy_lesson_revision SET status='published',
+       reviewed_by='another-reviewer',published_at=NOW()
+       WHERE course_slug=$1 AND lesson_slug=$2 AND revision=2`,
+       ["seo-aeo","search-fundamentals"]);
+     const published=await client.query<{revision:number}>(
+       "SELECT revision FROM academy_lesson_revision WHERE course_slug=$1 AND lesson_slug=$2 AND status='published'",
+       ["seo-aeo","search-fundamentals"]);
+     assert.deepEqual(published.rows.map(x=>x.revision),[2]);
    });
    await t.test("workbook entries are unique and private to a master identity",async()=>{
      await client.query(`INSERT INTO academy_activity_submission(master_identity_id,course_slug,lesson_slug,response_text)
