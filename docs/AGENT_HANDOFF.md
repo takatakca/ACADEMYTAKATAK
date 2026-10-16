@@ -1,6 +1,22 @@
 # TAKATAK Academy — AGENT HANDOFF
 
-Updated: 2026-10-15. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
+Updated: 2026-10-16. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
+
+## Handoff — 2026-10-16 (current session)
+- **Repository:** `takatakca/ACADEMYTAKATAK`, branch `main`. Starting GitHub HEAD: `a0876d94e3651b77c5ee814f184a3cc7ddeac8ad`.
+- **Last finished task:** source implementation of instructor lesson CMS with migration 007, TAKATAK-signature-gated draft and independent publication APIs, new UI, published-only entitlement-checked learner rendering, and disposable PostgreSQL migration/integrity tests.
+- **Source files:** `db/007_lesson_revisions.sql`; `src/lib/lesson-policy.ts`, `src/lib/lesson-revisions.ts`; `src/app/api/instructor/lessons/route.ts`, `src/app/api/instructor/lessons/publish/route.ts`; `src/components/instructor-lesson-editor.tsx`, `src/app/instructor/lessons/page.tsx`; `src/app/courses/[slug]/[lesson]/page.tsx`, `src/app/account/page.tsx`, `src/app/api/ready/route.ts`, `src/app/globals.css`, `tests/lesson-policy.test.ts`, `tests/db-integration.test.ts`; README and required documentation.
+- **Latest SOURCE SHA before documentation:** `eef9e1478e31ed363be28976f292dbefcc28d595`. Initial source lint failed due to unnecessary React `useCallback` memoization; fixed in `eef9e147`. Read GitHub Actions for the final CI outcome and exact current HEAD before claiming release eligibility.
+- **Central V1:** GitHub PR #183 is now **MERGED** (2026-10-16T05:34:34Z, V1 SHA `1c349ce40ef36ed92d115fb675f0df7fa3d0d465`). This does NOT establish live deployment, proper staff claims or SSO smoke-test success.
+- **Verification performed:** GitHub main tree/ref and handoff checked, merge state checked, Github Actions lint logs read and corrected, all seven migrations included in isolated PostgreSQL integration tests with independent-review and one-published-revision constraints. CI final run must be verified.
+- **Known blockers:** no confirmed Coolify Academy service UUID/domain, production PostgreSQL/backup/migrations 001–007, live V1 one-time SSO and entitlements, paid plans, authorized staff claims or approved lesson content; no deployed E2E. Revisions require the dedicated database migration before launch.
+- **Actual deployment:** **NOT VERIFIED / NOT ACTIVATED**. CI-pass or V1 PR merged does not prove an Academy production release. Coolify Actions gated variable remains unconfirmed and deployment jobs historically skipped; do not turn on production release without real prerequisites.
+- **Required access:** Authorized V1 production operator, dedicated Academy Postgres DBA backup/migration approval, Coolify app/domain, TLS, tokens and environment settings in secret stores; no secret values in Git.
+- **Next executable action:** verify CI on latest Academy source, correct any issues; update this handoff with actual green run. Where production configuration is still absent, add more integration coverage or improve factual lesson content. When infrastructure is approved, apply 001–007 migrations, run true staff draft/reviewer/student access smoke tests, verify V1 SSO, then deploy gated with exact matching SHA.
+- **Commit / handoff source of truth:** re-read GitHub `refs/heads/main` after the final documentation commit; GitHub Actions on `eef9e147` is the source validation checkpoint, not a production record.
+- **Automation:** this chat does not self-restart; an external authorized orchestrator is required for automatic reactivation.
+
+---
 
 ## Current checkpoint — 2026-10-15 evening (latest session)
 - **Repository / branch:** `takatakca/ACADEMYTAKATAK` / `main`. Latest source commit before documentation writes: `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65`. Re-fetch `main` HEAD after documentation commits for exact final commit.
