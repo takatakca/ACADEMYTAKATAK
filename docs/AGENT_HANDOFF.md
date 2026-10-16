@@ -2,6 +2,21 @@
 
 Updated: 2026-10-16. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
 
+## 2026-10-16 — student-data portability and workbook privacy
+- **Repository / branch:** `takatakca/ACADEMYTAKATAK` / `main`. HEAD before this session: `7ed5d02db09ad57d5d1564e40f573758dadc997e`. No force-push.
+- **Last completed task:** new privacy-preserving Academy learner export (signed central TAKATAK identity, all course progress/attempts/workbooks/awards, coherent read-only snapshot, JSON attachment with no-store headers); explicit confirmation and CSRF-aware deletion of user's *own* workbook responses; responsive account UI. Maintains central V1 account, billing, exam-grade, progress and award records.
+- **Files modified:** `src/lib/account-data.ts`, `src/app/api/account/export/route.ts`, `src/app/api/account/workbooks/route.ts`, `src/components/account-data-controls.tsx`, `src/app/account/page.tsx`, `tests/db-integration.test.ts`; `README.md`, `WORKLOG.md`, `docs/{PROJECT_STATUS,TASK_QUEUE,AGENT_HANDOFF,DEPLOYMENT,DECISIONS}.md`.
+- **Latest application/source commit before docs:** `1cf1184c0e4c9989d093f33f7235cb91a4f5785c`. **CI was running at handoff preparation; check the actual newest workflow outcome before calling it passed**. Prior verified code checkpoint: `eef9e1478e31ed363be28976f292dbefcc28d595`, run `38883044268`, 40 tests, full build green.
+- **Work done / verification:** Inspected live GitHub `main`, files, Actions history, previous `AGENTS.md` and handoff. Examined existing V1 session, scoped learning tables, workbook query and dashboard. Pushed expected-blob-SHA commits for new account data module, export endpoint, erasure endpoint, learner UI and Postgres identity-isolation test. Verified no change to TAKATAK-V1 or production DB.
+- **V1 PR #183:** MERGED in V1 on 2026-10-16; this does not establish a deployed SSO bridge, staff entitlements or paid purchases.
+- **Actual deployment:** Academy Coolify still **NOT VERIFIED**, release Actions jobs skipped under opt-in gate. No migrations 001–007 applied by this session; no public Academy HTTPS readiness URL or verified target SHA, provider token or real session available. Never claim 100% or production success based on isolated CI.
+- **Known blockers and access:** approved dedicated Academy PostgreSQL backing DB with backup/migrations, V1 production one-use SSO secrets and claims, Coolify configured app/domain/TLS and Actions webhook/token, payment entitlements, genuine browser/regression QA; editor review and Québec French course parity. Do not invent access or secrets.
+- **Currently ongoing:** await latest GitHub CI on `1cf1184c`, inspect the failed job logs if any; correct promptly and verify. User-facing download/deletion needs real SSO and PostgreSQL deployment to become live.
+- **Exact next action:** read GitHub `refs/heads/main`, newest Academy CI, this handoff and `docs/TASK_QUEUE.md`; fix failure if present; once green, continue independent accessible bilingual Academy UI/content. After authorized backend/SSO activation, test full student export and workbook erasure using two genuine V1 identities, verify migration/readiness/deployed SHA before enabling gated Coolify. Maintain these five docs at handoff.
+- **Continuous restart:** no external orchestrator has been configured; GitHub handoff enables future separate agents to resume, not unattended continuation after this session.
+
+---
+
 ## Handoff — 2026-10-16 (current session)
 - **Repository:** `takatakca/ACADEMYTAKATAK`, branch `main`. Starting GitHub HEAD: `a0876d94e3651b77c5ee814f184a3cc7ddeac8ad`.
 - **Last finished task:** source implementation of instructor lesson CMS with migration 007, TAKATAK-signature-gated draft and independent publication APIs, new UI, published-only entitlement-checked learner rendering, and disposable PostgreSQL migration/integrity tests.
