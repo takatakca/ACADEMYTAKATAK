@@ -24,3 +24,7 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 
 16. **Exam replay prevention**: one-time candidate tickets carry a signed random UUID nonce; database migration 006 places a unique partial index on non-null `ticket_nonce` in scored attempts. The nonce is saved in the same transaction as grade, and conflicting submissions return HTTP 409. Do not treat a JWT/HMAC alone as sufficient one-time protection.
 17. **Disposal-only database CI**: use GitHub Actions PostgreSQL 16 with an isolated random schema, apply ordered migrations and validate constraints. Do not connect CI to any live Academy database or use live credentials for tests. Green CI proves schema invariants in test, not live SSO or production readiness.
+
+
+18. **Same-origin mutations:** all credentialed student and staff write endpoints require an exact trusted browser Origin including protocol, host and port. Bare host comparison does not protect an HTTPS session from same-host HTTP pages. Only local development may use HTTP. In production, configure proxy forwarding to preserve canonical HTTPS origin; do not bypass checks to fix misconfigured proxies.
+19. **Concurrency evidence:** ephemeral PostgreSQL CI creates separate DB clients and races two attempted inserts with an identical nonce. Exactly one must persist, with the other rejected under SQLSTATE 23505; this does not replace a live V1 authenticated HTTP load test.
