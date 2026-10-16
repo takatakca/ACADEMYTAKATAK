@@ -78,3 +78,11 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [ ] Have authorized DB owner back up and apply migration 007 after migrations 001–006. Verify Academy `/api/ready` and live author/reviewer permission tests.
 - [ ] Confirm V1 Academy bridge is actually deployed and emits approved `academy_editor`/`academy_reviewer` staff claims. Do not forge local staff roles.
 - [ ] Expert-review starter content across courses, multilingual parity, lessons/media/transcripts and regulatory/educational sign-off.
+
+
+## Private student data controls
+- [x] Ship student-accessible personal Academy JSON export (courses, exam attempts, workbook submissions, internal award records) with signed TAKATAK session, scoped SQL, consistent snapshot, no-store download and size limit.
+- [x] Add explicit-confirmation, same-origin-protected self-service erasure of **only** the user's Academy workbook responses; never central TAKATAK clients, payments, grades or awards.
+- [x] Add PostgreSQL CI test demonstrating other students' workbook isolation, continued grades/progress, and idempotent repeat erasure.
+- [ ] Confirm CI on newest application commit and fix any failures before release.
+- [ ] Conduct live V1 SSO, browser download, data-erasure/reload, mobile accessibility, backup/retention and Quebec privacy-law review in authorized deployment. Export is not equivalent to deleting the master TAKATAK account.
