@@ -31,7 +31,7 @@ test("editor and reviewer require different signed TAKATAK entitlements",()=>{
 test("exam ticket bound to user, course, five selected IDs, expiry and signature",()=>{
  const now=2_000_000_000,secret="s".repeat(40);
  const t={sub:"person1",course:"seo-aeo",version:3,source:"private_reviewed" as const,
- questionIds:["q1","q2","q3","q4","q5"],expiresAt:now+900};
+ questionIds:["q1","q2","q3","q4","q5"],expiresAt:now+900,nonce:"bb644ee3-c218-43ea-bd8f-d74783a423f9"};
  const token=issueAssessmentTicket(t,secret);
  assert.deepEqual(verifyAssessmentTicket(token,secret,"person1","seo-aeo",now),t);
  assert.equal(verifyAssessmentTicket(token,secret,"person2","seo-aeo",now),null);
