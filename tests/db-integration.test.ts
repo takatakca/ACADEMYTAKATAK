@@ -147,6 +147,34 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
        "SELECT response_text FROM academy_activity_submission WHERE master_identity_id=$1",["master-2"]);
      assert.deepEqual(other.rows.map(x=>x.response_text),["Other notes"]);
    });
+   await t.test("learning export and workbook erasure stay limited to the authenticated master identity",async()=>{
+     // Two users have existing workbook rows from the previous test.
+     await client.query(`INSERT INTO academy_lesson_progress(master_identity_id,course_slug,lesson_slug)
+       VALUES('master-1','seo-aeo','lesson-1')`);
+     await client.query(`INSERT INTO academy_exam_attempt(master_identity_id,course_slug,correct_answers,
+       question_count,points,passed,assessment_source,assessment_version)
+       VALUES('master-1','seo-aeo',5,5,100,true,'public_practice',NULL)`);
+     const query=`SELECT course_slug,lesson_slug,response_text FROM academy_activity_submission
+       WHERE master_identity_id=$1`;
+     const own=await client.query<{response_text:string}>(query,["master-1"]);
+     assert.deepEqual(own.rows.map(r=>r.response_text),["Practice notes"]);
+     assert.equal((await client.query(query,["unknown-master"])).rowCount,0);
+     const deleted=await client.query(
+       "DELETE FROM academy_activity_submission WHERE master_identity_id=$1",["master-1"]);
+     assert.equal(deleted.rowCount,1);
+     assert.equal((await client.query(query,["master-1"])).rowCount,0);
+     const other=await client.query<{response_text:string}>(query,["master-2"]);
+     assert.deepEqual(other.rows.map(r=>r.response_text),["Other notes"]);
+     const exams=await client.query(
+       "SELECT 1 FROM academy_exam_attempt WHERE master_identity_id=$1",["master-1"]);
+     const progress=await client.query(
+       "SELECT 1 FROM academy_lesson_progress WHERE master_identity_id=$1",["master-1"]);
+     assert.equal(exams.rowCount,1);
+     assert.equal(progress.rowCount,1);
+     const secondDelete=await client.query(
+       "DELETE FROM academy_activity_submission WHERE master_identity_id=$1",["master-1"]);
+     assert.equal(secondDelete.rowCount,0);
+   });
    await t.test("award issuance unique to learner+program and revocation auditable",async()=>{
      const id=randomUUID();
      await client.query(`INSERT INTO academy_program_award
