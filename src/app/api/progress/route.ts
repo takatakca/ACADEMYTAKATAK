@@ -16,7 +16,11 @@ export async function POST(request:NextRequest){
   const identity=await currentIdentity();
   if(!identity)return json({ok:false,error:"sign_in_required"},401);
   let input:unknown;
-  try{input=await request.json()}catch{return json({ok:false,error:"invalid_json"},400)}
+  try{
+    const raw=await request.text();
+    if(raw.length>1024)return json({ok:false,error:"request_too_large"},413);
+    input=JSON.parse(raw);
+  }catch{return json({ok:false,error:"invalid_json"},400)}
   if(!input || typeof input!=="object" || Array.isArray(input))return json({ok:false,error:"invalid_payload"},400);
   const {course:slug,lesson:lessonSlug}=input as Record<string,unknown>;
   if(typeof slug!=="string"||typeof lessonSlug!=="string")return json({ok:false,error:"invalid_payload"},400);
