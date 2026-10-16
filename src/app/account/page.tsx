@@ -9,6 +9,7 @@ import { readMyAwards,canRevokeAwards } from "@/lib/awards";
 import { getProgram } from "@/lib/programs";
 import { courseProgress } from "@/lib/access";
 import { canAuthorExams,canReviewExams } from "@/lib/assessment-policy";
+import { canWriteLessons,canPublishLessons } from "@/lib/lesson-policy";
 
 export const dynamic="force-dynamic";
 export default async function Account(){
@@ -31,7 +32,7 @@ export default async function Account(){
   const completedCourses=records.filter(({course})=>isCourseMastered(course,progress,examByCourse)).length;
   const completedPrograms=masteredProgramCount(programs,courses,progress,examByCourse);
   return <div className="container inner-page">
-    <div className="account-head"><div><span className="kicker">MY LEARNING · TAKATAK-V1 MASTER ACCOUNT</span><h1>Welcome, {identity.name||"learner"}.</h1><p>Your courses, exam results and accumulated points—always linked to one TAKATAK identity.</p></div><div className="assessment-actions">{(canAuthorExams(identity)||canReviewExams(identity))&&<Link href="/instructor/exams" className="btn btn-outline">Instructor exam desk →</Link>}{canRevokeAwards(identity)&&<Link href="/instructor/awards" className="btn btn-outline">Award administration →</Link>}<Link href="/auth/logout" className="btn btn-outline">Sign out</Link></div></div>
+    <div className="account-head"><div><span className="kicker">MY LEARNING · TAKATAK-V1 MASTER ACCOUNT</span><h1>Welcome, {identity.name||"learner"}.</h1><p>Your courses, exam results and accumulated points—always linked to one TAKATAK identity.</p></div><div className="assessment-actions">{(canAuthorExams(identity)||canReviewExams(identity))&&<Link href="/instructor/exams" className="btn btn-outline">Instructor exam desk →</Link>}{(canWriteLessons(identity)||canPublishLessons(identity))&&<Link href="/instructor/lessons" className="btn btn-outline">Lesson editorial desk →</Link>}{canRevokeAwards(identity)&&<Link href="/instructor/awards" className="btn btn-outline">Award administration →</Link>}<Link href="/auth/logout" className="btn btn-outline">Sign out</Link></div></div>
     {storageError&&<div className="important-note" role="alert"><strong>Learning data temporarily unavailable.</strong><p>We could not load your transcript. Your saved records have not been reset; please retry later.</p></div>}
     {!progressConfigured()&&<div className="important-note"><strong>Learning database not configured.</strong><p>Progress and exams cannot be saved until Academy PostgreSQL migrations are activated.</p></div>}
     <section className="student-overview" aria-label="Personal learning statistics">
