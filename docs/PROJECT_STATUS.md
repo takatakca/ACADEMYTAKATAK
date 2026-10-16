@@ -70,3 +70,11 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 ## Final source verification for lesson CMS
 - **Success:** SHA `eef9e1478e31ed363be28976f292dbefcc28d595` passed GitHub Actions Academy CI run `38883044268`, **40 tests succeeded / 0 failed**, including PostgreSQL migrations 001–007, lesson self-review and unique published revision constraints, TypeScript, ESLint and Next.js build.
 - Coolify auto-deploy is still intentionally skipped, not verified; no production database migration 007 or live V1 SSO smoke test was run.
+
+
+## Student data access and workbook erasure — 2026-10-16
+- Added authenticated `GET /api/account/export`, serving private, no-store downloadable JSON containing only the signed TAKATAK master identity's Academy lesson progress, graded attempts, saved workbook text and internally issued program award records. Excludes payment/CRM/merchant data, examiner answer keys and all other student identities.
+- Added same-origin protected `DELETE /api/account/workbooks` requiring exact `DELETE MY WORKBOOKS` confirmation and signed central SSO session. Only rows in `academy_activity_submission` matching `master_identity_id` are deleted. Student progress, exam attempts, awards and V1 identity/billing are preserved.
+- Account learner UI provides a self-service export and an explicit irreversible erasure control. No additional database migrations required (uses existing tables from 001–007).
+- Disposable PostgreSQL CI tests verify that deletion of master-1 workbooks does not affect master-2, progress or exam history, and repeat deletion is idempotent. **CI result on latest source must be checked**, not inferred.
+- Live Academy deployment, application database migrations and genuine V1 SSO still need external verification. Source changes do not imply completed production launch.
