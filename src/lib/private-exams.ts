@@ -1,5 +1,5 @@
 import "server-only";
-import { randomInt } from "node:crypto";
+import { randomInt,randomUUID } from "node:crypto";
 import type { AnswerKeyQuestion } from "./service-courses";
 import type { AcademyIdentity } from "./access";
 import { getExamKey, type PublicQuestion } from "./exams";
@@ -59,7 +59,7 @@ export async function issueLearnerAssessment(identity:AcademyIdentity,slug:strin
  const version=published?.version??0;
  const secret=process.env.ACADEMY_SESSION_SECRET||"";
  const ticket:AssessmentTicket={sub:identity.sub,course:slug,version,source,
-   questionIds:ids,expiresAt:Math.floor(Date.now()/1000)+15*60};
+   questionIds:ids,expiresAt:Math.floor(Date.now()/1000)+15*60,nonce:randomUUID()};
  return {questions:PUBLIC(questions),ticket:issueAssessmentTicket(ticket,secret),source,version};
 }
 export async function verifyTicketQuestions(ticket:AssessmentTicket):Promise<AnswerKeyQuestion[]|null>{
