@@ -1,3 +1,4 @@
+import { isSameWriteOrigin } from "@/lib/request-origin";
 import { NextRequest,NextResponse } from "next/server";
 import { currentIdentity } from "@/lib/session";
 import { canReadLesson } from "@/lib/access";
@@ -18,8 +19,7 @@ export async function GET(){
  catch{return json({ok:false,error:"storage_unavailable"},503);}
 }
 export async function POST(request:NextRequest){
- const origin=request.headers.get("origin");
- if(!origin||(()=>{try{return new URL(origin).host!==request.nextUrl.host;}catch{return true;}})())return json({ok:false,error:"origin_not_allowed"},403);
+ if(!isSameWriteOrigin(request.headers.get("origin"),request.nextUrl.origin))return json({ok:false,error:"origin_not_allowed"},403);
  if(!(request.headers.get("content-type")||"").toLowerCase().startsWith("application/json"))return json({ok:false,error:"json_required"},415);
  if(Number(request.headers.get("content-length")||0)>1024)return json({ok:false,error:"too_large"},413);
  const identity=await currentIdentity();
