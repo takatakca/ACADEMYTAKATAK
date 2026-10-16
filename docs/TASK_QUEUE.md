@@ -66,5 +66,5 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Test rejection of a private-bank author's self-review at the DB constraint level.
 - [x] Centralize exact-scheme-and-host write-Origin verification on progress, workbook, exam, award and instructor mutation APIs; add same-origin tests.
 - [x] Enforce actual request-body limit for course progress POST rather than trusting the Content-Length header alone.
-- [ ] Verify newest Academy CI source commit `01e7cbc0` and correct any errors before production enablement.
+- [x] Latest source commit `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65` passed Academy CI `38848457760`: 37 tests, PostgreSQL concurrency, TypeScript, lint and build.
 - [ ] Validate public HTTPS Origin behaviour behind configured reverse proxy (Coolify), including intentional HTTP/HTTPS rejection; fix forwarded scheme/host proxy configuration, not by weakening CSRF protection.
