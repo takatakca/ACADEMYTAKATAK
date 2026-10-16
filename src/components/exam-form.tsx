@@ -29,7 +29,8 @@ export default function ExamForm({course,questions,ticket}:{course:string;questi
           progress_not_configured:"Exam storage is not yet configured.",
           exam_unavailable:"The assessment service is temporarily unavailable.",
           exam_ticket_expired:"This exam session has expired. Reload the exam page to begin again.",
-          exam_version_unavailable:"This exam version is unavailable. Reload the exam page."
+          exam_version_unavailable:"This exam version is unavailable. Reload the exam page.",
+          exam_ticket_already_used:"This exam has already been submitted. Reload the page for another attempt, if attempts remain."
         };
         setError(messages[data.error||""]||"Could not submit. Please try again.");return;
       }
