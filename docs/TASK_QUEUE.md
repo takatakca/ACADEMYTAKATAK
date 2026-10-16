@@ -68,3 +68,13 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Enforce actual request-body limit for course progress POST rather than trusting the Content-Length header alone.
 - [x] Latest source commit `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65` passed Academy CI `38848457760`: 37 tests, PostgreSQL concurrency, TypeScript, lint and build.
 - [ ] Validate public HTTPS Origin behaviour behind configured reverse proxy (Coolify), including intentional HTTP/HTTPS rejection; fix forwarded scheme/host proxy configuration, not by weakening CSRF protection.
+
+
+## Lesson CMS release checkpoint — 2026-10-16
+- [x] Confirm V1 Academy bridge PR #183 was merged by authorized V1 owners; merge commit `1c349ce4` (2026-10-16). V1 production rollout **still unverified**.
+- [x] Build Academy lesson-revision storage and migration 007, independent editorial review and publication APIs, staff UI, and entitlement-gated student presentation of approved copy.
+- [x] Enforce PostgreSQL one-published-revision-per-lesson and separate-author-reviewer constraints in disposable DB integration tests.
+- [ ] Confirm new source CI passes end-to-end (tests, PostgreSQL 16 migrations 001–007, TypeScript, lint and build) and fix any reported errors.
+- [ ] Have authorized DB owner back up and apply migration 007 after migrations 001–006. Verify Academy `/api/ready` and live author/reviewer permission tests.
+- [ ] Confirm V1 Academy bridge is actually deployed and emits approved `academy_editor`/`academy_reviewer` staff claims. Do not forge local staff roles.
+- [ ] Expert-review starter content across courses, multilingual parity, lessons/media/transcripts and regulatory/educational sign-off.
