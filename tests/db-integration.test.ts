@@ -77,7 +77,7 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      try{
        await client.query(`INSERT INTO academy_exam_version(course_slug,version,status,questions,
           created_by,reviewed_by,published_at)
-         VALUES('seo-aeo',3,'published',$1::jsonb,'same-master','same-master',now())`,[JSON.stringify(q)]);
+         VALUES('shopify',1,'published',$1::jsonb,'same-master','same-master',now())`,[JSON.stringify(q)]);
      }catch(e){error=(e as {code?:string}).code??"";}
      assert.equal(error,"23514");
      await client.query("ROLLBACK TO SAVEPOINT author_review");
