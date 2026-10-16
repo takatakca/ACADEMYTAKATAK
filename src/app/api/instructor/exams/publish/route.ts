@@ -1,3 +1,4 @@
+import { isSameWriteOrigin } from "@/lib/request-origin";
 import { NextRequest,NextResponse } from "next/server";
 import { getCourse } from "@/lib/catalog";
 import { currentIdentity } from "@/lib/session";
@@ -9,8 +10,7 @@ const json=(data:object,status:number)=>NextResponse.json(data,{status,headers:{
 export async function POST(request:NextRequest){
  const identity=await currentIdentity();
  if(!identity||!canReviewExams(identity))return json({ok:false,error:"reviewer_entitlement_required"},403);
- const origin=request.headers.get("origin");
- if(!origin||(()=>{try{return new URL(origin).host!==request.nextUrl.host;}catch{return true;}})())return json({ok:false,error:"origin_not_allowed"},403);
+ if(!isSameWriteOrigin(request.headers.get("origin"),request.nextUrl.origin))return json({ok:false,error:"origin_not_allowed"},403);
  if(!(request.headers.get("content-type")||"").toLowerCase().startsWith("application/json"))return json({ok:false,error:"json_required"},415);
  if(Number(request.headers.get("content-length")||0)>1024)return json({ok:false,error:"too_large"},413);
  let input:unknown;
