@@ -350,3 +350,10 @@ p{color:#b3c0d6;line-height:1.8}
 .instructor-version-body .btn{margin-right:12px;margin-bottom:12px}
 .instructor-version-body h3{color:#e7f4ff;font-size:18px}
 @media(max-width:700px){.lesson-edit-filters{grid-template-columns:1fr}}
+
+/* Privacy controls: visible, keyboard-accessible confirmation areas. */
+.account-erase-form,.workbook-erase-panel{margin-top:16px;padding:20px;border:1px solid #6f87ac;border-radius:12px;background:#122642;max-width:700px}
+.account-erase-form .instructor-select{margin-bottom:12px}
+.account-erase-form p,.workbook-erase-panel p{font-size:14px;line-height:1.6}
+.account-erase-form .btn,.workbook-erase-panel .btn{max-width:100%;white-space:normal;text-align:center}
+@media(max-width:580px){.account-erase-form,.workbook-erase-panel{padding:14px}.account-erase-form .btn,.workbook-erase-panel .btn{width:100%}}
