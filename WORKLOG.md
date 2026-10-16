@@ -26,3 +26,5 @@ Format: date | agent | branch/commit | status | completed | next
 
 
 - 2026-10-16 | ChatGPT/GitHub | main / c28e9153 (source) | CI pending; production not verified | Added per-lesson workbook deletion API and two-step UI with same-origin confirmation; modified Postgres DB integration test to prove same student/other student isolation; styled mobile confirmations. | Verify final CI, document passed run, then continue independent fixes. Live deployment still requires authorized Academy app, V1 SSO, migrations 001–007, protected Coolify config and real user QA.
+
+- 2026-10-16 | ChatGPT/GitHub | main / c28e9153 | VERIFIED CI run 38943064719 (41/41 passed, npm install, Postgres integration tests, TS, lint, build); NOT deployed | Completed personal student export, whole-workbook and per-lesson note erasure with scoped SQL, explicit confirmations, cross-identity regression. | Authorized Academy DB migrations, V1 runtime SSO, Coolify setup and real browser QA remain blockers.
