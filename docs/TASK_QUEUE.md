@@ -86,3 +86,10 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Add PostgreSQL CI test demonstrating other students' workbook isolation, continued grades/progress, and idempotent repeat erasure.
 - [ ] Confirm CI on newest application commit and fix any failures before release.
 - [ ] Conduct live V1 SSO, browser download, data-erasure/reload, mobile accessibility, backup/retention and Quebec privacy-law review in authorized deployment. Export is not equivalent to deleting the master TAKATAK account.
+
+
+## Student workbook deletion granularity
+- [x] Add explicit, server-authorized, same-origin deletion of a **single** workbook response without requiring currently active course purchase rights.
+- [x] Expose two-step deletion confirmation in lesson workbook UI without deleting progress, exam history, awards or V1 customer records.
+- [x] Add PostgreSQL isolation coverage for single-lesson and whole-account workbooks.
+- [ ] Confirm source CI for `c28e9153` and obtain real SSO + migration deployment to test these flows end-to-end.
