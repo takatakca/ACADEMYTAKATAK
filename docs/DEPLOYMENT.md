@@ -89,3 +89,5 @@ Academy exposes `GET /api/account/export` (authenticated JSON attachment) and `D
 
 ## Individual saved-workbook erasure
 `DELETE /api/workbook` accepts same-origin authenticated JSON `{"course":"<course-slug>","lesson":"<lesson-slug>","confirmation":"DELETE THIS RESPONSE"}`. It deletes only the matching `academy_activity_submission` row for the current TAKATAK master identity, even if that user's subscription to the lesson has since expired. Verify with two distinct V1 accounts and multiple saved lessons that one delete leaves the other student's and same student's unrelated responses intact; grades/awards/progress must remain unchanged. The UI requests a second explicit click. No additional SQL migration beyond existing 001–007 is required.
+
+**Release validation checkpoint (2026-10-16):** last tested source SHA `c28e915376ffb8a25d534d125e790531be24af0d`, GitHub Academy CI run `38943064719`, 41 tests successful including disposable PostgreSQL, typecheck/lint/build. This does NOT prove production Coolify deployment; no real SSO student-workbook erasure smoke test occurred.
