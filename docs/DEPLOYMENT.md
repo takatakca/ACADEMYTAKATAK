@@ -81,3 +81,7 @@ Apply migration 006 before enabling the new exam POST handler. GitHub Actions Po
 
 ### Latest validation checkpoint
 Academy source `eef9e1478e31ed363be28976f292dbefcc28d595` passed GitHub Actions Academy CI run `38883044268` (40 tests, TypeScript, lint, build). This is **test** infrastructure, not a deployed Academy resource; migration 007 still needs DBA backup/approval and execution in the actual authorized service before release.
+
+
+## Student export and workbook erasure QA
+Academy exposes `GET /api/account/export` (authenticated JSON attachment) and `DELETE /api/account/workbooks` (authenticated HTTPS same-origin JSON with `{"confirmation":"DELETE MY WORKBOOKS"}`). Both require all existing Academy tables and the V1 SSO session. The export uses a consistent read-only repeatable-read PostgreSQL transaction and enforces 10,000 records per data category rather than silently truncating. Download must not be publicly cached. Verify an unauthorized account returns 401; an authenticated student sees **only** own progress, graded attempts, workbook answers and award records. Test deletion with two distinct V1 identities; deleting one user's workbook must preserve the other student's submissions and must not change grades, learning progress, or awards. Do not assume erasure reaches backups. Existing database migrations 001–007 are sufficient; no production SQL was executed by this code change.
