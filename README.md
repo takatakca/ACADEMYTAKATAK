@@ -108,3 +108,7 @@ Academy includes an opt-in private PostgreSQL assessment bank, with a restricted
 
 ## Internal program completion records
 After all required course lessons and exams pass, the student may issue an optional Academy education completion record. An opaque UUID lets others check the program, course count, frozen exam points, issue date and active/revoked status at `/verify/<uuid>` without revealing the learner's identity. Only a verified TAKATAK-V1 `academy_awards_admin` may revoke via the restricted `/instructor/awards` interface. The feature is source-complete but needs database migration 005 and end-to-end production testing; it does not confer government or external professional credentials.
+
+
+## Lesson editorial desk (source implementation)
+TAKATAK-authorized course editors and independent reviewers may maintain versioned plain-text lesson content at `/instructor/lessons`. Lesson drafts and revisions live in Academy PostgreSQL (`db/007_lesson_revisions.sql`), never in a second customer/identity database. A different TAKATAK master account must approve each draft before student pages can display the reviewed lesson. Existing free, Plus and one-time purchase boundaries remain fixed in the code catalog. Migration 007, signed staff roles and runtime DB config are needed before this feature becomes operational in production.
