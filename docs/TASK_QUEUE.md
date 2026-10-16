@@ -92,4 +92,5 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Add explicit, server-authorized, same-origin deletion of a **single** workbook response without requiring currently active course purchase rights.
 - [x] Expose two-step deletion confirmation in lesson workbook UI without deleting progress, exam history, awards or V1 customer records.
 - [x] Add PostgreSQL isolation coverage for single-lesson and whole-account workbooks.
-- [ ] Confirm source CI for `c28e9153` and obtain real SSO + migration deployment to test these flows end-to-end.
+- [x] Verify source CI `38943064719` for `c28e915376ffb8a25d534d125e790531be24af0d`: 41 tests passed and TypeScript, lint, build successful.
+- [ ] Deploy Academy with authorized SSO/DB and verify these flows end-to-end with two distinct V1 learner accounts; run manual CI on release HEAD.
