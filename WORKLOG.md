@@ -23,3 +23,6 @@ Format: date | agent | branch/commit | status | completed | next
 
 
 - 2026-10-16 | ChatGPT/GitHub | main / 1cf1184c (source checkpoint) | CI pending; not live | Added Academy student data export (consistent scoped snapshot, private JSON download), explicit-confirmation same-origin workbook erasure, self-service account controls, and disposable Postgres isolation + preservation test. No data changed in live services. | Verify newest source CI; update handoff with evidence. Production tasks remain V1 SSO runtime verification, Postgres migrations 001–007, Coolify config and actual user authorization smoke tests.
+
+
+- 2026-10-16 | ChatGPT/GitHub | main / c28e9153 (source) | CI pending; production not verified | Added per-lesson workbook deletion API and two-step UI with same-origin confirmation; modified Postgres DB integration test to prove same student/other student isolation; styled mobile confirmations. | Verify final CI, document passed run, then continue independent fixes. Live deployment still requires authorized Academy app, V1 SSO, migrations 001–007, protected Coolify config and real user QA.
