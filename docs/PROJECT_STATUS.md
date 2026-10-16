@@ -57,3 +57,12 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 ## Verified CI for newest application code
 - `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65` passed GitHub Academy CI run `38848457760` (37 passed, zero failed; npm install, unit/integration tests against PostgreSQL 16, typecheck, lint, build). The database tests included two concurrent connections with a shared one-use exam nonce.
 - Documentation updates after this source SHA are `[skip ci]`; they do not themselves change the compiled app. For an exact-head production candidate use the existing manual `workflow_dispatch` on `main` and follow the gated deployment runbook.
+
+
+## Editorial course CMS — 2026-10-16
+- GitHub-confirmed TAKATAK-V1 integration PR #183 **MERGED** at 2026-10-16T05:34:34Z, V1 merge SHA `1c349ce40ef36ed92d115fb675f0df7fa3d0d465`. No verified V1 production release, SSO runtime credentials or paid subscription fulfillment yet.
+- Added `db/007_lesson_revisions.sql`: versioned private draft / published / retired learning content per course and lesson. Prevents two active versions and self-review through PostgreSQL constraints; keeps audit metadata.
+- Academy-owned lesson editorial API `/api/instructor/lessons` (read/write) and `/api/instructor/lessons/publish` use server-verified `academy_editor` and `academy_reviewer` TAKATAK entitlements, separate authors/reviewers, complete same-origin checks and bounded JSON.
+- `/instructor/lessons` offers staff editorial drafting, review and publishing UI. Student lessons only use approved published text **after** passing existing lesson-access policy; original curriculum remains fallback, no leaked drafts.
+- Disposable PostgreSQL 16 CI applies migrations **001–007** and verifies new approval/one-published-per-lesson constraints.
+- **No migrations or services were changed in production.** Coolify deployment is not verified; source-level functionality is not a live deployment.
