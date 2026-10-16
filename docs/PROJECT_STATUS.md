@@ -85,3 +85,6 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - Added two-step confirmation on each authorized lesson's workbook form and mobile-responsive privacy controls. Account-wide workbook erasure remains available separately.
 - Database CI now checks single-lesson deletion leaves the same student's other lesson intact and all other students' data untouched, followed by the existing bulk-erasure assertions.
 - Last source SHA before handoff docs: `c28e915376ffb8a25d534d125e790531be24af0d`; confirm exact GitHub CI run before claiming pass. No changes were made to live Academy/PostgreSQL/Coolify.
+
+### Final verification — student privacy controls
+- Latest code SHA `c28e915376ffb8a25d534d125e790531be24af0d` **PASSED** Academy CI run `38943064719` (41 tests; isolated PostgreSQL 16, migrations 001–007, workbook isolation and erasure, TypeScript, ESLint, Next.js build). No source-CI failures remain known for this SHA.
