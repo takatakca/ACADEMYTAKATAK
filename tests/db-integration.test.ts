@@ -159,6 +159,15 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      const own=await client.query<{response_text:string}>(query,["master-1"]);
      assert.deepEqual(own.rows.map(r=>r.response_text),["Practice notes"]);
      assert.equal((await client.query(query,["unknown-master"])).rowCount,0);
+     await client.query(`INSERT INTO academy_activity_submission
+       (master_identity_id,course_slug,lesson_slug,response_text)
+       VALUES('master-1','seo-aeo','lesson-2','Independent second lesson response')`);
+     const single=await client.query(
+       "DELETE FROM academy_activity_submission WHERE master_identity_id=$1 AND course_slug=$2 AND lesson_slug=$3",
+       ["master-1","seo-aeo","lesson-1"]);
+     assert.equal(single.rowCount,1);
+     assert.deepEqual((await client.query<{lesson_slug:string}>(query,["master-1"])).rows.map(x=>x.lesson_slug),["lesson-2"]);
+     assert.deepEqual((await client.query<{response_text:string}>(query,["master-2"])).rows.map(x=>x.response_text),["Other notes"]);
      const deleted=await client.query(
        "DELETE FROM academy_activity_submission WHERE master_identity_id=$1",["master-1"]);
      assert.equal(deleted.rowCount,1);
