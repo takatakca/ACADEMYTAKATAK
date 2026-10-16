@@ -21,3 +21,14 @@ export async function saveWorkbook(identity:AcademyIdentity,courseSlug:string,le
     [identity.sub,courseSlug,lessonSlug,text.trim()]
   );
 }
+
+/** A student may erase their own exercise text without losing exam scores or course completion.
+ * This is intentionally not conditioned on a current paid-content entitlement.
+ */
+export async function deleteWorkbook(identity:AcademyIdentity,courseSlug:string,lessonSlug:string):Promise<boolean>{
+  const db=learningDb();if(!db)throw new Error("workbook_database_not_configured");
+  const result=await db.query(
+    "DELETE FROM academy_activity_submission WHERE master_identity_id=$1 AND course_slug=$2 AND lesson_slug=$3",
+    [identity.sub,courseSlug,lessonSlug]);
+  return (result.rowCount??0)>0;
+}
