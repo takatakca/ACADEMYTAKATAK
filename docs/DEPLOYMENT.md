@@ -54,3 +54,10 @@ The optional program-completion award is issued only after every component cours
 
 ## Revalidate `main` on demand
 The Academy CI workflow supports `workflow_dispatch`. When documentation-only commits have advanced the HEAD past the last compiled source SHA, use **GitHub Actions → Academy CI → Run workflow → main** after obtaining authorized repository access. A passing manual CI on exact current HEAD can trigger the gated Coolify workflow if production deployment is explicitly enabled; do not bypass the two independent checks. No external restart/orchestrator is configured by this workflow.
+
+
+## One-time exam replay migration and disposable database CI
+- After authorized database backup and migrations 001–005, apply `db/006_exam_ticket_once.sql` before deploying application commits that require it.
+- The migration adds a nullable ticket nonce to preserve historical attempts and a unique partial index so each new signed candidate session can be graded at most once. `/api/ready` requires that index for operational readiness.
+- The `Academy CI` verification job creates disposable PostgreSQL 16 credentials only within the GitHub Actions ephemeral runner. It creates a random test schema, executes migrations 001–006 and validates workbook isolation, exam history and award constraints before the build. This CI database is never a production environment.
+- New exam API error `exam_ticket_already_used` (409) tells the learner to reload for another attempt; repeated requests cannot farm points on one signed ticket.
