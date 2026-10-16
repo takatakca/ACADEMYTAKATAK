@@ -13,3 +13,5 @@ Format: date | agent | branch/commit | status | completed | next
 
 
 - 2026-10-15 | ChatGPT/GitHub | main / 01e7cbc0 (source) | newer CI pending; NOT deployed | Replayed-exam nonce with schema 006; disposable PostgreSQL 16 tests executed; independent-connection concurrent insert test and author/reviewer DB constraint verified (run 38848221344, 35 tests). Hardened all 7 student/staff POST endpoint Origins and progress payload length. | Check exact latest source SHA CI, update handoff proof, authorized DBA migration 006 and V1/Coolify configuration, then run real live SSO and access smoke tests.
+
+- 2026-10-15 | ChatGPT/GitHub | main / 01e7cbc0 | VERIFIED: CI 38848457760 passed, 37 tests (ephemeral Postgres 16), typecheck, lint, build; NOT DEPLOYED | Confirmed concurrent one-use exam ticket enforcement and all authenticated write Origin protections in green source build. | Continue V1 release integration, approve migrations 001–006 and provision/verify Coolify; full staging SSO and API E2E required before production.
