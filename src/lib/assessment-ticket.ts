@@ -2,7 +2,7 @@ import { createHmac,timingSafeEqual } from "node:crypto";
 
 export type AssessmentTicket={
  sub:string;course:string;version:number;source:"public_practice"|"private_reviewed";
- questionIds:string[];expiresAt:number
+ questionIds:string[];expiresAt:number;nonce:string
 };
 const ticketMac=(payload:string,secret:string)=>
  createHmac("sha256",secret).update("academy-exam-ticket:v1:").update(payload).digest();
@@ -35,5 +35,6 @@ function validTicket(x:unknown):x is AssessmentTicket {
  (d.source==="public_practice"||d.source==="private_reviewed") &&
  Array.isArray(d.questionIds)&&d.questionIds.length===5&&
  d.questionIds.every(x=>typeof x==="string"&&/^[A-Za-z0-9_-]{1,45}$/.test(x))&&
- new Set(d.questionIds).size===5&&Number.isInteger(d.expiresAt);
+ new Set(d.questionIds).size===5&&Number.isInteger(d.expiresAt)&&
+ typeof d.nonce==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(d.nonce);
 }
