@@ -29,9 +29,9 @@ export default function InstructorLessonEditor({courses,canAuthor,canReview}:{
  const [busy,setBusy]=useState(false);
  const [error,setError]=useState("");
  const [success,setSuccess]=useState("");
- const showStarter=useCallback((v:LessonOption)=>{
+ const showStarter=(v:LessonOption)=>{
    setTitle(v.title);setParagraphs(v.content.join("\n\n"));setActivity(v.activity);
- },[]);
+ };
  const reload=useCallback(async(courseName:string,lessonName:string)=>{
   const res=await fetch("/api/instructor/lessons?course="+encodeURIComponent(courseName)+
    "&lesson="+encodeURIComponent(lessonName),{cache:"no-store",credentials:"same-origin"});
