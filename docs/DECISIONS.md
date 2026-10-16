@@ -41,3 +41,5 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 
 
 25. **Individual workbook erasure:** students may delete one of their own exercise responses (even after losing paid lesson access) using signed V1 identity, exact same-origin validation and explicit `DELETE THIS RESPONSE` confirmation. The DELETE query always scopes by `master_identity_id`, course and lesson, and never deletes progress, exams, awards, central customer records or another student’s notes.
+
+26. **Privacy release evidence:** student-owned JSON export and whole-workbook/per-lesson deletions passed isolated PostgreSQL CI run `38943064719` (41 tests) on source `c28e9153`. Live user rights, backup retention and actual Academy deployment must be independently verified before claiming production readiness.
