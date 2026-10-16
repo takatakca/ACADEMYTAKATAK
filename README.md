@@ -112,3 +112,7 @@ After all required course lessons and exams pass, the student may issue an optio
 
 ## Lesson editorial desk (source implementation)
 TAKATAK-authorized course editors and independent reviewers may maintain versioned plain-text lesson content at `/instructor/lessons`. Lesson drafts and revisions live in Academy PostgreSQL (`db/007_lesson_revisions.sql`), never in a second customer/identity database. A different TAKATAK master account must approve each draft before student pages can display the reviewed lesson. Existing free, Plus and one-time purchase boundaries remain fixed in the code catalog. Migration 007, signed staff roles and runtime DB config are needed before this feature becomes operational in production.
+
+
+## Student data portability and workbook privacy
+From `/account`, signed-in Academy students can download a JSON export of their own Academy learning progress, exam attempts, exercise responses and educational awards. The application enforces `master_identity_id` filtering in SQL, a bounded consistent database snapshot and private no-store download headers. They can also permanently erase **only their own saved workbook text** with the exact confirmation `DELETE MY WORKBOOKS`. Grade history, progress, awards, payments and the central TAKATAK-V1 customer identity remain unchanged. This control is not a full data-subject or TAKATAK master-account deletion. See `docs/DEPLOYMENT.md` for production identity, privacy and verification requirements.
