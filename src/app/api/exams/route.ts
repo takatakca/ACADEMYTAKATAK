@@ -6,7 +6,7 @@ import { gradeExam } from "@/lib/exams";
 import { verifyAssessmentTicket } from "@/lib/assessment-ticket";
 import { verifyTicketQuestions } from "@/lib/private-exams";
 import { readProgress,progressConfigured } from "@/lib/progress";
-import { ExamLimitError,saveExamAttempt } from "@/lib/exam-records";
+import { ExamLimitError,ExamReplayError,saveExamAttempt } from "@/lib/exam-records";
 
 export const runtime="nodejs";
 export const dynamic="force-dynamic";
@@ -39,7 +39,7 @@ export async function POST(request:NextRequest){
     const questions=await verifyTicketQuestions(ticket);
     if(!questions)return json({ok:false,error:"exam_version_unavailable"},409);
     const grade=gradeExam(questions,answers as number[]);
-    const bestPoints=await saveExamAttempt(identity,slug,grade,ticket.source,ticket.version);
+    const bestPoints=await saveExamAttempt(identity,slug,grade,ticket.source,ticket.version,ticket.nonce);
     const review=questions.map((q,i)=>({
       id:q.id,prompt:q.prompt,correct:q.correctIndex===(answers as number[])[i],
       correctAnswer:q.choices[q.correctIndex],explanation:q.explanation
@@ -47,6 +47,7 @@ export async function POST(request:NextRequest){
     return json({ok:true,grade:{...grade,review},bestPoints,attemptLimit:3,passingPercent:80},200);
   }catch(e){
     if(e instanceof ExamLimitError)return json({ok:false,error:"exam_attempt_limit"},429);
+    if(e instanceof ExamReplayError)return json({ok:false,error:"exam_ticket_already_used"},409);
     return json({ok:false,error:"exam_unavailable"},503);
   }
 }
