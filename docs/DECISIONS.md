@@ -38,3 +38,6 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 
 23. **Personal Academy data access:** authenticated student export returns a complete bounded consistent JSON snapshot using only queries scoped by `master_identity_id`. It excludes central TAKATAK CRM, payments, secrets, question answer banks and unrelated students' records. Download response must be private/no-store with attachment disposition.
 24. **Student-authored workbook erasure:** a separate explicit confirmation permits irreversible removal only from `academy_activity_submission` for the currently authenticated V1 subject. Past exam attempt audit, learning progress, issued educational awards and V1 identity/payment state remain unchanged. Do not silently infer full account deletion from workbook erasure; retention/backup decisions still require governance.
+
+
+25. **Individual workbook erasure:** students may delete one of their own exercise responses (even after losing paid lesson access) using signed V1 identity, exact same-origin validation and explicit `DELETE THIS RESPONSE` confirmation. The DELETE query always scopes by `master_identity_id`, course and lesson, and never deletes progress, exams, awards, central customer records or another student’s notes.
