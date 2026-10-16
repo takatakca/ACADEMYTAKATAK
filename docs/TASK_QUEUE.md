@@ -59,3 +59,12 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [ ] Production DBA backup and apply migration `db/006_exam_ticket_once.sql` after 001–005. Live readiness requires the new ticket uniqueness index.
 - [ ] Execute adversarial concurrent exam replay test with actual app sessions and two simultaneous submissions. CI tests validate database constraint, not deployed HTTP concurrency.
 - [ ] Confirm latest GitHub CI run for 006 and database integration tests; resolve any errors before enabling deployments.
+
+
+## Latest incremental hardening and verification
+- [x] Prove database replay rejection with simultaneous queries from two separate PostgreSQL connections. CI run `38848221344` succeeded, including 35 tests.
+- [x] Test rejection of a private-bank author's self-review at the DB constraint level.
+- [x] Centralize exact-scheme-and-host write-Origin verification on progress, workbook, exam, award and instructor mutation APIs; add same-origin tests.
+- [x] Enforce actual request-body limit for course progress POST rather than trusting the Content-Length header alone.
+- [ ] Verify newest Academy CI source commit `01e7cbc0` and correct any errors before production enablement.
+- [ ] Validate public HTTPS Origin behaviour behind configured reverse proxy (Coolify), including intentional HTTP/HTTPS rejection; fix forwarded scheme/host proxy configuration, not by weakening CSRF protection.
