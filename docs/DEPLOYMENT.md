@@ -78,3 +78,6 @@ Apply migration 006 before enabling the new exam POST handler. GitHub Actions Po
 - Confirm the student lesson displays only the published revision after checking TAKATAK purchase entitlements; restricted content must not appear to guests or users of unrelated companies.
 - Staging QA: draft new revision → GET versions as instructor → verify student still sees old version → different reviewer publishes → verify newly approved copy for an authorized student → verify previous version retired and not returned to students → test original curriculum fallback for untouched lessons.
 - Do not activate Coolify auto-deploy until live SSO, migration 007, public HTTPS readiness, canonical Origin and deployment SHA have been verified.
+
+### Latest validation checkpoint
+Academy source `eef9e1478e31ed363be28976f292dbefcc28d595` passed GitHub Actions Academy CI run `38883044268` (40 tests, TypeScript, lint, build). This is **test** infrastructure, not a deployed Academy resource; migration 007 still needs DBA backup/approval and execution in the actual authorized service before release.
