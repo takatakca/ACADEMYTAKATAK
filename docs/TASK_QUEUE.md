@@ -74,7 +74,7 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Confirm V1 Academy bridge PR #183 was merged by authorized V1 owners; merge commit `1c349ce4` (2026-10-16). V1 production rollout **still unverified**.
 - [x] Build Academy lesson-revision storage and migration 007, independent editorial review and publication APIs, staff UI, and entitlement-gated student presentation of approved copy.
 - [x] Enforce PostgreSQL one-published-revision-per-lesson and separate-author-reviewer constraints in disposable DB integration tests.
-- [ ] Confirm new source CI passes end-to-end (tests, PostgreSQL 16 migrations 001–007, TypeScript, lint and build) and fix any reported errors.
+- [x] Confirm source CI `38883044268` on `eef9e1478e31ed363be28976f292dbefcc28d595` passed all 40 tests, PostgreSQL 16 migrations 001–007, TypeScript, lint and build (earlier React Compiler lint issue corrected).
 - [ ] Have authorized DB owner back up and apply migration 007 after migrations 001–006. Verify Academy `/api/ready` and live author/reviewer permission tests.
 - [ ] Confirm V1 Academy bridge is actually deployed and emits approved `academy_editor`/`academy_reviewer` staff claims. Do not forge local staff roles.
 - [ ] Expert-review starter content across courses, multilingual parity, lessons/media/transcripts and regulatory/educational sign-off.
