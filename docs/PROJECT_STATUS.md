@@ -78,3 +78,10 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - Account learner UI provides a self-service export and an explicit irreversible erasure control. No additional database migrations required (uses existing tables from 001–007).
 - Disposable PostgreSQL CI tests verify that deletion of master-1 workbooks does not affect master-2, progress or exam history, and repeat deletion is idempotent. **CI result on latest source must be checked**, not inferred.
 - Live Academy deployment, application database migrations and genuine V1 SSO still need external verification. Source changes do not imply completed production launch.
+
+
+## Per-lesson workbook privacy control — 2026-10-16
+- Added signed-master-ID-scoped `DELETE /api/workbook` for **one** saved course/lesson response (same-origin and exact `DELETE THIS RESPONSE` confirmation), including after paid lesson access expires. Did not change workbook save restrictions or other students' records.
+- Added two-step confirmation on each authorized lesson's workbook form and mobile-responsive privacy controls. Account-wide workbook erasure remains available separately.
+- Database CI now checks single-lesson deletion leaves the same student's other lesson intact and all other students' data untouched, followed by the existing bulk-erasure assertions.
+- Last source SHA before handoff docs: `c28e915376ffb8a25d534d125e790531be24af0d`; confirm exact GitHub CI run before claiming pass. No changes were made to live Academy/PostgreSQL/Coolify.
