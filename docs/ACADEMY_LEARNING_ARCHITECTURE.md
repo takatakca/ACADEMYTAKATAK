@@ -87,3 +87,7 @@ Launch checklist:
 
 ## Program completion verification (source phase)
 `db/005_program_awards.sql` adds Academy-only optional immutable educational completion snapshots (opaque UUID, course IDs and points, issuance time) and revocation/audit fields. A student may explicitly claim a record only after all lessons and examinations in an Academy program are confirmed complete in their own master-linked progress, with currently valid learning access. `/verify/<uuid>` checks the record status and makes **no personal identity assertion**. Only V1 `academy_awards_admin` may record a revocation and reason. This is not an accredited, externally licensed or proctored credential. Migrations 001–005 and real service/identity integration remain outstanding before live issuance.
+
+
+## Single-use exam attempt integrity
+Migration `006_exam_ticket_once.sql` augments the 15-minute signed exam ticket with a cryptographic random v4 UUID nonce and a UNIQUE index on the persisted attempt nonce. A successfully recorded grade therefore consumes its exact ticket once; another concurrent or later submission of the same token fails without additional points. This is enforced in PostgreSQL, not in browser state. CI applies six migrations to an isolated disposable PostgreSQL schema and validates constraints; production approval, SSO smoke tests and DB migration remain separate launch gates.
