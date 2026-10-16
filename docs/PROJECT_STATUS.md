@@ -53,3 +53,7 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - GitHub CI now runs 16.x PostgreSQL with schema-scoped 001–006 migrations and concurrent duplicate-ticket tests. Run `38848221344` passed 35 tests, typecheck, lint and build; this was before the subsequent shared Origin controls.
 - All seven student/staff POST routes check complete same-origin (including HTTPS scheme/port), and progress body length is checked after reading, not just claimed Content-Length. Coolify proxy must retain the correct external scheme and host.
 - Production remains **NOT VERIFIED DEPLOYED**. V1 SSO PR #183 and real runtime/DB migration/roles remain prerequisites.
+
+## Verified CI for newest application code
+- `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65` passed GitHub Academy CI run `38848457760` (37 passed, zero failed; npm install, unit/integration tests against PostgreSQL 16, typecheck, lint, build). The database tests included two concurrent connections with a shared one-use exam nonce.
+- Documentation updates after this source SHA are `[skip ci]`; they do not themselves change the compiled app. For an exact-head production candidate use the existing manual `workflow_dispatch` on `main` and follow the gated deployment runbook.
