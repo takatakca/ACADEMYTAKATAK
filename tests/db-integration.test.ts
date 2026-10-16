@@ -69,6 +69,20 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
        "SELECT version FROM academy_exam_version WHERE course_slug='seo-aeo' AND status='published'");
      assert.equal(rows.rowCount,1);
    });
+   await t.test("a draft author cannot be their own reviewer",async()=>{
+     const q=Array.from({length:10},(_,i)=>({id:"sep"+i,prompt:"Review separation question "+i,
+       choices:["Document","Invent","Ignore","Guess"],correctIndex:0,explanation:"Only evidence-based editorial review."}));
+     await client.query("SAVEPOINT author_review");
+     let error="";
+     try{
+       await client.query(`INSERT INTO academy_exam_version(course_slug,version,status,questions,
+          created_by,reviewed_by,published_at)
+         VALUES('seo-aeo',3,'published',$1::jsonb,'same-master','same-master',now())`,[JSON.stringify(q)]);
+     }catch(e){error=(e as {code?:string}).code??"";}
+     assert.equal(error,"23514");
+     await client.query("ROLLBACK TO SAVEPOINT author_review");
+     await client.query("RELEASE SAVEPOINT author_review");
+   });
    await t.test("workbook entries are unique and private to a master identity",async()=>{
      await client.query(`INSERT INTO academy_activity_submission(master_identity_id,course_slug,lesson_slug,response_text)
        VALUES('master-1','seo-aeo','lesson-1','Practice notes')`);
@@ -101,6 +115,35 @@ test("Academy migrations and security invariants on disposable PostgreSQL schema
      assert.equal(failure,"23505");
      await client.query("ROLLBACK TO SAVEPOINT award_duplicate");
      await client.query("RELEASE SAVEPOINT award_duplicate");
+   });
+   // Commit migrations, discard transactional test fixtures, then verify
+   // unique nonce enforcement with two truly independent database connections.
+   await client.query("ROLLBACK");
+   await t.test("concurrent submissions using one ticket yield exactly one persisted grade",async()=>{
+     const first=new Client({connectionString:url,connectionTimeoutMillis:4000});
+     const second=new Client({connectionString:url,connectionTimeoutMillis:4000});
+     try{
+       await Promise.all([first.connect(),second.connect()]);
+       await Promise.all([first.query(`SET search_path TO "${schema}"`),
+         second.query(`SET search_path TO "${schema}"`)]);
+       const nonce=randomUUID();
+       const insert=`INSERT INTO academy_exam_attempt(master_identity_id,course_slug,
+         correct_answers,question_count,points,passed,assessment_source,assessment_version,ticket_nonce)
+         VALUES($1,'seo-aeo',5,5,100,true,'private_reviewed',1,$2::uuid)`;
+       const outcome=await Promise.allSettled([
+         first.query(insert,["concurrent-one",nonce]),
+         second.query(insert,["concurrent-two",nonce])
+       ]);
+       assert.equal(outcome.filter(x=>x.status==="fulfilled").length,1);
+       const loser=outcome.find(x=>x.status==="rejected");
+       assert.ok(loser&&loser.status==="rejected");
+       assert.equal((loser.reason as {code?:string}).code,"23505");
+       const matches=await client.query<{n:string}>(
+         "SELECT COUNT(*)::text AS n FROM academy_exam_attempt WHERE ticket_nonce=$1::uuid",[nonce]);
+       assert.equal(matches.rows[0].n,"1");
+     }finally{
+       await Promise.allSettled([first.end(),second.end()]);
+     }
    });
  } finally {
    await client.query("ROLLBACK").catch(()=>{});
