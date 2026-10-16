@@ -10,3 +10,6 @@ Format: date | agent | branch/commit | status | completed | next
 
 
 - 2026-10-15 | ChatGPT/GitHub | main / 4e3213f (source checkpoint) | PostgreSQL CI first run pending; NOT deployed | Added single-use signed exam ticket nonces, migration 006 unique index, HTTP replay conflict handling, student error UI, disposable PostgreSQL 16 CI, SQL invariants across migrations 001–006 | Inspect first full CI with Postgres, fix any errors, then verify green build; apply migrations and exercise live SSO only with authorized Academy infrastructure.
+
+
+- 2026-10-15 | ChatGPT/GitHub | main / 01e7cbc0 (source) | newer CI pending; NOT deployed | Replayed-exam nonce with schema 006; disposable PostgreSQL 16 tests executed; independent-connection concurrent insert test and author/reviewer DB constraint verified (run 38848221344, 35 tests). Hardened all 7 student/staff POST endpoint Origins and progress payload length. | Check exact latest source SHA CI, update handoff proof, authorized DBA migration 006 and V1/Coolify configuration, then run real live SSO and access smoke tests.
