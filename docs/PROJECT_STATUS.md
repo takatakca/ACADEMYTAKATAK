@@ -39,3 +39,9 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - `.github/workflows/ci.yml` now also supports manual `workflow_dispatch` on current `main` for a fresh production-candidate validation after documentation-only commits.
 - Workflow-source update `f176531a73196bb4ef668152c59afb6452833fcc` PASSED Academy CI run `38792169955`: tests, typecheck, lint and Next.js build. Documentation-only commits followed, so the latest main HEAD is not an independently retested deployable source revision until CI is manually redispatched.
 - Live Coolify release is still intentionally disabled and V1 PR #183 remains open. No migration, payment processing or real Academy student SSO was tested in production.
+
+
+## Exam replay and database regression — 2026-10-15
+- Added migration `db/006_exam_ticket_once.sql` (unique non-null random v4 UUID ticket nonce on `academy_exam_attempt`), signed per-student ticket binding and explicit one-use handling. A replayed exam token cannot persist a second grade after successful submission, including concurrent duplicate requests.
+- Added `tests/db-integration.test.ts`: uses a disposable PostgreSQL schema and applies migrations 001–006; exercises uniqueness, published exam version constraints, learner-scoped workbook access, and revocable awards. GitHub Actions now provisions an isolated PostgreSQL 16 service and supplies `ACADEMY_TEST_DATABASE_URL` to `npm run test`.
+- The live Academy application is still NOT VERIFIED deployed. A passing ephemeral CI database test is not production DB/SSO verification. Confirm the latest workflow run on the source commit before claiming CI success.
