@@ -4,7 +4,7 @@ import { currentIdentity } from "@/lib/session";
 import { getCourse,getLesson } from "@/lib/catalog";
 import { canReadLesson } from "@/lib/access";
 import { progressConfigured } from "@/lib/progress";
-import { saveWorkbook } from "@/lib/workbook";
+import { saveWorkbook,deleteWorkbook } from "@/lib/workbook";
 import { validWorkbookText } from "@/lib/workbook-policy";
 
 export const runtime="nodejs";export const dynamic="force-dynamic";
@@ -26,4 +26,32 @@ export async function POST(request:NextRequest){
  if(!progressConfigured())return json({ok:false,error:"storage_not_configured"},503);
  try{await saveWorkbook(identity,course.slug,lesson.slug,text);return json({ok:true,saved:true},200);}
  catch{return json({ok:false,error:"storage_unavailable"},503);}
+}
+
+/** The authenticated learner always retains the right to remove their own notes,
+ * including after a paid course entitlement has expired.
+ */
+export async function DELETE(request:NextRequest){
+ if(!isSameWriteOrigin(request.headers.get("origin"),request.nextUrl.origin))
+   return json({ok:false,error:"origin_not_allowed"},403);
+ if(!(request.headers.get("content-type")||"").toLowerCase().startsWith("application/json"))
+   return json({ok:false,error:"json_required"},415);
+ if(Number(request.headers.get("content-length")||0)>512)return json({ok:false,error:"request_too_large"},413);
+ const identity=await currentIdentity();if(!identity)return json({ok:false,error:"sign_in_required"},401);
+ let input:unknown;
+ try{
+   const raw=await request.text();if(raw.length>512)return json({ok:false,error:"request_too_large"},413);
+   input=JSON.parse(raw);
+ }catch{return json({ok:false,error:"invalid_json"},400);}
+ if(!input||typeof input!=="object"||Array.isArray(input))return json({ok:false,error:"invalid_payload"},400);
+ const {course:slug,lesson:lessonSlug,confirmation}=input as Record<string,unknown>;
+ if(confirmation!=="DELETE THIS RESPONSE"||typeof slug!=="string"||typeof lessonSlug!=="string")
+   return json({ok:false,error:"explicit_confirmation_required"},400);
+ const course=getCourse(slug);const lesson=course&&getLesson(course,lessonSlug);
+ if(!course||!lesson)return json({ok:false,error:"not_found"},404);
+ if(!progressConfigured())return json({ok:false,error:"storage_not_configured"},503);
+ try{
+   const deleted=await deleteWorkbook(identity,course.slug,lesson.slug);
+   return json({ok:true,deleted,scope:"single_workbook_response"},200);
+ }catch{return json({ok:false,error:"storage_unavailable"},503);}
 }
