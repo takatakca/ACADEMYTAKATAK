@@ -45,3 +45,11 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 - Added migration `db/006_exam_ticket_once.sql` (unique non-null random v4 UUID ticket nonce on `academy_exam_attempt`), signed per-student ticket binding and explicit one-use handling. A replayed exam token cannot persist a second grade after successful submission, including concurrent duplicate requests.
 - Added `tests/db-integration.test.ts`: uses a disposable PostgreSQL schema and applies migrations 001–006; exercises uniqueness, published exam version constraints, learner-scoped workbook access, and revocable awards. GitHub Actions now provisions an isolated PostgreSQL 16 service and supplies `ACADEMY_TEST_DATABASE_URL` to `npm run test`.
 - The live Academy application is still NOT VERIFIED deployed. A passing ephemeral CI database test is not production DB/SSO verification. Confirm the latest workflow run on the source commit before claiming CI success.
+
+
+## Security and DB verification — 15 October 2026, evening
+- Source baseline: `01e7cbc029c0cb668a6f39d9ec3f1b3ac84e0f65`, Academy `main`. Post-change CI outcome must be inspected by SHA.
+- Migration `006_exam_ticket_once.sql` is source-committed and REQUIRED before new code starts grading. A cryptographic UUID on each HMAC-signed exam ticket is inserted into the same transaction as its grade; a unique PostgreSQL index blocks replay, including concurrency.
+- GitHub CI now runs 16.x PostgreSQL with schema-scoped 001–006 migrations and concurrent duplicate-ticket tests. Run `38848221344` passed 35 tests, typecheck, lint and build; this was before the subsequent shared Origin controls.
+- All seven student/staff POST routes check complete same-origin (including HTTPS scheme/port), and progress body length is checked after reading, not just claimed Content-Length. Coolify proxy must retain the correct external scheme and host.
+- Production remains **NOT VERIFIED DEPLOYED**. V1 SSO PR #183 and real runtime/DB migration/roles remain prerequisites.
