@@ -20,3 +20,7 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 14. **Educational completion records** require actual completed lessons and passed course exams throughout a program; issuance stores a UUID, frozen course snapshot and earned points in Academy. Anonymous verification exposes no master identity; V1 authorizes `academy_awards_admin` revocation, with reason and audit. These are NOT external professional licences, identity verification or government accreditation.
 
 15. **Release and revalidation**: Academy CI may be manually rerun on `main` through `workflow_dispatch`; the Coolify workflow still requires a successful run on the exact latest `main` SHA plus explicit opt-in. Documentation-only commits must not be misconstrued as a deployed code version.
+
+
+16. **Exam replay prevention**: one-time candidate tickets carry a signed random UUID nonce; database migration 006 places a unique partial index on non-null `ticket_nonce` in scored attempts. The nonce is saved in the same transaction as grade, and conflicting submissions return HTTP 409. Do not treat a JWT/HMAC alone as sufficient one-time protection.
+17. **Disposal-only database CI**: use GitHub Actions PostgreSQL 16 with an isolated random schema, apply ordered migrations and validate constraints. Do not connect CI to any live Academy database or use live credentials for tests. Green CI proves schema invariants in test, not live SSO or production readiness.
