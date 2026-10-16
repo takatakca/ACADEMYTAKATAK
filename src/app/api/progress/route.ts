@@ -1,3 +1,4 @@
+import { isSameWriteOrigin } from "@/lib/request-origin";
 import { NextRequest, NextResponse } from "next/server";
 import { currentIdentity } from "@/lib/session";
 import { getCourse,getLesson } from "@/lib/catalog";
@@ -8,8 +9,7 @@ export const runtime="nodejs";
 export const dynamic="force-dynamic";
 const json=(data:object,status:number)=>NextResponse.json(data,{status,headers:{"Cache-Control":"no-store"}});
 export async function POST(request:NextRequest){
-  const origin=request.headers.get("origin");
-  if(!origin || (()=>{try{return new URL(origin).host!==request.nextUrl.host;}catch{return true;}})()) return json({ok:false,error:"origin_not_allowed"},403);
+  if(!isSameWriteOrigin(request.headers.get("origin"),request.nextUrl.origin))return json({ok:false,error:"origin_not_allowed"},403);
   if(!(request.headers.get("content-type")||"").toLowerCase().startsWith("application/json"))return json({ok:false,error:"json_required"},415);
   const length=Number(request.headers.get("content-length")||"0");
   if(!Number.isFinite(length) || length>1024)return json({ok:false,error:"request_too_large"},413);
