@@ -50,3 +50,12 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Verify workflow-source commit `f176531a` via green Academy CI run `38792169955` (tests, typecheck, lint, build).
 - [ ] Produce end-to-end database-backed test coverage (approved dedicated test Postgres) for exam-bank four-eyes publication, signed exam tickets, 24h attempt cap, student workbook isolation, educational record issuance/revocation and replay.
 - [ ] Prepare deeper instructional content and accessible bilingual training, with instructor approvals and QA.
+
+
+## Next-generation validation and assessment hardening
+- [x] Add unpredictable one-time nonce to candidate-specific signed assessment tickets and enforce unique consumption in the same transaction as persisted grading (migration 006).
+- [x] Extend exam API with explicit replay conflict and student retry guidance.
+- [x] Add real PostgreSQL 16 ephemeral database service to GitHub CI, apply all six migrations in disposable schema, test exam duplicate prevention, workbook identity isolation, version uniqueness, award revocation.
+- [ ] Production DBA backup and apply migration `db/006_exam_ticket_once.sql` after 001–005. Live readiness requires the new ticket uniqueness index.
+- [ ] Execute adversarial concurrent exam replay test with actual app sessions and two simultaneous submissions. CI tests validate database constraint, not deployed HTTP concurrency.
+- [ ] Confirm latest GitHub CI run for 006 and database integration tests; resolve any errors before enabling deployments.
