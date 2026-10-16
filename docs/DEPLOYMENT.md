@@ -68,3 +68,13 @@ All student and instructor POST APIs now reject an Origin whose scheme, host, or
 
 ## SQL replay and ephemeral CI verification
 Apply migration 006 before enabling the new exam POST handler. GitHub Actions PostgreSQL tests verify concurrent insertion with a shared nonce using independent connections and two-person editorial review constraint. A 409 `exam_ticket_already_used` means the learner must obtain a fresh signed ticket; neither a repeat submission nor a changed answer can bypass the uniqueness index. **Green isolated CI is not proof that production DB migrations ran.**
+
+
+## Lesson editorial CMS — activation (migration 007)
+- GitHub PR #183 has now been merged into TAKATAK-V1 (2026-10-16, merge commit `1c349ce4`); verify that V1 is **deployed** and SSO truly works before enabling the Academy production release.
+- DBA must approve/backup the dedicated Academy PostgreSQL database and apply migrations in order **001 → 002 → 003 → 004 → 005 → 006 → 007**. Never apply a new migration silently at web startup.
+- Migration 007 creates `academy_lesson_revision` with exactly one published version per course/lesson, immutable historical revisions, separate author/reviewer IDs. The new `/api/ready` requires this table to be queryable and returns HTTP 503 until configured.
+- The staff page `/instructor/lessons` requires signed `academy_editor` or `academy_reviewer` entitlements from TAKATAK-V1; separate accounts must create and approve a real draft. Confirm unavailable roles return 403/404 as appropriate.
+- Confirm the student lesson displays only the published revision after checking TAKATAK purchase entitlements; restricted content must not appear to guests or users of unrelated companies.
+- Staging QA: draft new revision → GET versions as instructor → verify student still sees old version → different reviewer publishes → verify newly approved copy for an authorized student → verify previous version retired and not returned to students → test original curriculum fallback for untouched lessons.
+- Do not activate Coolify auto-deploy until live SSO, migration 007, public HTTPS readiness, canonical Origin and deployment SHA have been verified.
