@@ -3,10 +3,10 @@
 Updated: 2026-10-16. Repository: https://github.com/takatakca/ACADEMYTAKATAK. Branch: `main`.
 
 ## Follow-on checkpoint — 2026-10-16, individual response erasure
-- **Latest source SHA before documentation:** `c28e915376ffb8a25d534d125e790531be24af0d`. CI running at documentation time; inspect newest Academy CI for accurate status, fix any reported lint/test/build failure, and record the green run.
+- **Latest source SHA VERIFIED:** `c28e915376ffb8a25d534d125e790531be24af0d`, Academy CI **38943064719** completed **SUCCESS**: 41/41 tests including the PostgreSQL scoped single-lesson and bulk-erasure assertions, TypeScript, ESLint and Next.js build. Documentation-only `[skip ci]` commits follow; read the GitHub `main` ref for absolute latest SHA.
 - **Completed:** `DELETE /api/workbook`, `src/lib/workbook.ts` identity-scoped query, `src/components/workbook-form.tsx` two-step confirmation, `src/app/globals.css` responsive styles, `tests/db-integration.test.ts` isolated single-lesson and cross-student deletion test. Preserves historical grades, other lessons, awards and TAKATAK-V1 master account/billing.
 - **Next action:** verify newest source CI; confirm exact GitHub `main` SHA after docs, then pursue remaining real V1 login, academy DB migrations 001–007 and Coolify verification when authorized. No live migration or deploy occurred.
-- **Deployment status:** **NOT VERIFIED / NOT ACTIVATED**. Last confirmed CI on earlier source `1cf1184c` was green with 41 tests (run `38942507969`); this is test evidence only.
+- **Deployment status:** **NOT VERIFIED / NOT ACTIVATED**. Last successful source CI `38943064719` for `c28e9153` (41 passing tests) is test evidence only; Coolify production deploy still requires approved V1/runtime and verified database migration.
 - **Access needed:** Academy Coolify application, secrets/domain/TLS, approved PostgreSQL backup and migration, V1 SSO and staff entitlements; never invent or disclose credentials.
 
 ---
