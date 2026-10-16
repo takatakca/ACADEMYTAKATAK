@@ -10,6 +10,7 @@ import { getProgram } from "@/lib/programs";
 import { courseProgress } from "@/lib/access";
 import { canAuthorExams,canReviewExams } from "@/lib/assessment-policy";
 import { canWriteLessons,canPublishLessons } from "@/lib/lesson-policy";
+import AccountDataControls from "@/components/account-data-controls";
 
 export const dynamic="force-dynamic";
 export default async function Account(){
@@ -69,6 +70,7 @@ export default async function Account(){
       </div>)}</div>:<p>No issued completion records yet. Finish a program and use its official Academy completion-record action.</p>}
       <p className="fine-print">These are Academy education records, not government permits or external certifications. Public verification does not show your identity.</p>
     </section>
+    <AccountDataControls/>
     <div className="notice account-note">Payments, specialist-course purchases and access rights are managed by TAKATAK-V1. <a href={process.env.NEXT_PUBLIC_TAKATAK_DASHBOARD_URL||"https://takatak.ca/dashboard"}>Open your main dashboard ↗</a></div>
   </div>;
 }
