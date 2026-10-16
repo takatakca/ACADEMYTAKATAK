@@ -61,3 +61,10 @@ The Academy CI workflow supports `workflow_dispatch`. When documentation-only co
 - The migration adds a nullable ticket nonce to preserve historical attempts and a unique partial index so each new signed candidate session can be graded at most once. `/api/ready` requires that index for operational readiness.
 - The `Academy CI` verification job creates disposable PostgreSQL 16 credentials only within the GitHub Actions ephemeral runner. It creates a random test schema, executes migrations 001–006 and validates workbook isolation, exam history and award constraints before the build. This CI database is never a production environment.
 - New exam API error `exam_ticket_already_used` (409) tells the learner to reload for another attempt; repeated requests cannot farm points on one signed ticket.
+
+
+## Origin checks and secure proxy
+All student and instructor POST APIs now reject an Origin whose scheme, host, or port differs from the public request origin. Verify that Coolify/Traefik forwards the browser's HTTPS scheme and intended Academy domain to Next.js (`request.nextUrl.origin` must reflect that origin). Do not change API guards to host-only comparisons or disable CSRF controls for convenience. Check requests from mobile browsers after TLS setup; reject same-host HTTP and unrelated domains.
+
+## SQL replay and ephemeral CI verification
+Apply migration 006 before enabling the new exam POST handler. GitHub Actions PostgreSQL tests verify concurrent insertion with a shared nonce using independent connections and two-person editorial review constraint. A 409 `exam_ticket_already_used` means the learner must obtain a fresh signed ticket; neither a repeat submission nor a changed answer can bypass the uniqueness index. **Green isolated CI is not proof that production DB migrations ran.**
