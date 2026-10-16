@@ -8,6 +8,8 @@ import { readProgress } from "@/lib/progress";
 import ProgressButton from "@/components/progress-button";
 import WorkbookForm from "@/components/workbook-form";
 import { readWorkbook } from "@/lib/workbook";
+import { readPublishedLesson } from "@/lib/lesson-revisions";
+import type { LessonRevision } from "@/lib/lesson-revisions";
 
 type Props={params:Promise<{slug:string;lesson:string}>};
 export async function generateMetadata({params}:Props):Promise<Metadata>{
@@ -20,6 +22,12 @@ export default async function LessonPage({params}:Props){
   const identity=await currentIdentity(); const allowed=canReadLesson(course,entry,identity);
   const position=course.lessons.findIndex((item)=>item.slug===entry.slug);
   const previous=course.lessons[position-1],next=course.lessons[position+1];
+  let approved:LessonRevision|null=null;
+  // Only access the editable learning copy after the original course entitlement check.
+  if(allowed)try{approved=await readPublishedLesson(slug,entry.slug);}catch{/* Keep static curriculum if editorial storage is unavailable. */}
+  const displayedTitle=approved?.title??entry.title;
+  const displayedParagraphs=approved?.paragraphs??entry.content;
+  const displayedActivity=approved?.activity??entry.activity;
   let initialWorkbook="";
   if(identity&&allowed)try{initialWorkbook=await readWorkbook(identity,slug,entry.slug)||"";}catch{}
   let completed=false;
@@ -31,9 +39,9 @@ export default async function LessonPage({params}:Props){
         <span>{i+1}.</span><span>{item.title}</span>{!canReadLesson(course,item,identity)&&<span aria-label="Locked">🔒</span>}
       </Link>)}</div></aside>
     <article className="reader-content">
-      <div className="lesson-header"><span className="kicker">LESSON {position+1} OF {course.lessons.length} · {entry.duration} MIN</span><h1>{entry.title}</h1><div className="lesson-access"><span className={allowed?"tag tag-free":"tag"}>{allowed?"Available to you":accessLabel(entry.access)}</span></div></div>
-      {allowed?<><div className="lesson-copy">{entry.content.map((paragraph,i)=><p key={i}>{paragraph}</p>)}</div>
-        <section className="lesson-activity"><span className="kicker">PRACTICAL ACTIVITY</span><h2>Put it into practice</h2><p>{entry.activity}</p></section>
+      <div className="lesson-header"><span className="kicker">LESSON {position+1} OF {course.lessons.length} · {entry.duration} MIN</span><h1>{displayedTitle}</h1><div className="lesson-access"><span className={allowed?"tag tag-free":"tag"}>{allowed?"Available to you":accessLabel(entry.access)}</span></div></div>
+      {allowed?<>{approved&&<p className="fine-print">Editorially reviewed lesson · revision #{approved.revision}</p>}<div className="lesson-copy">{displayedParagraphs.map((paragraph,i)=><p key={i}>{paragraph}</p>)}</div>
+        <section className="lesson-activity"><span className="kicker">PRACTICAL ACTIVITY</span><h2>Put it into practice</h2><p>{displayedActivity}</p></section>
         {identity?<WorkbookForm course={slug} lesson={entry.slug} initialText={initialWorkbook}/>:<div className="notice workbook-notice">Sign in with TAKATAK to save this practical exercise in your personal workbook. <Link href={"/auth/start?next="+encodeURIComponent("/courses/"+slug+"/"+entry.slug)}>Sign in →</Link></div>}
         <div className="lesson-complete">{identity?<ProgressButton course={slug} lesson={entry.slug} initialCompleted={completed}/>:<div className="notice">Sign in with your TAKATAK account to save lesson completion. <Link href={"/auth/start?next="+encodeURIComponent("/courses/"+slug+"/"+entry.slug)}>Sign in →</Link></div>}</div>
       </>:<section className="locked-panel"><div className="lock-big">🔒</div><span className="kicker">ADVANCED LESSON</span><h2>Continue your journey</h2>
