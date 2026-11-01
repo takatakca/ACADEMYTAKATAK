@@ -98,7 +98,38 @@ un employé (`public/photos/CREDITS.md`).
   Studio avec takatak.ca@gmail.com.
 - **Témoignages** : seulement de vrais clients, avec leur accord écrit.
 
-## 9. Avant chaque envoi de code (agents)
+## 9. L'essai TAK bot et l'assistant ventes (ajouté le 1er novembre)
+
+**Essai TAK bot sur l'accueil** (section « TAK bot ») :
+
+1. Le visiteur clique **Continuer avec Google** (ou son courriel). Son compte TAKATAK et sa **fiche client** sont créés.
+2. Il reçoit **50 crédits d'essai**, une seule fois, sur un moteur économique (Groq, Gemini, DeepSeek ou OpenAI mini).
+3. Chaque réponse est gardée dans sa fiche (`/dashboard/ai-studio/saved`). Chaque nouvel essai crée une fiche dans le CRM
+   (`/dashboard/leads`, source « takatak.ca TAK bot trial »), sans consentement marketing.
+4. Quand il achète un forfait de crédits, les moteurs premium s'ouvrent (Claude, GPT, Perplexity…).
+
+À faire une fois par le propriétaire : Supabase → Authentication → Providers → **Google** ; Dashboard → Admin › AI
+provider keys → une clé **Groq** (la moins chère), puis **Test the key**. Réglages facultatifs dans Coolify :
+`TAKBOT_TRIAL_CREDITS` (50 par défaut), `TAKBOT_TRIAL_ENGINE`, `TAKBOT_TRIAL_MODEL`, `TAKBOT_TRIAL_ENABLED=false` pour
+fermer l'essai. Détails : `docs/TAKBOT_TRIAL.md` (dépôt takatak-v1).
+
+**Assistant ventes IA** (bande des offres, FAQ, fin de page) :
+
+- Trois façons : **Écrire**, **Parler** (dictée du navigateur, réponses lues à voix haute), **Un humain** (clavardage).
+- Il parle seulement de vente : services, prix du catalogue, délais. Un problème avec un service existant → bouton
+  **Contacter le soutien**.
+- « Préparer ma demande » : il pose une question à la fois (nom, entreprise, courriel, téléphone), remplit la fiche à
+  côté, demande « Tout est bon ? », puis l'envoie dans **`/dashboard/leads/inbox`** (catégorie `sales-assistant`).
+- Prochaines étapes (paiement Stripe, téléphone, clé d'accès, contrat signé) et règles du Québec :
+  `docs/SALES_FLOW_PLAN.md` (dépôt takatak-v1).
+
+**MIMT sur l'accueil** : 3 forfaits (Essentiel, Affaires, Affaires Pro). Les prix viennent du dépôt MIMT
+(`mimtcaapp/packages/shared/src/plans.ts`). Si un prix change là, le copier dans `src/lib/website/mimt-plans.ts`.
+
+**Connecteurs** : le total affiché (bande « Écosystème ») est compté à partir des catalogues, jamais tapé à la main.
+Ajouter un connecteur dans son catalogue l'ajoute au compte.
+
+## 10. Avant chaque envoi de code (agents)
 
 Dans takatak-v1, avec `NODE_OPTIONS=--max-old-space-size=6144` :
 
@@ -110,7 +141,7 @@ Dans takatak-v1, avec `NODE_OPTIONS=--max-old-space-size=6144` :
 Ensuite : une ligne signée dans `WORKLOG.md`, sur le tableau https://github.com/takatakca/foodhubca/issues/105 et dans
 Drive « 00 — Opérations TAKATAK ».
 
-## 10. Les règles qui ne bougent pas
+## 11. Les règles qui ne bougent pas
 
 - Pas de faux rabais, pas de faux compte à rebours, pas de garantie sans texte écrit, pas de faux témoignage.
 - Infolettre, alertes sur l'appareil et textos ont **chacun leur propre consentement**, jamais coché d'avance et jamais
@@ -134,7 +165,9 @@ How to run takatak.ca:
 6. **Orders and requests:** `/commander` is the order funnel; requests arrive in `/dashboard/leads/inbox`.
 7. **Content:** homepage texts are in `src/lib/website/home-funnel.ts`. Prices come only from the catalogs.
 8. **Videos and YouTube:** see `docs/media/`.
-9. **Before each push:** the checks in section 9.
-10. **Fixed rules:** see section 10.
+9. **TAK bot trial and AI sales assistant:** Google sign-in, 50 trial credits, answers saved in the client file; the
+   assistant fills the request form and sends it to the leads inbox (section 9).
+10. **Before each push:** the checks in section 10.
+11. **Fixed rules:** see section 11.
 
-— signé : Claude (cloud session upbeat-einstein) @ Claude Code cloud · 2026-11-01
+— signé : Claude (cloud session upbeat-einstein) @ Claude Code cloud · 2026-11-01 (mis à jour 11 h UTC)
