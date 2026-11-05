@@ -99,3 +99,13 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 ## 2026-11-05 — TAKATAKSTUDIO training candidate
 
 STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.
+
+
+## 2026-11-05 — Next Studio training review
+
+STUDIO-ENGINE — Codex. DURING: aligned existing lessons with the V1 #256 safety fixes without adding identities, billing or publishing jobs. AFTER: both focused course checks pass; no full framework or deployed-course claim. Next: independently review the revised recovery and commercial-rights guidance against the final V1 PR head, then validate the exact Academy candidate through the existing release gates when dependency validation is authorized. Do not use another installer or remote CI to bypass the recorded installation rejection. Real media, OAuth upload permission and destination receipts remain V1/Studio prerequisites.
+
+
+### Final Studio course review targets
+
+2026-11-05 — STUDIO-ENGINE — Codex. Review the six lessons against the final Create / Projects / Library / Your agent / Scheduled / Apps & connections candidate. Verify customer retail-credit ceilings separately from supplier-expense evidence; unknown supplier cost is neither free usage nor profit. Preserve one-writer-task-per-format/day planning limits; do not teach parallel backend orchestration, automatic cost routing or artifact reuse as enabled. SONGER remains a manual companion: lyrics/composition brief → owner's existing SONGER account → specific unlocked output and rights evidence. Account and plan confirmation plus media/provenance validation remain pending.

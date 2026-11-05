@@ -48,3 +48,15 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 ## 2026-11-05 — TAKATAKSTUDIO training candidate
 
 STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.
+
+
+## 2026-11-05 — Studio training safety contract
+
+STUDIO-ENGINE — Codex. Teach recovery in terms of evidence: stable request ID, saved-output ID, central credit event and actual provider/destination confirmation. An ambiguous billable result or upload must not be replayed automatically or repaired by creating a new operation. Review status can change after a handoff; a repeated handoff must not be taught as a new pending approval or proof of publication. Connected/read-only YouTube access is insufficient for upload. Commercial use requires actual asset provenance, account-plan license evidence and any necessary source/likeness/voice permissions; configured credentials alone prove none of these. V1 remains sole identity, permissions, billing and connection authority.
+
+
+### Studio credits, collaborators and manual SONGER boundary
+
+2026-11-05 — STUDIO-ENGINE — Codex. Customer TAKATAK retail credits, provider currency/credit expense and realized revenue/margin are separate measures. Unknown expense is not zero and cannot support a profit claim. Shared planning must expose one writer task per format/day and prevent hidden collaborator multipliers; parallel backend agents, automatic cost routing and automatic reuse are not operational in this candidate. Existing drafts remain discoverable through the tenant-scoped Library.
+
+The owner's existing music service is SONGER. Use a manual companion workflow until provider-supported access and account-specific rights are verified; do not automate the website to simulate an API. [SONGER terms](https://songer.co/terms) restrict automated access. [Its ownership guidance](https://help.songer.co/en/articles/11332706-song-lyrics-and-artwork-ownership) describes rights in specific unlocked outputs, not resale rights to the service; [unlocking guidance](https://help.songer.co/en/articles/12577060-how-to-unlock-songs-in-songer) does not itself prove this account's plan or a particular song's rights. Preserve actual downloaded assets and applicable license evidence before commercialization.

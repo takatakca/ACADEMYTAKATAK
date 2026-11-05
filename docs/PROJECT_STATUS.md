@@ -93,3 +93,16 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 ## 2026-11-05 — TAKATAKSTUDIO training candidate
 
 STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.
+
+
+## 2026-11-05 — Studio safety guidance continuation
+
+STUDIO-ENGINE — Codex. Resumed draft PR #2 from saved `704d766ad4119d8801367ce8afa3e8626cd8f4fd`. Updated the existing six-lesson course for V1 #256's review candidate: one-attempt tasks and held ambiguity, saved-output/credit request evidence, production-specific scene editing, current Social review status on replay, read-only YouTube authorization and commercial provenance. This is training copy, not activation of media generation or publishing. Two focused course checks and `git diff --check` passed locally on Node 24; Node 22/framework/build/SSO/database/media E2E remain unverified for this candidate. Read-only GitHub workflow lookup found no PR-triggered run on the saved SHA. No installation, remote CI dispatch, migration or deployment.
+
+
+### Latest owner steering — Studio navigation, costs and SONGER
+
+2026-11-05 — STUDIO-ENGINE — Codex. Course copy now matches the in-module navigation: Create, Projects, Library, Your agent, Scheduled, Apps & connections. Library guidance covers workspace-scoped search/format filtering and paginated Load more drafts, without presenting browsing as automatic model reuse. Added retail TAKATAK credit ceilings versus unknown supplier expense, bounded shared-task planning, and the manual SONGER companion workflow. Parallel backend agents, automatic cost-based routing and automatic artifact reuse are not enabled. SONGER's exact account/plan/output rights remain unverified; no automated access or music generation was performed.
+
+
+Verified source receipt: companion V1 draft #256 is `bb80d0cce4a0fe640b5a07d35114b7bdcbf55a96`. This Academy continuation remains source-only; 2 focused course checks pass and full framework/live integration validation is pending. — STUDIO-ENGINE — Codex

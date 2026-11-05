@@ -96,3 +96,13 @@ Academy exposes `GET /api/account/export` (authenticated JSON attachment) and `D
 ## 2026-11-05 — TAKATAKSTUDIO training candidate
 
 STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.
+
+
+## 2026-11-05 — Studio training release boundary
+
+STUDIO-ENGINE — Codex. The revised Studio lessons remain on draft PR #2; nothing was deployed. Two local content checks do not validate the Academy framework, V1 worker/database locks, media providers or publishing adapters. The saved `704d766a` has no PR-triggered workflow runs in the read-only GitHub lookup. Preserve the prior automatic-review rejection of dependency installation: no alternate installer or remote CI workaround was run. Studio flags remain off under V1 ownership; no Academy change enables a Studio runner, grants upload scope, buys credits or creates a publishing receipt. Full checks and the existing exact-SHA/SSO/DB/Coolify gates remain required before release.
+
+
+### Latest Studio lesson alignment is source-only
+
+2026-11-05 — STUDIO-ENGINE — Codex. New navigation/search, measured cost concepts and manual SONGER guidance describe the continuing V1 review candidate. The Academy changes do not enable parallel provider agents, automatic cost routing, automatic artifact reuse, SONGER site automation or any scheduler/publication adapter. SONGER account/plan access and specific commercial output rights have not been checked. Two course content checks and diff validation pass locally; existing deployment gates and installation-rejection limits still apply. No runtime credentials, CI dispatch or deployment changed.
