@@ -28,6 +28,7 @@ export const dashboardLearningMap:DashboardLearningSection[]=[
    ["Local listings","/dashboard/local-listings","local-seo"],
    ["Leads","/dashboard/leads","lead-pipelines"],
    ["AI Studio","/dashboard/ai-studio","ai-studio-creative"],
+   ["TAKATAKSTUDIO","/dashboard/studio","takatakstudio"],
    ["Content moderation","/dashboard/contributions","content-moderation"]
  ]),
  section("Growth Suite",[

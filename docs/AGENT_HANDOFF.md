@@ -119,3 +119,33 @@ Coolify configured app/domain and provider token; Academy-only Postgres credenti
 5. Update all five documentation files and `WORKLOG.md` at end of next session.
 
 **No autonomous agent restart is configured by a GitHub file.** Resume requires a separately authorized external orchestrator/trigger.
+
+
+## 2026-11-05 — TAKATAKSTUDIO training candidate
+
+STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.
+
+
+## 2026-11-05 — Studio safe recovery and media boundaries
+
+STUDIO-ENGINE — Codex. Continued `feat/studio-client-training-20261105` / draft PR #2 from `704d766a`; did not restart the course. Only `src/lib/studio-course.ts` lesson prose and signed continuity notes changed. The course now teaches that expired/ambiguous worker tasks and lost links need operator reconciliation before a replacement plan or billable generation; confirmed generation plus failed list refresh calls for refresh/recovery, not regeneration. New request-ID/engine/trial/mode evidence is described with an explicit warning that older outputs may lack it. Social replay preserves current review status and never proves delivery. YouTube's current read-only scope, additional upload authorization, commercial plan/license evidence and actual asset/destination proof are explicit.
+
+Validation: `node --experimental-strip-types --test tests/studio-course.test.mjs` — 2 passed on Node v24.19.0; `git diff --check` passed. GitHub PR-triggered workflow lookup on the saved SHA returned no runs; old main CI is not exact-candidate validation. No dependencies installed, no remote CI dispatched and no deployment or live learner/provider data used. Next: compare course to final V1 #256 source; exact candidate framework QA and genuine SSO/student/mobile checks remain outstanding.
+
+
+### Latest navigation, cost and SONGER alignment
+
+2026-11-05 — STUDIO-ENGINE — Codex. Updated the same six lessons for the revised module navigation: Create, Projects, Library, Your agent, Scheduled and Apps & connections. Library searches the authenticated workspace's saved drafts on the server with format filtering and paginated results; course copy explains Search / Load more drafts, reading, copying and download. No Academy route, identity, entitlement or payment behavior changed.
+
+Cost guidance distinguishes the customer's TAKATAK retail-credit ceiling from supplier expense and realized profit. A bounded shared plan counts one writer task per selected format/day; it does not enable parallel backend agents, automatic cheapest-provider routing or automatic artifact reuse. Unknown supplier expense remains unknown. Source contract: V1 `docs/studio/COST_CONTROLS.md` on the continuing #256 branch.
+
+SONGER is the owner-confirmed service name. The course teaches manual use of the existing account after preparing lyrics here; Studio has no verified public SONGER generation API or automated connection. Official sources reviewed by the coordinating agent on 2026-11-05:
+
+- [SONGER Terms](https://songer.co/terms), updated 2026-10-19: restrictions on automated site access.
+- [Song, lyrics and artwork ownership](https://help.songer.co/en/articles/11332706-song-lyrics-and-artwork-ownership): specific unlocked-output commercial license; no authorization to resell the service.
+- [How to unlock songs](https://help.songer.co/en/articles/12577060-how-to-unlock-songs-in-songer): retain the unlocked output and applicable license evidence.
+
+No private account, paid plan or output license was verified. Validation repeated after these edits: 2 focused course checks and `git diff --check` pass on Node v24.19.0. Framework/Node 22/SSO/DB/provider/publication verification remains outstanding. Final source receipts follow the coordinator's reviewed commit; no receipt SHA is invented here.
+
+
+Verified source receipt: companion V1 draft #256 is `bb80d0cce4a0fe640b5a07d35114b7bdcbf55a96`. This Academy continuation remains source-only; 2 focused course checks pass and full framework/live integration validation is pending. — STUDIO-ENGINE — Codex
