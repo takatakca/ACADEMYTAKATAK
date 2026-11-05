@@ -43,3 +43,8 @@ Updated 2026-10-15. Maintain these decisions unless the owner explicitly approve
 25. **Individual workbook erasure:** students may delete one of their own exercise responses (even after losing paid lesson access) using signed V1 identity, exact same-origin validation and explicit `DELETE THIS RESPONSE` confirmation. The DELETE query always scopes by `master_identity_id`, course and lesson, and never deletes progress, exams, awards, central customer records or another student’s notes.
 
 26. **Privacy release evidence:** student-owned JSON export and whole-workbook/per-lesson deletions passed isolated PostgreSQL CI run `38943064719` (41 tests) on source `c28e9153`. Live user rights, backup retention and actual Academy deployment must be independently verified before claiming production readiness.
+
+
+## 2026-11-05 — TAKATAKSTUDIO training candidate
+
+STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.

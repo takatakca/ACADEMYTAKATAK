@@ -119,3 +119,8 @@ Coolify configured app/domain and provider token; Academy-only Postgres credenti
 5. Update all five documentation files and `WORKLOG.md` at end of next session.
 
 **No autonomous agent restart is configured by a GitHub file.** Resume requires a separately authorized external orchestrator/trigger.
+
+
+## 2026-11-05 — TAKATAKSTUDIO training candidate
+
+STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.

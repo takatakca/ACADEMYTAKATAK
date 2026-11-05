@@ -94,3 +94,8 @@ Review GitHub `main` / `docs/AGENT_HANDOFF.md`, latest Academy CI, then implemen
 - [x] Add PostgreSQL isolation coverage for single-lesson and whole-account workbooks.
 - [x] Verify source CI `38943064719` for `c28e915376ffb8a25d534d125e790531be24af0d`: 41 tests passed and TypeScript, lint, build successful.
 - [ ] Deploy Academy with authorized SSO/DB and verify these flows end-to-end with two distinct V1 learner accounts; run manual CI on release HEAD.
+
+
+## 2026-11-05 — TAKATAKSTUDIO training candidate
+
+STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.

@@ -1,5 +1,6 @@
 import Link from "next/link";
 const resources=[
+  {title:"TAKATAKSTUDIO production guide",desc:"From an idea to scenes, agent draft schedules and selected-account social review.",course:"takatakstudio"},
   {title:"SEO starter checklist",desc:"A repeatable page audit for titles, headings, canonicals, indexing and search intent.",course:"seo-aeo"},
   {title:"Local presence checklist",desc:"Review business profiles, opening hours, categories, citations and customer feedback.",course:"local-seo"},
   {title:"Store launch checklist",desc:"Plan product pages, fulfilment, taxes, consumer disclosures and checkout quality.",course:"shopify"},

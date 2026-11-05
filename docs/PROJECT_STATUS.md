@@ -88,3 +88,8 @@ Not verified deployed. A green CI is not equivalent to a healthy production serv
 
 ### Final verification — student privacy controls
 - Latest code SHA `c28e915376ffb8a25d534d125e790531be24af0d` **PASSED** Academy CI run `38943064719` (41 tests; isolated PostgreSQL 16, migrations 001–007, workbook isolation and erasure, TypeScript, ESLint, Next.js build). No source-CI failures remain known for this SHA.
+
+
+## 2026-11-05 — TAKATAKSTUDIO training candidate
+
+STUDIO-ENGINE — Codex. Source branch `feat/studio-client-training-20261105`, draft; not deployed. Added six original practical lessons under `/courses/takatakstudio`: first production, scenes, characters/formats, agent/Ollama, Social review, ownership/recovery. Catalog, dashboard learning map and Resources link to the same course. It describes V1 PR #256's source candidate explicitly, including runner setup, pending publishing and manual media production gaps. No identity, purchase, entitlement, database or hosting change. Old green CI is not validation of this branch. Focused course checks run separately; full Academy checks pending dependency approval. Next: editorial review and exact-commit framework QA; deploy only after the existing V1/Academy readiness gates.

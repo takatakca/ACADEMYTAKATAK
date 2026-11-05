@@ -1,4 +1,5 @@
 import { serviceCourses } from "./service-courses";
+import { studioCourse } from "./studio-course";
 export type LessonAccess = "free" | "plus" | "purchase";
 export type Course = {
   slug: string;
@@ -149,7 +150,7 @@ export const courses: Course[] = [
     ]
   }
 ];
-courses.push(...serviceCourses);
+courses.push(...serviceCourses, studioCourse);
 
 export const getCourse = (slug: string) => courses.find((course) => course.slug === slug);
 export const getLesson = (course: Course, slug: string) => course.lessons.find((item) => item.slug === slug);
