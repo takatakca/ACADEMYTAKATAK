@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { studioCourse } from '../src/lib/studio-course.ts';
+test('Studio training has six original usable lessons and a matching workspace destination',()=>{assert.equal(studioCourse.slug,'takatakstudio');assert.equal(studioCourse.dashboardPath,'/dashboard/studio');assert.equal(studioCourse.lessons.length,6);assert.equal(new Set(studioCourse.lessons.map(l=>l.slug)).size,6);for(const l of studioCourse.lessons){assert.equal(l.access,'free');assert.ok(l.content.length>=3);assert.ok(l.activity.length>40)}});
+test('training identifies source and operational limits before clients rely on them',()=>{assert.ok(studioCourse.disclaimer.includes('review candidate'));const content=studioCourse.lessons.flatMap(l=>l.content).join('\n');for(const phrase of ['runner needs setup','does not mean scheduled or published','no second Ollama key','File exchange is not continuous synchronization','not automatically replace manually edited scenes'])assert.ok(content.includes(phrase),phrase)});
