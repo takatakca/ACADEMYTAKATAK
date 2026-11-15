@@ -106,3 +106,7 @@ STUDIO-ENGINE — Codex. The revised Studio lessons remain on draft PR #2; nothi
 ### Latest Studio lesson alignment is source-only
 
 2026-11-05 — STUDIO-ENGINE — Codex. New navigation/search, measured cost concepts and manual SONGER guidance describe the continuing V1 review candidate. The Academy changes do not enable parallel provider agents, automatic cost routing, automatic artifact reuse, SONGER site automation or any scheduler/publication adapter. SONGER account/plan access and specific commercial output rights have not been checked. Two course content checks and diff validation pass locally; existing deployment gates and installation-rejection limits still apply. No runtime credentials, CI dispatch or deployment changed.
+
+
+## AI Universe branch does not authorize deployment (2026-11-15)
+The public `/universe` route on `feat/ai-learning-universe-20261115` is source-only and explicitly labels AI tutor imagery as a concept. Its addition must not turn on `ACADEMY_AUTODEPLOY_ENABLED`, claim voice/LLM features or bypass the existing controlled Coolify, V1 master identity, reviewed migration and real readiness gates. No new secrets, deployment UUID or migrations were supplied for this phase. Confirm exact PR SHA, CI and accessibility before considering a reviewed release.
