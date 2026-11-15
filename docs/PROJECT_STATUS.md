@@ -106,3 +106,7 @@ STUDIO-ENGINE — Codex. Resumed draft PR #2 from saved `704d766ad4119d8801367ce
 
 
 Verified source receipt: companion V1 draft #256 is `bb80d0cce4a0fe640b5a07d35114b7bdcbf55a96`. This Academy continuation remains source-only; 2 focused course checks pass and full framework/live integration validation is pending. — STUDIO-ENGINE — Codex
+
+
+## AI Learning Universe concept M0 — 2026-11-15
+Feature branch: `feat/ai-learning-universe-20261115`, review pending. Added an original, blue-on-navy `/universe` landing page with self-disclosed AI mentor concept artwork, source-derived program/course counts, existing real Academy program links, responsive/reduced-motion CSS and homepage entry. Blueprint: `docs/AI_LEARNING_UNIVERSE.md`; source test: `tests/ai-universe.test.ts`. No LLM provider, generated voice, payment system, DB migration or production deployment was activated. Current Academy runtime/SSO/DB status remains unverified; CI on this PR SHA pending.
