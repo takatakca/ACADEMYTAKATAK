@@ -119,3 +119,7 @@ From `/account`, signed-in Academy students can download a JSON export of their 
 
 
 To erase one exercise without deleting every workbook, open its Academy lesson and select “Delete this response”, then explicitly confirm. This deletes only the saved `master_identity_id` + course + lesson entry. To erase all responses, use the separate account-level control. Neither action deletes exams, learning history, Academy awards or TAKATAK-V1 accounts.
+
+
+## AI Learning Universe — concept preview
+The separate `/universe` microsite (introduced in branch `feat/ai-learning-universe-20261115`) offers an original immersive visual introduction and links into existing Academy programs. AI mentor illustrations on that page are explicitly concepts; **no interactive AI tutor, generated voice, AI lab engine or community is activated by this change.** See `docs/AI_LEARNING_UNIVERSE.md` for the phased, consent- and cost-governed roadmap. This section is documentation of proposed source changes, not production-deploy proof.

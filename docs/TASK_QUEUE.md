@@ -109,3 +109,11 @@ STUDIO-ENGINE — Codex. DURING: aligned existing lessons with the V1 #256 safet
 ### Final Studio course review targets
 
 2026-11-05 — STUDIO-ENGINE — Codex. Review the six lessons against the final Create / Projects / Library / Your agent / Scheduled / Apps & connections candidate. Verify customer retail-credit ceilings separately from supplier-expense evidence; unknown supplier cost is neither free usage nor profit. Preserve one-writer-task-per-format/day planning limits; do not teach parallel backend orchestration, automatic cost routing or artifact reuse as enabled. SONGER remains a manual companion: lyrics/composition brief → owner's existing SONGER account → specific unlocked output and rights evidence. Account and plan confirmation plus media/provenance validation remain pending.
+
+
+## AI Learning Universe microsite — 2026-11-15 (feature branch only)
+- [ ] Review/merge the original `/universe` M0 design, Academy homepage entry, source link validation and clear AI-concept disclosures. See `docs/AI_LEARNING_UNIVERSE.md` and branch `feat/ai-learning-universe-20261115`; not on main until reviewed.
+- [ ] Confirm GitHub CI on exact PR SHA (unit tests, Next typecheck, lint, build), then independent mobile/keyboard/contrast review.
+- [ ] M1: consent-based, cost-capped, source-grounded server-only tutor with live tests and human-reviewed lessons; no activation without V1 identity/entitlement approval.
+- [ ] M2+: multilingual original generated video/voice, AI labs, reviewed artifacts and governed community; no claims of active tutors before implemented.
+- [ ] Confirm actual Coolify deployment and production readiness of Academy before announcing availability.

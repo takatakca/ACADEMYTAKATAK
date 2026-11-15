@@ -15,6 +15,7 @@ export default async function Home({searchParams}:{searchParams:Promise<{categor
         <p>One academy. A world of practical skills. Start with free lessons, unlock advanced learning as you grow, and connect what you learn to your TAKATAK dashboard.</p>
         <div className="hero-buttons"><a className="btn btn-primary" href="#courses">Explore courses <span aria-hidden="true">↗</span></a>
           <Link className="btn btn-soft" href={identity ? "/account" : "/auth/start"}>{identity ? "Continue learning" : "Create your free account"} →</Link></div>
+        <p><Link className="text-link" href="/universe">Discover the AI Learning Universe (concept preview) ↗</Link></p>
         <div className="hero-points"><span>✓ Free lessons for everyone</span><span>✓ Graded exams and earned points</span><span>✓ One TAKATAK identity</span></div>
       </div>
       <div className="hero-visual" aria-label="Overview of the TAKATAK Academy learning experience">
