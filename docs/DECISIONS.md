@@ -70,3 +70,9 @@ Keep the current independent Academy application and central TAKATAK-V1 identity
 - All 87 accessible TAKATAK repositories are candidate sources, not approved public training data; 13 are private. Readme/metadata audit is not a full code review. Protected client, family, legal, employee and credentials remain excluded without approved consent/redaction.
 - Academy organization sponsor records in optional migration 008 are not TAKATAK-V1 identity or billing records. Never issue paid entitlement based on a seat row. Org manager access requires BOTH verified short-lived V1 manager entitlement AND active, approved organization membership in Academy; no role self-promotion, organization discovery, or cross-tenant grades.
 - Institution/OBNL partnerships require actual signed terms, billing policy and privacy review. Lessons, voice and avatar outputs require original or licensed inputs, valid avatar consent, and accountable editor approval before commercial publication.
+
+
+## 2026-11-15 — Coolify provisioning separated from launch
+- Owner authorized continued Academy deployment preparation. Authorized operator inventory reports no Academy app or dedicated DB; never repurpose unknown production databases. Only GROUPE TAKATAK/production and explicitly selected server are acceptable.
+- A reviewed Node22 Coolify bootstrap may create **undeployed** isolated Academy application and PostgreSQL 16 resource records after explicit operator API authorization. Default is read-only plan; only manual production GitHub Actions workflow with typed approval may apply. No domain until owner/DNS/TLS confirmation. No native automatic Git-push deploy bypass.
+- Source bootstrap cannot access Coolify secrets or user infrastructure by itself; a passing CI does not prove resources created. Separate backed-up migrations, SSO, tenant privacy, mobile QA, financial gate and exact deployed SHA plus `/api/ready` are mandatory release evidence.

@@ -1,0 +1,75 @@
+name: Academy Coolify infrastructure bootstrap (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "Read-only plan or create only the independent Academy app and database"
+        required: true
+        type: choice
+        options: [plan, apply]
+        default: plan
+      approval:
+        description: "For apply: type CREATE_ACADEMY_RESOURCES. Never paste passwords or tokens here."
+        required: false
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: academy-coolify-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  bootstrap:
+    if: github.ref == 'refs/heads/main' && (inputs.mode == 'plan' || inputs.approval == 'CREATE_ACADEMY_RESOURCES')
+    name: Academy resources — approved manual action only
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 10
+    env:
+      COOLIFY_BASE_URL: ${{ vars.COOLIFY_BASE_URL }}
+      COOLIFY_API_TOKEN: ${{ secrets.COOLIFY_API_TOKEN }}
+      COOLIFY_PROJECT_UUID: ${{ vars.COOLIFY_PROJECT_UUID }}
+      COOLIFY_SERVER_UUID: ${{ vars.COOLIFY_SERVER_UUID }}
+      COOLIFY_DESTINATION_UUID: ${{ vars.COOLIFY_DESTINATION_UUID }}
+      ACADEMY_SOURCE_SHA: ${{ github.sha }}
+      ACADEMY_CREATE_RESOURCES_APPROVED: ${{ inputs.mode == 'apply' && inputs.approval == 'CREATE_ACADEMY_RESOURCES' && 'yes' || 'no' }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Confirm SHA is latest main and its source CI passed
+        shell: bash
+        run: |
+          set -euo pipefail
+          latest="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/main" --jq '.object.sha')"
+          if [[ "${latest}" != "${GITHUB_SHA}" ]]; then
+            echo "::error::A newer main commit exists; choose latest verified main."
+            exit 1
+          fi
+          runs="$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs?head_sha=${GITHUB_SHA}&per_page=50")"
+          if ! jq -e '[.workflow_runs[] | select(.name=="Academy CI" and .conclusion=="success" and .head_branch=="main" and .event=="push")] | length > 0' <<<"${runs}" >/dev/null; then
+            echo "::error::No successful Academy CI push run found for the exact main SHA."
+            exit 1
+          fi
+      - name: Inspect or provision only named Academy resources
+        shell: bash
+        env:
+          BOOTSTRAP_MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          if [[ "${BOOTSTRAP_MODE}" == "apply" ]]; then
+            node scripts/coolify-provision-academy.mjs --apply
+          else
+            node scripts/coolify-provision-academy.mjs --plan
+          fi
+      - name: Release note
+        run: |
+          echo "Bootstrap does not deploy containers, create public domains, start Postgres, install migrations,"
+          echo "copy secret values, grant TAKATAK-V1 roles, or activate payments."
+          echo "Complete the protected deployment checklist before public /api/ready verification."
