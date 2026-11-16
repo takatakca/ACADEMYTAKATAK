@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-// @ts-ignore Node .mjs operator utility intentionally has no TypeScript declaration.
+// @ts-expect-error -- the audited Node .mjs operator utility has no TypeScript declaration.
 import { APP_NAME, DB_NAME, REPO, appPayload, databasePayload, configFrom, findResources, run } from "../scripts/coolify-provision-academy.mjs";
 
 const sha="2ef80385bceb224254ca00e7d5e902df26204880";
