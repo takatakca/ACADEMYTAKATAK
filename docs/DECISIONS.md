@@ -64,3 +64,9 @@ The owner's existing music service is SONGER. Use a manual companion workflow un
 
 ## 2026-11-15 — immersive Academy direction
 Keep the current independent Academy application and central TAKATAK-V1 identity/payment authority. Add an original `/universe` microsite, with no MasterClass copyrighted assets/code/text and no invented affiliations. Label all AI mentor/voice/cohort simulations as future goals until actual approved, consent-based, secure, cost-limited services pass live tests. New generated instructor likenesses/voices require rights and explicit AI disclosure. See `docs/AI_LEARNING_UNIVERSE.md`. M0 branch changes do not alter exam integrity, tenant privacy, billing or live deployment.
+
+## 2026-11-15 University policy — organization permissions and content rights
+- Full competitor FEATURE parity as a product checklist; never import MasterClass proprietary course videos, scripts, instructor likenesses, design assets or paywalled materials. Public help pages only establish capabilities, not access to private material.
+- All 87 accessible TAKATAK repositories are candidate sources, not approved public training data; 13 are private. Readme/metadata audit is not a full code review. Protected client, family, legal, employee and credentials remain excluded without approved consent/redaction.
+- Academy organization sponsor records in optional migration 008 are not TAKATAK-V1 identity or billing records. Never issue paid entitlement based on a seat row. Org manager access requires BOTH verified short-lived V1 manager entitlement AND active, approved organization membership in Academy; no role self-promotion, organization discovery, or cross-tenant grades.
+- Institution/OBNL partnerships require actual signed terms, billing policy and privacy review. Lessons, voice and avatar outputs require original or licensed inputs, valid avatar consent, and accountable editor approval before commercial publication.
