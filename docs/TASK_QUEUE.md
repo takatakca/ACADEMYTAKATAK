@@ -126,3 +126,14 @@ STUDIO-ENGINE — Codex. DURING: aligned existing lessons with the V1 #256 safet
 - [ ] Design/approve master org identity + permission synchronization, revoke behavior, billing-confirmed group license and OBNL sponsorship contracts before activating any group learner seats.
 - [ ] Provide staff CMS for lessons, labs, rubric reviews, scheduled events, cohort management with scoped privacy; do not expose student chats/workbooks to employers by default.
 - [ ] Build source-grounded teacher, user-controlled memory, dictation, original Runway/HeyGen media, feedback/portfolio and source-provenance checks; cost/consent caps before provider spend.
+
+
+## Production bring-up — source-ready Coolify bootstrap (2026-11-15)
+- [ ] Validate feature branch `feat/coolify-academy-bootstrap-20261115` (Node 22 CI, tests, typecheck, lint, build) and merge after code/security review; no automatic infrastructure changes.
+- [ ] Authorized operator supplies the exact GROUPE TAKATAK Coolify project UUID, server/destination UUID, trusted HTTPS control-plane origin and least-privileged API token to protected GitHub `production` Environment.
+- [ ] Run manual `Academy Coolify infrastructure bootstrap (manual)` in **plan** mode; reconcile existing resources and choose a single target.
+- [ ] Run reviewed **apply** mode to create only `academy-takatak` and private `academy-takatak-db` if absent. Record both UUIDs. Neither starts automatically.
+- [ ] Configure PostgreSQL persistent volume, backup/restore rehearsal, private networking; run reviewed ordered migrations 001–007 with verified schema. Migration 008 OBNL optional only after staff contract approval.
+- [ ] Confirm Academy domain/DNS/HTTPS and V1 launch/exchange deployed endpoints and dedicated secrets; never post values in issues.
+- [ ] Complete Law 25 privacy and student/teacher/tenant isolation proof, paid-denial tests, `/api/ready` real HTTP 200. Use GitHub CI-gated Coolify deploy only after signed release readiness and check matching deployment UUID + SHA.
+- [ ] Later: approve V1-owned paid tuition product, taxes, refunds, seats/OBNL contracts, and separately permitted Runway/HeyGen production; don't preactivate.
