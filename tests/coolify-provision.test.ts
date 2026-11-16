@@ -1,10 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 // @ts-ignore Node .mjs operator utility intentionally has no TypeScript declaration.
-import {
-  APP_NAME, DB_NAME, REPO, appPayload, databasePayload,
-  configFrom, findResources, run
-} from "../scripts/coolify-provision-academy.mjs";
+import { APP_NAME, DB_NAME, REPO, appPayload, databasePayload, configFrom, findResources, run } from "../scripts/coolify-provision-academy.mjs";
 
 const sha="2ef80385bceb224254ca00e7d5e902df26204880";
 const env={
@@ -17,8 +14,8 @@ const env={
 const cfg=configFrom(env);
 const project=[{uuid:cfg.projectUuid,name:"GROUPE TAKATAK"}];
 const server=[{uuid:cfg.serverUuid,name:"TAKATAK VPS"}];
-const response=(v,status=200)=>new Response(JSON.stringify(v),{status,headers:{"Content-Type":"application/json"}});
-function mockApi(apps=[],dbs=[]){
+const response=(v:unknown,status=200)=>new Response(JSON.stringify(v),{status,headers:{"Content-Type":"application/json"}});
+function mockApi(apps:unknown[]=[],dbs:unknown[]=[]){
   const requests: {method:string;path:string;data:unknown;authorization:string}[]=[];
   const fake=async(input: string|URL|Request,init?: RequestInit)=>{
     const path=new URL(String(input)).pathname;
