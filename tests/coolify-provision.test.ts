@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+// @ts-ignore Node .mjs operator utility intentionally has no TypeScript declaration.
 import {
   APP_NAME, DB_NAME, REPO, appPayload, databasePayload,
   configFrom, findResources, run
@@ -18,7 +19,7 @@ const project=[{uuid:cfg.projectUuid,name:"GROUPE TAKATAK"}];
 const server=[{uuid:cfg.serverUuid,name:"TAKATAK VPS"}];
 const response=(v,status=200)=>new Response(JSON.stringify(v),{status,headers:{"Content-Type":"application/json"}});
 function mockApi(apps=[],dbs=[]){
-  const requests: {method:string;path:string;data:any;authorization:string}[]=[];
+  const requests: {method:string;path:string;data:unknown;authorization:string}[]=[];
   const fake=async(input: string|URL|Request,init?: RequestInit)=>{
     const path=new URL(String(input)).pathname;
     const method=init?.method||"GET";
@@ -118,7 +119,7 @@ test("existing verified Academy resources are reused; unrelated resources cannot
 
 test("refuses unverified project names before writes",async()=>{
   const {fake,requests}=mockApi();
-  const wrongProjectFetch=async (url:any, init?:RequestInit)=>{
+  const wrongProjectFetch=async (url:string|URL|Request, init?:RequestInit)=>{
     if(String(url).endsWith("/projects"))return response([{uuid:cfg.projectUuid,name:"Other Team"}]);
     return fake(url,init);
   };
