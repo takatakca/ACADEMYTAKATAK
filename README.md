@@ -123,3 +123,7 @@ To erase one exercise without deleting every workbook, open its Academy lesson a
 
 ## AI Learning Universe — concept preview
 The separate `/universe` microsite (introduced in branch `feat/ai-learning-universe-20261115`) offers an original immersive visual introduction and links into existing Academy programs. AI mentor illustrations on that page are explicitly concepts; **no interactive AI tutor, generated voice, AI lab engine or community is activated by this change.** See `docs/AI_LEARNING_UNIVERSE.md` for the phased, consent- and cost-governed roadmap. This section is documentation of proposed source changes, not production-deploy proof.
+
+
+## First-time Coolify bootstrap (protected and opt-in)
+The existing GitHub `main` builds successfully but, per the owner-supplied Coolify operator inventory, the Academy application and dedicated PostgreSQL are **not yet provisioned**. See `docs/COOLIFY_FIRST_DEPLOYMENT.md` for a manual, dry-run-first resource bootstrap and separate operational migration/SSO/privacy/verified release gates. Nothing in `.github/workflows/academy-coolify-bootstrap.yml` runs on push; it cannot provision without protected Coolify API configuration, exact-main successful CI, and an explicit typed approval. The bootstrap intentionally does not launch containers, collect tuition, create a public domain, set secrets, or run SQL migrations.
