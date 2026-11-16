@@ -48,7 +48,9 @@ export function appPayload(cfg) {
     project_uuid: cfg.projectUuid, server_uuid: cfg.serverUuid,
     environment_name: "production",
     ...(cfg.destinationUuid ? {destination_uuid:cfg.destinationUuid} : {}),
-    git_repository: REPO, git_branch: "main", git_commit_sha: cfg.sha,
+    // Use main as the moving source; GitHub release CI verifies the exact SHA before any deploy.
+    // Do not persist a git_commit_sha override that could lock later releases to an older commit.
+    git_repository: REPO, git_branch: "main",
     build_pack: "dockerfile", dockerfile_location: "/Dockerfile",
     ports_exposes: "3000", instant_deploy: false,
     autogenerate_domain: false, domains: "",
