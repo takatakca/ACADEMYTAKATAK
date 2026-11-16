@@ -21,7 +21,7 @@ export default async function OrganizationDashboard() {
     <div className="breadcrumbs"><Link href="/campus">University campus</Link><span>/</span><span>Organizations</span></div>
     <span className="eyebrow">RESTRICTED / TAKATAK-VERIFIED ORGANIZATION MANAGER</span>
     <h1>My organization workspace</h1>
-    <p>Only active, approved organizations linked to your verified TAKATAK identity are listed. No other organization's students, grades, invoices or content are exposed.</p>
+    <p>Only active, approved organizations linked to your verified TAKATAK identity are listed. No other organization&apos;s students, grades, invoices or content are exposed.</p>
     {storageError && <div className="important-note" role="alert">
       <strong>Organization registry unavailable.</strong>
       <p>No organization data was loaded. An approved Academy database migration and live TAKATAK organization permissions are required.</p>
