@@ -46,7 +46,7 @@ test("rejects untrusted configuration and invalid target",()=>{
 test("creates only independent, private and non-running resources",()=>{
   const app=appPayload(cfg),db=databasePayload(cfg);
   assert.equal(app.git_repository,REPO);
-  assert.equal(app.git_commit_sha,sha);
+  assert.equal("git_commit_sha" in app,false,"A persistent SHA override must not freeze future main releases");
   assert.equal(app.build_pack,"dockerfile");
   assert.equal(app.ports_exposes,"3000");
   assert.equal(app.instant_deploy,false);
