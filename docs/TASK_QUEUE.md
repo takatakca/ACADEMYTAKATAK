@@ -117,3 +117,12 @@ STUDIO-ENGINE — Codex. DURING: aligned existing lessons with the V1 #256 safet
 - [ ] M1: consent-based, cost-capped, source-grounded server-only tutor with live tests and human-reviewed lessons; no activation without V1 identity/entitlement approval.
 - [ ] M2+: multilingual original generated video/voice, AI labs, reviewed artifacts and governed community; no claims of active tutors before implemented.
 - [ ] Confirm actual Coolify deployment and production readiness of Academy before announcing availability.
+
+## University parity + organization capability (branch 2026-11-15)
+- [ ] Review original MasterClass public feature parity inventory at `docs/UNIVERSITY_FEATURE_PARITY_2026-11-15.md`, keep it current until every owned capability has QA/launch proof.
+- [ ] Expand 87-repository metadata/README source inventory into approved product-specific sample curricula after exact-sha, license and redaction review (74 public / 13 private; private never copied into public modules).
+- [ ] Review/merge independent university/organization foundation branch, run Node 22 tests/typecheck/lint/build and browser mobile QA.
+- [ ] Have authorized operator back up and apply migration `db/008_organizations.sql` only after live existing schema and V1 identity contract audit; no automatic migration.
+- [ ] Design/approve master org identity + permission synchronization, revoke behavior, billing-confirmed group license and OBNL sponsorship contracts before activating any group learner seats.
+- [ ] Provide staff CMS for lessons, labs, rubric reviews, scheduled events, cohort management with scoped privacy; do not expose student chats/workbooks to employers by default.
+- [ ] Build source-grounded teacher, user-controlled memory, dictation, original Runway/HeyGen media, feedback/portfolio and source-provenance checks; cost/consent caps before provider spend.
